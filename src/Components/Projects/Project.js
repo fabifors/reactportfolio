@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+
+// Styled components
 import { ProjectContainer, TypesContainer, Icon, ProjectImg } from './styles';
+
+// FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Project extends Component {

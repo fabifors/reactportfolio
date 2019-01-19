@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
 
+// Styled Components
 import { Heading, Text, Section } from '../Basic/styles';
+import { ProjectsWrapper } from './styles';
+
+// Components
 import Container from '../Wrappers/Container';
 import Project from './Project';
-import { ProjectsWrapper } from './styles';
 
 // Project img
 import webbhotel from './img/hittawebbhotellet.jpg';

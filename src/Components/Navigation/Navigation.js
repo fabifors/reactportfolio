@@ -1,5 +1,9 @@
 import React from 'react';
+
+// Libraries
 import styled from 'styled-components';
+
+// Components
 import Link from './Link';
 import List from '../List/List';
 import ListItem from '../List/ListItem';

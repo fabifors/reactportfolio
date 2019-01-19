@@ -1,5 +1,9 @@
 import React from 'react';
+
+// Libraries
 import styled from 'styled-components';
+
+// FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Feature = styled.div`

@@ -1,9 +1,11 @@
 import React from 'react';
-import Portrait from '../Portrait/Portrait';
 
-import Button from '../Button/Button';
-
+// Libraries
 import styled from 'styled-components';
+
+// Components
+import Portrait from '../Portrait/Portrait';
+import Button from '../Button/Button';
 
 const Container = styled.section`
   height: calc(90vh - 90px);

@@ -4,6 +4,8 @@ import React from 'react';
 import Feature from './Feature';
 import Data from './data.js';
 import Container from '../Wrappers/Container';
+
+// Styled components
 import { Text, Heading, Background, Section } from '../Basic/styles';
 import { FeatureList } from './FeatureList';
 
