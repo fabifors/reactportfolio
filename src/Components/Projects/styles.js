@@ -1,28 +1,5 @@
 import styled from 'styled-components';
 
-export const Icon = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem;
-  margin-left: 1rem;
-
-  border: 1px solid ${props => props.theme.accent.hsl};
-  border-radius: 3px;
-
-  background: ${props => props.theme.text_light.hsl};
-  color: ${props => props.theme.accent.hsl};
-
-  transition: color 300ms, background 300ms, transform 300ms, padding 200ms;
-
-  &:hover {
-    background: ${props => props.theme.accent.hsl};
-    color: ${props => props.theme.text_light.hsl};
-  }
-`;
-
 export const TypesContainer = styled.div`
   height: 3.5rem;
   position: absolute;
@@ -39,6 +16,7 @@ export const ProjectsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 2rem;
+  min-height: 500px;
 
   @media screen and (min-width: 768px){
     grid-template-columns: repeat(2, 1fr);

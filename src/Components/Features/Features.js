@@ -7,7 +7,7 @@ import Container from '../Wrappers/Container';
 
 // Styled components
 import { Text, Heading, Background, Section } from '../Basic/styles';
-import { FeatureList } from './FeatureList';
+import { FeatureList } from './styles';
 
 const featureList = Data.map(feature => {
   return (<Feature key={feature.id} title={feature.title} content={feature.content} icon={feature.icon} alt={feature.alt} />)

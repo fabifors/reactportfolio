@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 
 // Styled components
-import { ProjectContainer, TypesContainer, Icon, ProjectImg } from './styles';
+import { ProjectContainer, TypesContainer, ProjectImg } from './styles';
+import FilterIcon from '../Filter/FilterIcon';
 
-// FontAwesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-class Project extends Component {
+export default class Project extends Component {
 
   render() {
+    const { type, url, title, img, handleFilterChange, activeFilters } = this.props;
 
-    const types = this.props.type.map((t, index) => <Icon key={index} title={t.title}><FontAwesomeIcon icon={['fas', t.icon]} /></Icon>);
+    const types = type.map((type, index) => (activeFilters.includes(type.title)
+      ? <FilterIcon isActive click={handleFilterChange} key={index} title={type.title} icon={type.icon} />
+      : <FilterIcon click={handleFilterChange} key={index} title={type.title} icon={type.icon} />
+    ));
 
     return (
-      <a href={this.props.url} target="_blank" rel="noopener noreferrer">
-        <ProjectContainer workedOn={this.props.title}>
-          <TypesContainer>
-            {types}
-          </TypesContainer>
-          <ProjectImg src={this.props.img} />
-        </ProjectContainer>
-      </a>
+
+      <ProjectContainer workedOn={title}>
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          <ProjectImg src={img} />
+        </a>
+        <TypesContainer>
+          {types}
+        </TypesContainer>
+      </ProjectContainer>
+
     );
   }
 }
 
-export default Project;

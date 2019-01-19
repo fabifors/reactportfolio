@@ -6,6 +6,11 @@ export const Heading = styled.h2`
   color: ${props => props.theme.accent.hsl};
 `;
 
+export const Highlight = styled.span`
+  color: ${props => props.theme.accent.hsl};
+  font-weight: ${props => props.semibold ? 600 : null || props.bold ? 800 : null || 400};
+`;
+
 export const Text = styled.p`
   margin-bottom: 4rem;
   line-height: 1.5em;
