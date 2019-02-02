@@ -8,7 +8,7 @@ import SocialButtons from '../SocialButtons';
 
 export const Footer = () => {
   return (
-    <Container background fluid hasNestedContainer height="100vh">
+    <Container id="contact" background fluid hasNestedContainer height="100vh">
       <Container>
         <Section padding>
           <ContactWrapper>
@@ -20,15 +20,15 @@ export const Footer = () => {
             </ContactText>
             <Form accept-charset="UTF-8" action="https://usebasin.com/f/d25d2e66f249" method="POST">
               <FormGroup>
-                <FormLabel for="Name">Name:</FormLabel>
+                <FormLabel htmlFor="name">Name:</FormLabel>
                 <FormInput type="text" name="name" id="name" placeholder="John Doe" required />
               </FormGroup>
               <FormGroup>
-                <FormLabel for="Email">Email:</FormLabel>
+                <FormLabel htmlFor="email">Email:</FormLabel>
                 <FormInput type="email" name="email" id="email" placeholder="john@example.se" required />
               </FormGroup>
               <FormGroup>
-                <FormLabel for="comment">Message:</FormLabel>
+                <FormLabel htmlFor="comment">Message:</FormLabel>
                 <FormComment min="25" max="350" rows="10" type="text" name="comment" id="comment" placeholder="Hi, my name is. . ." required />
               </FormGroup>
               <FormGroup row >

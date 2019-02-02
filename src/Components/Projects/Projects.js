@@ -48,7 +48,7 @@ class Projects extends PureComponent {
       },
       {
         title: 'Design / Code',
-        type: [this.icons.school],
+        type: [this.icons.school, this.icons.design, this.icons.code],
         img: `${quire}`,
         url: 'http://quire.brorarmand.com'
       }
@@ -88,6 +88,7 @@ class Projects extends PureComponent {
           }
         }
       }
+      return null;
     })
 
     return (

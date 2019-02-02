@@ -45,6 +45,7 @@ const StyledButton = styled.button`
   `}
 
   cursor: pointer;
+  ${p => p.nested ? 'pointer-events: none;' : null};
 
   ${ p => p.shadow
     ? `box-shadow: 0px 10px 20px ${p.theme.boxshadow.hsl}`

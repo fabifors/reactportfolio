@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 // Libraries
 import { Motion, spring } from 'react-motion';

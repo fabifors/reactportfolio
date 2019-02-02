@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import { levels } from './data';
 
-import { SkillbarGroup, SkillLabel, SkillBar, SkillProgress, Description } from './styles';
-import { SkillDescription } from './styles';
+import { SkillbarGroup, SkillLabel, SkillBar, SkillProgress, SkillDescription } from './styles';
 
 export default class Skillbar extends Component {
 

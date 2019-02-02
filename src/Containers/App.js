@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 
 // Libraries
 import { ThemeProvider } from 'styled-components';
+import { Motion, spring } from 'react-motion';
 
 // Globally assigned styles
 import GlobalStyles from '../Components/Global/Styles';
@@ -16,6 +17,7 @@ import Hero from '../Components/Hero/Hero';
 import Features from '../Components/Features/Features';
 import Projects from '../Components/Projects/Projects';
 import Skills from '../Components/Skills/Skills';
+import SideMenu from '../Components/SideMenu';
 
 // Navigation Links
 import { navLinks } from '../navLinks';
@@ -93,8 +95,23 @@ class App extends PureComponent {
       <ThemeProvider theme={theme}>
         <Fragment>
           <GlobalStyles />
-
           <Container>
+            <Motion
+              defaultStyle={{ x: 100 }}
+              style={(this.state.isMenuOpen ? { x: spring(0) } : { x: spring(100) })}
+            >
+              {(style) => {
+                return (
+                  <SideMenu
+                    handleOpenMenu={this.handleOpenMenu}
+                    style={{
+                      opacity: style.opacity,
+                      transform: `translateX(${style.x}%)`
+                    }}
+                  />
+                )
+              }}
+            </Motion>
             <Header
               navLinks={navLinks}
               isMenuOpen={isMenuOpen}

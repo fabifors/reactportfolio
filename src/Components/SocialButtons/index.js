@@ -7,8 +7,8 @@ import { buttons } from './data';
 const SocialButtons = () => {
   return (
     <SocialWrapper>
-      {buttons.map(btn => (
-        <SocialButton icon={btn.icon} title={btn.title} url={btn.url} />
+      {buttons.map((btn, i) => (
+        <SocialButton key={i} icon={btn.icon} title={btn.title} url={btn.url} />
       ))}
     </SocialWrapper>
   );

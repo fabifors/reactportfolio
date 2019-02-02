@@ -118,11 +118,10 @@ export const ContactWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
- 
   border-radius: 10px;
-  box-shadow: 0px 15px 60px hsla(0, 0%, 0%, 0.2);
 
   @media screen and (min-width:768px) {
+    box-shadow: 0px 15px 60px hsla(0, 0%, 0%, 0.2);
     flex: 0 2 2;
     flex-direction: row;
     max-width: 900px;
@@ -162,7 +161,6 @@ export const ContactText = styled.div`
       border-radius: 25px;
       opacity: 0.3;
       transform: translateY(-25px) translateX(-5px);
-      
     }
   }
 

@@ -28,7 +28,7 @@ const Navigation = (props) => {
           </ListItem>
           :
           <ListItem key={index}>
-            <Button href={link.href} small text={link.text} />
+            <Button nested href={link.href} small text={link.text} />
           </ListItem>
         )}
       </List>
