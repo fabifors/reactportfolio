@@ -11,6 +11,8 @@ const Wrapper = styled.div`
   margin-right: auto;
   margin-left: auto;
 
+  ${props => props.background ? `background: ${props.theme.accent.darken(3)};` : null}
+
   ${ p => p.fluid ? null : `@media screen and (min-width: 768px) {
       width: 750px;
     }
@@ -26,13 +28,17 @@ const Wrapper = styled.div`
     @media screen and (min-width: 1400px) {
       calc(1400px - ${padding});
     }
-    `}  
+    `} 
+  ${p => p.hasNestedContainer ? `padding: 0;` : null};
+
+  ${p => p.height ? `min-height: ${p.height}` : null}
+
 `;
 
-const Container = ({ fluid, children }) => {
+const Container = ({ fluid, children, background, flex, hasNestedContainer, ...rest }) => {
 
   return (
-    <Wrapper fluid={fluid}>
+    <Wrapper {...rest} background={background} hasNestedContainer={hasNestedContainer} fluid={fluid} flex={flex}>
       {children}
     </Wrapper>
   );

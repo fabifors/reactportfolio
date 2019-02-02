@@ -21,13 +21,14 @@ const Navigation = (props) => {
   return (
     <Wrapper>
       <List horizontal={horizontal}>
-        {links.map(link => !link.button ?
-          <ListItem key={link.id}>
+        {links.map((link, index) => !link.button
+          ?
+          <ListItem key={index}>
             <Link href={link.href} text={link.text} />
-          </ListItem> :
-
-          <ListItem key={link.id}>
-            <Button href={link.href} medium text={link.text} />
+          </ListItem>
+          :
+          <ListItem key={index}>
+            <Button href={link.href} small text={link.text} />
           </ListItem>
         )}
       </List>

@@ -1,8 +1,5 @@
 import React, { PureComponent } from 'react';
 
-// Libraries
-import FlipMove from 'react-flip-move';
-
 // Styled Components
 import { Heading, Section } from '../Basic/styles';
 import { ProjectsWrapper } from './styles';
@@ -77,6 +74,7 @@ class Projects extends PureComponent {
   render() {
 
     const { active, projects, filters } = this.state;
+    const { id } = this.props;
 
     const projectsFilter = projects.filter(project => {
       if (active.length === 0) {
@@ -85,29 +83,27 @@ class Projects extends PureComponent {
         for (let i = 0; i < project.type.length; i++) {
           if (active.includes(project.type[i].title)) {
             return project;
+          } else {
+            return null;
           }
         }
       }
     })
 
-    const styles = {
-      textAlign: 'center',
-      paddingTop: '4rem',
-      paddingBottom: '5rem',
-      height: '100vh'
-    }
-
     return (
-      <Container>
-        <Section style={styles}>
-          <Heading style={{ marginBottom: '1rem' }}>What I've Done</Heading>
+      <Container id={id}>
+        <Section fullScreen>
+          <Heading style={{ marginBottom: '1rem' }} center>What I've Done</Heading>
           <Filter activeFilters={active} filters={filters} handleFilterChange={this.handleFilterChange} />
           <ProjectsWrapper>
-            <FlipMove enterAnimation="fade" leaveAnimation="fade" typeName={null}>
-              {projectsFilter.map((project, index) => (
-                <Project activeFilters={active} key={index} {...project} handleFilterChange={this.handleFilterChange} />
-              ))}
-            </FlipMove>
+            {projectsFilter.map((project, index) => (
+              <Project
+                key={index}
+                activeFilters={active}
+                handleFilterChange={this.handleFilterChange}
+                {...project}
+              />
+            ))}
           </ProjectsWrapper>
         </Section>
       </Container>

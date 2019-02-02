@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 
 // Libraries
 import { ThemeProvider } from 'styled-components';
@@ -15,12 +15,17 @@ import Header from './Header';
 import Hero from '../Components/Hero/Hero';
 import Features from '../Components/Features/Features';
 import Projects from '../Components/Projects/Projects';
+import Skills from '../Components/Skills/Skills';
 
+// Navigation Links
+import { navLinks } from '../navLinks';
 
 // Font awesome library
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/pro-solid-svg-icons'
-library.add(fas)
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { fas } from '@fortawesome/pro-solid-svg-icons';
+import { Footer } from '../Components/Footer/Footer';
+library.add(fas, fab)
 
 
 class App extends PureComponent {
@@ -28,13 +33,14 @@ class App extends PureComponent {
   state = {
     isMobile: false,
     theme: {
-      accent: new Color(189, 60, 50, 1),
-      text: new Color(189, 15, 30, 1),
-      text_light: new Color(189, 60, 99, 1),
-      boxshadow: new Color(189, 15, 30, 0.25),
-      background_light: new Color(189, 15, 95, 1),
-      background: new Color(189, 15, 100, 1)
-    }
+      accent: new Color(256, 45, 60, 1),
+      text: new Color(256, 15, 30, 1),
+      text_light: new Color(256, 60, 99, 1),
+      boxshadow: new Color(256, 15, 30, 0.25),
+      background_light: new Color(256, 15, 95, 1),
+      background: new Color(256, 15, 100, 1)
+    },
+    isMenuOpen: false
   }
 
 
@@ -45,6 +51,12 @@ class App extends PureComponent {
   componentDidMount = () => {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
+  }
+
+  handleOpenMenu = () => {
+    this.setState(prevState => ({
+      isMenuOpen: !prevState.isMenuOpen
+    }))
   }
 
   handleThemeChange = (newHue) => {
@@ -75,23 +87,36 @@ class App extends PureComponent {
 
   render() {
 
+    const { theme, isMenuOpen, isMobile } = this.state;
+
     return (
-      <ThemeProvider theme={this.state.theme}>
-        <div className="App">
+      <ThemeProvider theme={theme}>
+        <Fragment>
           <GlobalStyles />
 
           <Container>
-            <Header isMobile={this.state.isMobile} handleThemeChange={this.handleThemeChange} />
+            <Header
+              navLinks={navLinks}
+              isMenuOpen={isMenuOpen}
+              isMobile={isMobile}
+              handleOpenMenu={this.handleOpenMenu}
+              handleThemeChange={this.handleThemeChange} />
           </Container>
 
           <Container>
             <Hero />
           </Container>
 
-          <Features />
+          <Features id="about-me" />
 
-          <Projects />
-        </div>
+          <Projects id="projects" />
+
+          <Container id="skills" background fluid hasNestedContainer>
+            <Skills />
+          </Container>
+
+          <Footer />
+        </Fragment>
       </ThemeProvider>
     );
   }

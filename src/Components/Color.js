@@ -7,6 +7,21 @@ class Color {
     this.hsl = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.alpha})`;
   }
 
+  getNewHue(value) {
+    const newHsl = `hsla(${value}, ${this.saturation}%, ${this.lightness}%, ${this.alpha})`;
+    return newHsl;
+  }
+
+  getNewSaturation(value) {
+    const newHsl = `hsla(${this.hue}, ${value}%, ${this.lightness}%, ${this.alpha})`;
+    return newHsl;
+  }
+
+  getNewAlpha(value) {
+    const newHsl = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${value})`;
+    return newHsl;
+  }
+
   lighten(value) {
     let newLightness = this.lightness + value;
     const newHsl = `hsla(${this.hue}, ${this.saturation}%, ${newLightness}%, ${this.alpha})`
@@ -28,6 +43,11 @@ class Color {
   setNewHue(value) {
     this.hue = value;
     this.hsl = `hsla(${value}, ${this.saturation}%, ${this.lightness}%, ${this.alpha})`;
+  }
+
+  setNewSaturation(value) {
+    this.saturation = value;
+    this.hsl = `hsla(${this.hue}, ${value}%, ${this.lightness}%, ${this.alpha})`;
   }
 
   setNewLightness(value) {

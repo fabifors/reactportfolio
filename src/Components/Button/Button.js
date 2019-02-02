@@ -1,45 +1,85 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const StyledButton = styled.button`
   border: none;
   border-radius: 5px;
 
+  ${p => p.small
+    ? `
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9em;
+      border-radius: 5px;
+    `
+    : null
+  };
+
   ${p => p.medium
     ? `
-      padding: 0.75rem 1rem;
+      padding: 0.9rem 1.25rem;
       font-size: 1em;
+      border-radius: 5px;
     `: null
   };
+
   ${p => p.large
     ? `
-      padding: 1rem 1.5rem;
-      font-size: 1.25em;
+      padding: 1rem 1.6rem;
+      font-size: 1.5em;
+      border-radius: 8px;
     `: null
   };
 
   font-weight: 600;
-
   transition: background 300ms;
+ 
+  ${p => p.secondary
+    ? `
+    background: ${p.theme.background_light.darken(10)};
+    color: ${p.theme.text.hsl};
+  ` : `
+    background: ${p.theme.accent.hsl};
+    color: ${p.theme.text_light.hsl};
+  `}
 
-  background: ${props => props.theme.accent.hsl};
-  color: ${props => props.theme.text_light.hsl};
   cursor: pointer;
-  ${ props => props.shadow
-    ? `box-shadow: 0px 10px 20px ${props => props.theme.boxshadow.hsl}`
-    : null}
+
+  ${ p => p.shadow
+    ? `box-shadow: 0px 10px 20px ${p.theme.boxshadow.hsl}`
+    : null};
 
   &:hover {
-    background: ${props => props.theme.accent.darken(40)}
+    background: ${p => p.theme.accent.lighten(10)}
   }
 `;
 
-const Button = ({ href, text, medium, large, shadow }) => {
+export const WithIcon = styled(StyledButton)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  svg{
+    margin-right: 0.75rem;
+  }
+`;
+
+const Link = styled.a`
+  display: block;
+  text-decoration: none;
+`;
+
+const Button = ({ icon, href, text, medium, large, shadow, ...rest }) => {
   return (
-    <a href={href} >
-      <StyledButton large={large} medium={medium} shadow={shadow}>{text}</StyledButton>
-    </a>
+    <Link href={href}>
+      {icon
+        ? <WithIcon large={large} medium={medium} shadow={shadow} {...rest}>
+          <FontAwesomeIcon icon={['fas', icon]} />{text}
+        </WithIcon>
+        : <StyledButton large={large} medium={medium} shadow={shadow} {...rest}>{text}</StyledButton>
+      }
+    </Link>
   );
 }
 

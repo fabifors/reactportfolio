@@ -2,28 +2,7 @@ import React from 'react';
 import Navigation from '../Components/Navigation/Navigation';
 import Logo from '../Components/Logo/Logo';
 import styled from 'styled-components';
-
-const navLinks = [
-  {
-    id: 0,
-    href: '#projects',
-    text: 'Projects',
-    button: false
-  },
-  {
-    id: 1,
-    href: '#aboutme',
-    text: 'About me',
-    button: false
-  },
-  {
-    id: 2,
-    href: '#contact',
-    text: 'Contact',
-    button: true,
-    size: 'md'
-  },
-];
+import MenuBtn from '../Components/MenuBtn/MenuBtn';
 
 const Wrapper = styled.header`
   width: 100%;
@@ -36,11 +15,11 @@ const Wrapper = styled.header`
 `;
 
 
-const Header = ({ handleThemeChange, isMobile }) => {
+const Header = ({ handleThemeChange, handleOpenMenu, isMobile, isMenuOpen, navLinks }) => {
 
   const navigation = !isMobile
     ? <Navigation links={navLinks} horizontal />
-    : null;
+    : <MenuBtn click={handleOpenMenu} isMenuOpen={isMenuOpen} />;
 
   return (
     <Wrapper>

@@ -8,7 +8,7 @@ import FilterIcon from '../Filter/FilterIcon';
 export default class Project extends Component {
 
   render() {
-    const { type, url, title, img, handleFilterChange, activeFilters } = this.props;
+    const { type, url, title, img, handleFilterChange, activeFilters, ...rest } = this.props;
 
     const types = type.map((type, index) => (activeFilters.includes(type.title)
       ? <FilterIcon isActive click={handleFilterChange} key={index} title={type.title} icon={type.icon} />
@@ -16,9 +16,8 @@ export default class Project extends Component {
     ));
 
     return (
-
-      <ProjectContainer workedOn={title}>
-        <a href={url} target="_blank" rel="noopener noreferrer">
+      <ProjectContainer workedOn={title} {...rest}>
+        <a href={url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex' }}>
           <ProjectImg src={img} />
         </a>
         <TypesContainer>

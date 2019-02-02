@@ -30,7 +30,7 @@ export const Icon = styled.div`
 
   ::after {
     content: '${props => props.iconTitle}';
-    padding-left: ${props => props.iconTitle ? '0.5rem' : null};
+    ${props => props.iconTitle ? 'padding-left: 0.5rem' : null};
   }
 
   &:hover {

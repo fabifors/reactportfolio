@@ -17,7 +17,7 @@ const Filter = ({ filters, handleFilterChange, activeFilters }) => {
 
   return (
     <FilterWrapper>
-      <Text style={{ marginBottom: '1rem' }}>What kind of <Highlight semibold>projects</Highlight> do you want to see?</Text>
+      <Text center style={{ marginBottom: '1rem' }}>What kind of <Highlight semibold>projects</Highlight> do you want to see?</Text>
       <Filters>
         {MapFilters}
       </Filters>
