@@ -129,20 +129,3 @@ export const SkillDescription = styled.span`
     opacity: 0;
   }
 `;
-
-export const Values = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: -150px;
-`;
-
-export const ValueText = styled.p`
-  text-align: center;
-  font-weight: 600;
-  padding: 0;
-  margin: 0 0 1rem;
-  color: ${p => p.theme.text_light.hsl};
-`;

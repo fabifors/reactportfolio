@@ -45,7 +45,7 @@ export const Footer = ({ id }) => {
             <CopyrightText>
               Handmade by <Highlight light bold underline>Fabian Forsström</Highlight> with <FontAwesomeIcon icon={['fas', 'heart']} />
             </CopyrightText>
-            <a href="https://www.buymeacoffee.com/wJZagVhYt" target="_blank">
+            <a href="https://www.buymeacoffee.com/wJZagVhYt" target="_blank" rel="noopener noreferrer">
               <img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style={{ height: 'auto !important', width: 'auto !important', marginBottom: '1rem' }} />
             </a>
             <CopyrightText style={{ fontSize: '0.75em', fontWeight: '300' }}>copyright <FontAwesomeIcon icon={['fas', 'copyright']} /> twentynineteen</CopyrightText>

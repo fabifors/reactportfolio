@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import { SkillSection, SkillCard, SkillCardHeader, SkillSectionLabel, SkillCardWrapper, Values, ValueText } from './styles.js';
+import { SkillSection, SkillCard, SkillCardHeader, SkillSectionLabel, SkillCardWrapper } from './styles.js';
 import SkillBar from './Skillbar';
 import { Heading, Text, Highlight } from '../Basic/styles';
 import Container from '../Wrappers/Container';
