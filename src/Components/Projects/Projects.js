@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
 // Styled Components
-import { Heading, Section } from '../Basic/styles';
+import { Heading, Section, Text, Highlight, HeadsUp } from '../Basic/styles';
 import { ProjectsWrapper } from './styles';
 
 // Components
@@ -14,6 +14,7 @@ import webbhotel from './img/hittawebbhotellet.jpg';
 import refineit from './img/refineit.jpg';
 import smsloan from './img/hittasmslan.jpg';
 import quire from './img/quire.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class Projects extends PureComponent {
@@ -29,24 +30,28 @@ class Projects extends PureComponent {
     filters: { ...this.icons },
     projects: [
       {
+        name: 'Hitta Webbhotellet',
         title: 'Design',
         type: [this.icons.design],
         img: `${webbhotel}`,
         url: 'https://hittawebbhotellet.se'
       },
       {
+        name: 'Refine-It',
         title: 'Design / Code',
         type: [this.icons.code, this.icons.design],
         img: `${refineit}`,
         url: 'https://refine-it.se'
       },
       {
+        name: 'Hittasmslån',
         title: 'Design',
         type: [this.icons.design],
         img: `${smsloan}`,
         url: 'https://hittasmslån.se'
       },
       {
+        name: 'Quire',
         title: 'Design / Code',
         type: [this.icons.school, this.icons.design, this.icons.code],
         img: `${quire}`,
@@ -106,6 +111,11 @@ class Projects extends PureComponent {
               />
             ))}
           </ProjectsWrapper>
+
+          <HeadsUp>
+            <FontAwesomeIcon icon={['fas', 'exclamation-circle']} />
+            <Text center>I have just started a <Highlight bold>new project</Highlight> with a customer and I'm also starting to build some of my own <Highlight bold>React apps</Highlight>. <Highlight bold>Stay tuned for updates</Highlight></Text>
+          </HeadsUp>
         </Section>
       </Container>
     );

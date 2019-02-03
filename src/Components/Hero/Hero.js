@@ -7,8 +7,9 @@ import styled from 'styled-components';
 import Portrait from '../Portrait/Portrait';
 import Button from '../Button/Button';
 import { Highlight } from '../Basic/styles';
+import Container from '../Wrappers/Container';
 
-const Container = styled.section`
+const Section = styled.section`
   height: calc(90vh - 90px);
   text-align: center;
   display: flex;
@@ -55,12 +56,14 @@ const Hero = ({ theme }) => {
 
   return (
     <Container>
-      <Portrait theme={theme} />
-      <Content theme={theme}>
-        <h1>Front End Developer in Stockholm</h1>
-        <p>I am a <Highlight semibold>Front-End Developer</Highlight> student learning React.js with a focus on <Highlight semibold>design</Highlight>. Together we can make your project <Highlight semibold>stand out</Highlight>!</p>
-        <Button href="#contact" text="Let's talk!" icon="comments" large shadow />
-      </Content>
+      <Section>
+        <Portrait theme={theme} />
+        <Content theme={theme}>
+          <h1>Front End Developer in Stockholm</h1>
+          <p>I am a <Highlight semibold>Front-End Developer</Highlight> student learning React.js with a focus on <Highlight semibold>design</Highlight>. Together we can make your project <Highlight semibold>stand out</Highlight>!</p>
+          <Button href="#contact" text="Let's talk!" icon="comments" large shadow />
+        </Content>
+      </Section>
     </Container>
   );
 }

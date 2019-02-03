@@ -120,19 +120,15 @@ class App extends PureComponent {
               handleThemeChange={this.handleThemeChange} />
           </Container>
 
-          <Container>
-            <Hero />
-          </Container>
+          <Hero />
 
           <Features id="about-me" />
 
           <Projects id="projects" />
 
-          <Container id="skills" background fluid hasNestedContainer>
-            <Skills />
-          </Container>
+          <Skills id="skills" />
 
-          <Footer />
+          <Footer id="contact" />
         </Fragment>
       </ThemeProvider>
     );

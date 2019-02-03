@@ -17,6 +17,7 @@ export const ProjectsWrapper = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   grid-gap: 2rem;
   padding: 0;
+  margin-bottom: 3rem;
 `;
 
 export const ProjectContainer = styled.li`
@@ -69,4 +70,15 @@ export const ProjectContainer = styled.li`
 export const ProjectImg = styled.img`
   width: 100%;
   align-self: center;
+`;
+
+export const HiddenLabel = styled.span`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
 `;

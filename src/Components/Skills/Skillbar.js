@@ -21,9 +21,9 @@ export default class Skillbar extends Component {
   }
 
   findLevel = () => {
-    const level = levels.find(lev => lev.value >= this.state.value);
+    let index = levels.findIndex(lev => this.state.value < lev.value);
     this.setState({
-      level: level.text
+      level: levels[index - 1].text
     })
   }
 

@@ -39,6 +39,8 @@ export const FormGroup = styled.div`
 
   input, textarea {
     font-size: 0.875em;
+    font-weight: 500;
+    line-height: 1.2em;
   }
 
 `;
@@ -119,6 +121,7 @@ export const ContactWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
+  margin-bottom: 4rem;
 
   @media screen and (min-width:768px) {
     box-shadow: 0px 15px 60px hsla(0, 0%, 0%, 0.2);
@@ -173,17 +176,17 @@ export const ContactText = styled.div`
       position: relative;
       z-index: 25;
       
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      background: ${p => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
-      width: 125%;
-      height: 20px;
-      border-radius: 25px;
-      opacity: 0.2;
-      z-index: 20;
-      transform: translateY(-14px) translateX(-2px);
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: ${p => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
+        width: 125%;
+        height: 20px;
+        border-radius: 25px;
+        opacity: 0.2;
+        z-index: 20;
+        transform: translateY(-14px) translateX(-2px);
       }
     }
   }
@@ -197,5 +200,19 @@ export const CopyrightWrapper = styled.div`
 `;
 
 export const CopyrightText = styled.p`
-  
+  padding: 3rem 0rem 1rem;
+  color: ${p => p.theme.text_light.hsl};
+  font-size: 1em;
+  font-weight: 600;
+
+  margin-bottom: 1rem;
+  margin-top: 0;
+
+  :nth-last-of-type(1) {
+    padding: 0;
+  }
+
+  svg {
+    color: ${p => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
+  }
 `;

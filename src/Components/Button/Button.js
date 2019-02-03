@@ -10,7 +10,7 @@ const StyledButton = styled.button`
   ${p => p.small
     ? `
       padding: 0.5rem 0.75rem;
-      font-size: 0.9em;
+      font-size: 1em;
       border-radius: 5px;
     `
     : null
@@ -19,7 +19,7 @@ const StyledButton = styled.button`
   ${p => p.medium
     ? `
       padding: 0.9rem 1.25rem;
-      font-size: 1em;
+      font-size: 1.1em;
       border-radius: 5px;
     `: null
   };
@@ -37,12 +37,12 @@ const StyledButton = styled.button`
  
   ${p => p.secondary
     ? `
-    background: ${p.theme.background_light.darken(10)};
-    color: ${p.theme.text.hsl};
+    background: ${p.theme.background_light.hsl};
+    color: ${p.theme.accent.hsl};
   ` : `
     background: ${p.theme.accent.hsl};
     color: ${p.theme.text_light.hsl};
-  `}
+  `};
 
   cursor: pointer;
   ${p => p.nested ? 'pointer-events: none;' : null};
@@ -52,7 +52,7 @@ const StyledButton = styled.button`
     : null};
 
   &:hover {
-    background: ${p => p.theme.accent.lighten(10)}
+    background: ${p => p.theme.accent.lighten(10)};
   }
 `;
 

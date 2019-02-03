@@ -23,7 +23,7 @@ const Header = ({ handleThemeChange, handleOpenMenu, isMobile, isMenuOpen, navLi
 
   return (
     <Wrapper>
-      <Logo click={handleThemeChange} />
+      <Logo height="100%" click={handleThemeChange} />
       {navigation}
     </Wrapper>
   );

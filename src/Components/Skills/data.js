@@ -37,15 +37,15 @@ export const levels = [{
 
 export const creative = [
   {
-    value: 0.48,
-    label: "Sketching"
+    value: 0.45,
+    label: "UI Design"
   },
   {
-    value: 0.7,
+    value: 0.8,
     label: "Adobe XD"
   },
   {
-    value: 0.15,
+    value: 0.25,
     label: "Adobe Illustrator"
   },
   {
@@ -56,38 +56,34 @@ export const creative = [
 
 export const building = [
   {
-    value: 0.67,
+    value: 0.87,
     label: "HTML"
   },
   {
-    value: 0.6,
+    value: 0.85,
     label: "CSS3"
   },
   {
-    value: 0.25,
+    value: 0.60,
     label: "JavaScript"
   },
   {
-    value: 0.3,
-    label: "Bootstrap 4"
-  },
-  {
-    value: 0.3,
+    value: 0.6,
     label: "React.js"
   }
 ]
 
 export const uiux = [
   {
-    value: 0.2,
-    label: "jQuery"
-  },
-  {
-    value: 0.15,
+    value: 0.25,
     label: "Animations"
   },
   {
-    value: 0.25,
+    value: 0.4,
     label: "Interactity"
+  },
+  {
+    value: 0.5,
+    label: "User experience"
   }
 ]

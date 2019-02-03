@@ -3,10 +3,11 @@ import styled from 'styled-components';
 
 const barHeight = 3;
 
-export const MenuButton = styled.div`
+export const MenuButton = styled.button`
   z-index: 100;
   position: fixed;
   right: 1rem;
+  cursor: pointer;
 
   width: 3rem; // 16px 32px 48px 56px
   height: 3rem;

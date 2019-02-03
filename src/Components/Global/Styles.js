@@ -19,7 +19,9 @@ const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar {
   width: 5px;
   }
-
+  .grecaptcha-badge {
+    display: none;
+  }
   /* Track */
   ::-webkit-scrollbar-track {
     transition: background 200ms; 
