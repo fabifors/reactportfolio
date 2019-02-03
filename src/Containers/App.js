@@ -46,7 +46,6 @@ class App extends PureComponent {
 
   componentWillMount = () => {
     window.removeEventListener('resize', this.handleResize);
-    this.getCoffeeData();
   }
 
   componentDidMount = () => {
