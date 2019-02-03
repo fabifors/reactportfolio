@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '../Wrappers/Container';
 import { Heading, Section, Text, Highlight } from '../Basic/styles';
-import { Form, FormInput, FormLabel, FormGroup, FormComment, FormReset, ContactWrapper, ContactText, CopyrightWrapper, CopyrightText } from './styles';
+import { Form, FormInput, FormLabel, FormGroup, FormComment, FormReset, ContactWrapper, ContactText, CopyrightWrapper, CopyrightText, FooterLink } from './styles';
 import Button from '../Button/Button';
 
 import SocialButtons from '../SocialButtons';
@@ -16,7 +16,7 @@ export const Footer = ({ id }) => {
           <ContactWrapper>
             <ContactText>
               <Heading light >Contact</Heading>
-              <Text light bold nomargin>Are you interested in learning more about me and my journey, hire me for your next project or just wanna buy me coffe?</Text>
+              <Text light bold nomargin>Are you interested in learning more about me and my journey, hire me for your next project or just wanna <FooterLink href="https://www.buymeacoffee.com/wJZagVhYt" target="_blank" rel="noopener noreferrer">buy me coffe</FooterLink>?</Text>
               <Text light bold>Hit me up and <span>let's talk!</span></Text>
               <SocialButtons />
             </ContactText>

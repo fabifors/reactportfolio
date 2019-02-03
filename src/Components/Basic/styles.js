@@ -67,3 +67,4 @@ export const HeadsUp = styled.div`
     top: 1rem;
   }
 `;
+

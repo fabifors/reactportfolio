@@ -197,6 +197,15 @@ export const CopyrightWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  a {
+    transition: transform 250ms, color 250ms;
+    transform: translateY(0);
+
+    :hover {
+      transform: scale(0.97) rotate(2deg);
+    }
+  }
 `;
 
 export const CopyrightText = styled.p`
@@ -214,5 +223,21 @@ export const CopyrightText = styled.p`
 
   svg {
     color: ${p => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
+  }
+`;
+
+export const FooterLink = styled.a`
+  display: inline-block;
+  color: ${p => p.theme.text_light.hsl};
+  padding: 0.25rem;
+  padding-bottom: 0;
+  text-decoration: none;
+  border-bottom: 2px solid ${p => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
+
+  transition: transform 250ms, color 250ms;
+  transform: translateY(0);
+
+  :hover {
+    transform: scale(0.97) rotate(2deg);
   }
 `;
