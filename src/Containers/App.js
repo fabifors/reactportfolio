@@ -29,8 +29,6 @@ import { fas } from '@fortawesome/pro-solid-svg-icons';
 import { Footer } from '../Components/Footer/Footer';
 library.add(fas, fab)
 
-const key = 'pk_test_0djZfaDu6QVIPGeUO8wczLEA'
-const URL = `https://cat-fact.herokuapp.com/`
 class App extends PureComponent {
 
   state = {
