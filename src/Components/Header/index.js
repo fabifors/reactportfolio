@@ -1,18 +1,9 @@
 import React from 'react';
-import Navigation from '../Components/Navigation/Navigation';
-import Logo from '../Components/Logo/Logo';
-import styled from 'styled-components';
-import MenuBtn from '../Components/MenuBtn/MenuBtn';
+import Navigation from '../Navigation/Navigation';
+import Logo from '../Logo/Logo';
+import MenuBtn from '../MenuBtn/MenuBtn';
+import { Wrapper } from './styles';
 
-const Wrapper = styled.header`
-  width: 100%;
-  height: 90px;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
 
 
 const Header = ({ handleThemeChange, handleOpenMenu, isMobile, isMenuOpen, navLinks }) => {

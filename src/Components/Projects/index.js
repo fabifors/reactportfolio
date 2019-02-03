@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 
 // Styled Components
-import { Heading, Section, Text, Highlight, HeadsUp } from '../Basic/styles';
+import { Heading, Section, Text, Highlight, HeadsUp } from '../General/styles';
 import { ProjectsWrapper } from './styles';
 
 // Components
-import Container from '../Wrappers/Container';
+import Container from '../Container';
 import Project from './Project';
-import Filter from '../Filter/Filter';
+import Filter from '../Filter';
 
 // Project img
 import webbhotel from './img/hittawebbhotellet.jpg';
@@ -114,7 +114,7 @@ class Projects extends PureComponent {
 
           <HeadsUp>
             <FontAwesomeIcon icon={['fas', 'exclamation-circle']} />
-            <Text center>I have just started a <Highlight bold>new project</Highlight> with a customer and I'm also starting to build some of my own <Highlight bold>React apps</Highlight>. <Highlight bold>Stay tuned for updates</Highlight></Text>
+            <Text center>I have just started a <Highlight bold>new project</Highlight> with a friend and I'm also going to build some of my own <Highlight bold>React apps</Highlight>. <Highlight bold>Stay tuned for updates</Highlight></Text>
           </HeadsUp>
         </Section>
       </Container>

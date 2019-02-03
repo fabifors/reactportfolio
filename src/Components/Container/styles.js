@@ -1,11 +1,9 @@
-import React from 'react';
-
 // Libraries
 import styled from 'styled-components';
 
 const padding = '1rem';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   padding-right: ${padding};
   padding-left: ${padding};
   margin-right: auto;
@@ -34,14 +32,3 @@ const Wrapper = styled.div`
   ${p => p.height ? `min-height: ${p.height}` : null}
 
 `;
-
-const Container = ({ fluid, children, background, flex, hasNestedContainer, ...rest }) => {
-
-  return (
-    <Wrapper {...rest} background={background} hasNestedContainer={hasNestedContainer} fluid={fluid} flex={flex}>
-      {children}
-    </Wrapper>
-  );
-}
-
-export default Container;

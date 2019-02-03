@@ -1,14 +1,14 @@
 import React from 'react';
-import Container from '../Wrappers/Container';
-import { Heading, Section, Text, Highlight } from '../Basic/styles';
+import Container from '../Container';
+import { Heading, Section, Text, Highlight } from '../General/styles';
 import { Form, FormInput, FormLabel, FormGroup, FormComment, FormReset, ContactWrapper, ContactText, CopyrightWrapper, CopyrightText, FooterLink } from './styles';
-import Button from '../Button/Button';
+import Button from '../Button';
 
 import SocialButtons from '../SocialButtons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Logo from '../Logo/Logo';
 
-export const Footer = ({ id }) => {
+const Footer = ({ id }) => {
   return (
     <Container id={id} background fluid hasNestedContainer>
       <Container>
@@ -55,3 +55,5 @@ export const Footer = ({ id }) => {
     </Container>
   );
 }
+
+export default Footer;

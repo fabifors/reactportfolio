@@ -2,7 +2,7 @@ import React from 'react';
 
 // Components
 import { FilterWrapper, Filters } from './styles';
-import { Text, Highlight } from '../Basic/styles';
+import { Text, Highlight } from '../General/styles';
 import FilterIcon from './FilterIcon';
 
 const Filter = ({ filters, handleFilterChange, activeFilters }) => {

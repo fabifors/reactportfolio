@@ -15,6 +15,6 @@ const LinkElement = styled.a`
   }
 `;
 
-const Link = ({ href, text, theme }) => <LinkElement theme={theme} href={href}>{text}</LinkElement>;
+const Link = ({ href, text }) => <LinkElement href={href}>{text}</LinkElement>;
 
 export default Link;

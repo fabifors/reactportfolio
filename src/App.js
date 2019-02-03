@@ -5,28 +5,29 @@ import { ThemeProvider } from 'styled-components';
 import { Motion, spring } from 'react-motion';
 
 // Globally assigned styles
-import GlobalStyles from '../Components/Global/Styles';
+import GlobalStyles from './Components/Global/Styles';
 
 // Color class 
-import Color from '../Components/Color';
+import Color from './Functions/Color';
 
 // Components
-import Container from '../Components/Wrappers/Container';
-import Header from './Header';
-import Hero from '../Components/Hero/Hero';
-import Features from '../Components/Features/Features';
-import Projects from '../Components/Projects/Projects';
-import Skills from '../Components/Skills/Skills';
-import SideMenu from '../Components/SideMenu';
+import Container from './Components/Container';
+import Header from './Components/Header';
+import Hero from './Components/Hero';
+import Features from './Components/Features';
+import Projects from './Components/Projects';
+import Skills from './Components/Skills';
+import SideMenu from './Components/SideMenu';
+import Footer from './Components/Footer';
 
 // Navigation Links
-import { navLinks } from '../navLinks';
+import { navLinks } from './navLinks';
 
 // Font awesome library
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/pro-solid-svg-icons';
-import { Footer } from '../Components/Footer/Footer';
+
 library.add(fas, fab)
 
 class App extends PureComponent {

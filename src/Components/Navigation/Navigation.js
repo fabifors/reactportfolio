@@ -1,19 +1,11 @@
 import React from 'react';
 
-// Libraries
-import styled from 'styled-components';
-
 // Components
 import Link from './Link';
 import List from '../List/List';
 import ListItem from '../List/ListItem';
-import Button from '../Button/Button';
-
-const Wrapper = styled.nav`
-  height: 100%;
-  display: flex;
-  align-items: center;
-`;
+import Button from '../Button';
+import { Wrapper } from './styles';
 
 const Navigation = (props) => {
   const { links, horizontal } = props;

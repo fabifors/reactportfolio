@@ -3,10 +3,10 @@ import React from 'react';
 // Components
 import Feature from './Feature';
 import Data from './data.js';
-import Container from '../Wrappers/Container';
+import Container from '../Container';
 
 // Styled components
-import { Text, Heading, Background, Section, Highlight } from '../Basic/styles';
+import { Text, Heading, Background, Section, Highlight } from '../General/styles';
 import { FeatureList } from './styles';
 
 const featureList = Data.map(feature => {

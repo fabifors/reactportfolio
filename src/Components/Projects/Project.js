@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { ProjectContainer, TypesContainer, ProjectImg, HiddenLabel } from './styles';
 import FilterIcon from '../Filter/FilterIcon';
 
-
 export default class Project extends Component {
 
   render() {

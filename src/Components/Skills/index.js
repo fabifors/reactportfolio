@@ -3,8 +3,8 @@ import React from 'react';
 // Components
 import { SkillSection, SkillCard, SkillCardHeader, SkillSectionLabel, SkillCardWrapper } from './styles.js';
 import SkillBar from './Skillbar';
-import { Heading, Text, Highlight } from '../Basic/styles';
-import Container from '../Wrappers/Container';
+import { Heading, Text, Highlight } from '../General/styles';
+import Container from '../Container';
 
 // Data
 import { creative, building, uiux } from './data';

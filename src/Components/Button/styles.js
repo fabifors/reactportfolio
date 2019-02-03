@@ -1,9 +1,7 @@
-import React from 'react';
+
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   border: none;
   border-radius: 5px;
 
@@ -66,22 +64,7 @@ export const WithIcon = styled(StyledButton)`
   }
 `;
 
-const Link = styled.a`
+export const Link = styled.a`
   display: block;
   text-decoration: none;
 `;
-
-const Button = ({ icon, href, text, medium, large, shadow, ...rest }) => {
-  return (
-    <Link href={href}>
-      {icon
-        ? <WithIcon large={large} medium={medium} shadow={shadow} {...rest}>
-          <FontAwesomeIcon icon={['fas', icon]} />{text}
-        </WithIcon>
-        : <StyledButton large={large} medium={medium} shadow={shadow} {...rest}>{text}</StyledButton>
-      }
-    </Link>
-  );
-}
-
-export default Button;
