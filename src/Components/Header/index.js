@@ -1,7 +1,7 @@
 import React from 'react';
-import Navigation from '../Navigation/Navigation';
+import Navigation from '../Navigation';
 import Logo from '../Logo/Logo';
-import MenuBtn from '../MenuBtn/MenuBtn';
+import MenuBtn from '../MenuBtn';
 import { Wrapper } from './styles';
 
 

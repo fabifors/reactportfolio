@@ -1,5 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
 
+// Api Key OPEN WEATHER MAP
+import { key } from './apikey';
+
 // Libraries
 import { ThemeProvider } from 'styled-components';
 import { Motion, spring } from 'react-motion';
@@ -13,6 +16,7 @@ import Color from './Functions/Color';
 // Components
 import Container from './Components/Container';
 import Header from './Components/Header';
+import Spotify from './Components/Spotify';
 import Hero from './Components/Hero';
 import Features from './Components/Features';
 import Projects from './Components/Projects';
@@ -29,6 +33,9 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/pro-solid-svg-icons';
 
 library.add(fas, fab)
+
+// API
+const WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?q=stockholm,se&APPID=${key}`;
 
 class App extends PureComponent {
 
@@ -52,6 +59,14 @@ class App extends PureComponent {
   componentDidMount = () => {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
+
+    fetch(WEATHER_API)
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json)
+        const { main: { temp }, name } = json;
+        this.setState({ temp: ((temp - 273.15).toFixed(2)), city: name })
+      })
   }
 
   handleOpenMenu = () => {
@@ -117,6 +132,7 @@ class App extends PureComponent {
               isMobile={isMobile}
               handleOpenMenu={this.handleOpenMenu}
               handleThemeChange={this.handleThemeChange} />
+            <Spotify />
           </Container>
 
           <Hero />

@@ -6,14 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Import styled components
 import { Link, WithIcon, StyledButton } from './styles';
 
-const Button = ({ icon, href, text, medium, large, shadow, ...rest }) => {
+const Button = ({ icon, href, text, ...rest }) => {
   return (
     <Link href={href}>
       {icon
-        ? <WithIcon large={large} medium={medium} shadow={shadow} {...rest}>
+        ? <WithIcon {...rest}>
           <FontAwesomeIcon icon={['fas', icon]} />{text}
         </WithIcon>
-        : <StyledButton large={large} medium={medium} shadow={shadow} {...rest}>{text}</StyledButton>
+        : <StyledButton {...rest}>{text}</StyledButton>
       }
     </Link>
   );
