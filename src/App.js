@@ -31,6 +31,8 @@ import { navLinks } from './navLinks';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/pro-solid-svg-icons';
+import { SpotifyButton } from './Components/Spotify/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 library.add(fas, fab)
 
@@ -49,7 +51,8 @@ class App extends PureComponent {
       background_light: new Color(256, 15, 95, 1),
       background: new Color(256, 15, 100, 1)
     },
-    isMenuOpen: false
+    isMenuOpen: false,
+    spotifyIsOpen: false
   }
 
   componentWillMount = () => {
@@ -101,15 +104,23 @@ class App extends PureComponent {
     }
   }
 
+  handleSpotifyOpen = () => {
+    this.setState(prevState => ({
+      spotifyIsOpen: !prevState.spotifyIsOpen
+    }))
+  }
+
   render() {
 
-    const { theme, isMenuOpen, isMobile } = this.state;
+    const { theme, isMenuOpen, isMobile, spotifyIsOpen } = this.state;
 
     return (
       <ThemeProvider theme={theme}>
         <Fragment>
           <GlobalStyles />
-          <Container>
+          <Container style={{ position: 'relative' }}>
+
+            <Spotify spotifyIsOpen={spotifyIsOpen} />
             <Motion
               defaultStyle={{ x: 100 }}
               style={(this.state.isMenuOpen ? { x: spring(0) } : { x: spring(100) })}
@@ -132,7 +143,9 @@ class App extends PureComponent {
               isMobile={isMobile}
               handleOpenMenu={this.handleOpenMenu}
               handleThemeChange={this.handleThemeChange} />
-            <Spotify />
+            <SpotifyButton onClick={() => this.handleSpotifyOpen()}>
+              <FontAwesomeIcon icon={['fab', 'spotify']} />
+            </SpotifyButton>
           </Container>
 
           <Hero />

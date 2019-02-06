@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { Motion, spring } from 'react-motion';
 
 // Spotify API lib
 import SpotifyWebApi from 'spotify-web-api-js';
-import { SpotifyWrapper } from './styles';
+import { SpotifyWrapper, SpotifySection, SpotifyAlbumCover, SpotifyText, SpotifyLink } from './styles';
 const spotifyApi = new SpotifyWebApi();
 
 class Spotify extends Component {
@@ -15,20 +16,41 @@ class Spotify extends Component {
     }
     this.state = {
       loggedIn: token ? true : false,
-      nowPlaying: { name: 'Not Checked', albumArt: '' }
+      nowPlaying: { name: 'Not Checked', albumArt: '', artists: [], uri: '' }
     }
   }
 
   getNowPlaying() {
     spotifyApi.getMyCurrentPlaybackState()
       .then((response) => {
-        console.log(response);
+        const {
+          name,
+          album: { images },
+          artists,
+          external_urls: { spotify }
+        } = response.item;
+
+        const artistsLocal = [...artists];
+        const artistsArray = [];
+
+        artistsLocal.map(artist => {
+          const { name, external_urls: { spotify } } = artist;
+          const artistObject = {
+            name,
+            url: spotify
+          }
+          return artistsArray.push(artistObject);
+        })
+
         this.setState({
           nowPlaying: {
-            name: response.item.name,
-            albumArt: response.item.album.images[0].url
+            name: name,
+            albumArt: images[0].url,
+            artists: artistsArray,
+            url: spotify
           }
         });
+        console.log(response);
       }).catch((err) => {
         console.log(err);
       })
@@ -51,16 +73,44 @@ class Spotify extends Component {
     return hashParams;
   }
   render() {
+
+    const { loggedIn, nowPlaying: { name, artists, albumArt, url } } = this.state;
+    const { spotifyIsOpen } = this.props;
+
     return (
-      <SpotifyWrapper>
-        {this.state.loggedIn ? null : <a href='https://infinite-taiga-49598.herokuapp.com/' > Login to Spotify </a>}
-        <div>
-          Now Playing: {this.state.nowPlaying.name}
-        </div>
-        <div>
-          <img src={this.state.nowPlaying.albumArt} style={{ height: '100%' }} />
-        </div>
-      </SpotifyWrapper>
+      <Fragment>
+        <Motion
+          defaultStyle={{ y: 100, opacity: 0 }}
+          style={(spotifyIsOpen ? { y: spring(0), opacity: spring(1) } : { y: spring(100), opacity: spring(0) })}>
+
+          {style => (
+            <SpotifyWrapper style={
+              {
+                opacity: style.opacity,
+                transform: `translateY(${style.y}%)`
+              }}>
+              {loggedIn
+                ? null
+                : <SpotifyLink href='https://infinite-taiga-49598.herokuapp.com/' > Login to Spotify </SpotifyLink>
+              }
+              <SpotifyAlbumCover alt="Album Cover Art" src={albumArt} />
+              <SpotifySection>
+                <SpotifySection>
+                  <SpotifyText bold>Song</SpotifyText>
+                  <SpotifyLink href={url} title={name}>
+                    {name}
+                  </SpotifyLink>
+                </SpotifySection>
+                <SpotifySection>
+                  <SpotifyText bold>Artists</SpotifyText>
+                  {artists.map((artist, i) => <SpotifyLink href={artist.url} target="_blank" rel="noopener nofollow" key={i}>{artist.name}</SpotifyLink>)}
+                </SpotifySection>
+              </SpotifySection>
+
+            </SpotifyWrapper>
+          )}
+        </Motion>
+      </Fragment>
     );
   }
 }
