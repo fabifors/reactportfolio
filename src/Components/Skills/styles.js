@@ -117,7 +117,6 @@ export const SkillDescription = styled.span`
   background: #fff;
   box-shadow: 0px 10px 20px hsla(0, 0%, 0%, 0.2);
   font-weight: 600;
-  transition: opacity 300ms;
   z-index: 99;
   border-radius: 5px;
   text-align: center;

@@ -2,6 +2,8 @@ import React from 'react';
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// Styled Components
 import { SocialLink } from './styles';
 
 const SocialButton = ({ icon, title, url }) => {

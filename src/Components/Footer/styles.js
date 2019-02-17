@@ -54,6 +54,7 @@ export const FormInput = styled.input`
   padding: 1rem;
   border-bottom: 3px solid transparent;
   outline: none;
+  font-family: 'Proxima-Soft';
 
   transition: border 300ms;
 
@@ -78,7 +79,7 @@ export const FormComment = styled.textarea`
   border-radius: 5px;
   outline: none;
   
-  font-family: 'Proxima Soft';
+  font-family: 'Proxima-Soft';
 
   padding: 1rem;
 `;

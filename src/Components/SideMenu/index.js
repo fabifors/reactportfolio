@@ -5,6 +5,7 @@ const SideMenu = (props) => {
   const { style, handleOpenMenu } = props;
 
   return (
+
     <MenuContainer style={style}>
       <Heading>Menu</Heading>
       <Nav>

@@ -5,6 +5,7 @@ import { key } from './apikey';
 
 // Libraries
 import { ThemeProvider } from 'styled-components';
+import SnowStorm from 'react-snowstorm';
 import { Motion, spring } from 'react-motion';
 
 // Globally assigned styles
@@ -23,6 +24,7 @@ import Projects from './Components/Projects';
 import Skills from './Components/Skills';
 import SideMenu from './Components/SideMenu';
 import Footer from './Components/Footer';
+import MakeItSnow from './Components/MakeItSnow';
 
 // Navigation Links
 import { navLinks } from './navLinks';
@@ -46,7 +48,7 @@ class App extends PureComponent {
   state = {
     isMobile: false,
     theme: {
-      accent: new Color(256, 45, 60, 1),
+      accent: new Color(256, 45, 50, 1),
       text: new Color(256, 15, 30, 1),
       text_light: new Color(256, 60, 99, 1),
       boxshadow: new Color(256, 15, 30, 0.25),
@@ -54,29 +56,68 @@ class App extends PureComponent {
       background: new Color(256, 15, 100, 1)
     },
     isMenuOpen: false,
-    spotifyIsOpen: false
+    spotifyIsOpen: false,
+    weather: {
+      belowZero: false
+    }
   }
 
   componentWillMount = () => {
+    this.getWeatherInfo();
     window.removeEventListener('resize', this.handleResize);
   }
 
   componentDidMount = () => {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
+  }
 
+  getWeatherInfo = () => {
     fetch(WEATHER_API)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json)
-        const { main: { temp }, name } = json;
-        this.setState({ temp: ((temp - 273.15).toFixed(2)), city: name })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          throw Error(res.status);
+        }
       })
+      .then((json) => {
+        const { main: { temp }, name } = json;
+        if ((temp - 273.15) < 0) {
+          this.setState({
+            weather: {
+              belowZero: true,
+              temp: ((temp - 273.15).toFixed(2)),
+              city: name
+            }
+          })
+        } else {
+          this.setState({
+            weather: {
+              belowZero: false,
+              temp: ((temp - 273.15).toFixed(2)),
+              city: name
+            }
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   handleOpenMenu = () => {
     this.setState(prevState => ({
       isMenuOpen: !prevState.isMenuOpen
+    }))
+  }
+
+  handleSnowDemo = () => {
+    this.setState(prevState => ({
+      weather: {
+        ...prevState.weather,
+        belowZero: !prevState.weather.belowZero
+      }
     }))
   }
 
@@ -114,11 +155,15 @@ class App extends PureComponent {
 
   render() {
 
-    const { theme, isMenuOpen, isMobile, spotifyIsOpen } = this.state;
+    const { theme, isMenuOpen, isMobile, spotifyIsOpen, weather: { belowZero } } = this.state;
 
     return (
       <ThemeProvider theme={theme}>
         <Fragment>
+          <MakeItSnow click={this.handleSnowDemo} />
+          {belowZero === true ?
+            <SnowStorm snowStick={false} snowColor={theme.background_light.darken(10)} />
+            : null}
           <GlobalStyles />
           <Container style={{ position: 'relative' }}>
 
@@ -149,7 +194,6 @@ class App extends PureComponent {
               <FontAwesomeIcon icon={['fab', 'spotify']} />
             </SpotifyButton>
           </Container>
-
           <Hero />
 
           <Features id="about-me" />
