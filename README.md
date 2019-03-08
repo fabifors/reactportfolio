@@ -20,9 +20,13 @@ Library used to style components. This really is the future!
 
 ## Available Scripts
 
-Of course all the avaliable scripts from create-react-app are avaliable here aswell. I have shortend this version to only include `npm start` since this is the only script you really need to use to test the application. The intent of this project is only to develop my skills and has no need for collaborations. 
+Of course all the avaliable scripts from create-react-app are avaliable here aswell. I have shortend this version to only include `npm i` and `npm start` since these are the only script you really need to use to test the application. The intent of this project is only to develop my skills and has no need for collaborations. 
 
 >Thanks for downloading and taking an interest in my personal development into the world of the web.
+
+First of all run:
+
+### `npm i`
 
 In the project directory, you can run:
 
