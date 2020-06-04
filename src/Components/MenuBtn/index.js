@@ -7,13 +7,20 @@ import { Motion, spring } from 'react-motion';
 import { Bar, MenuButton } from './styles';
 
 const MenuBtn = ({ isMenuOpen, click }) => {
-
   return (
     <Motion
       defaultStyle={{ x: 100, opacity: 0 }}
-      style={{ x: spring(0), opacity: spring(1) }}>
-      {style => (
-        <MenuButton style={{ opacity: style.opacity, transform: `translateX(${style.x}px)` }} onClick={() => click()} className={isMenuOpen ? 'open' : null}>
+      style={{ x: spring(0), opacity: spring(1) }}
+    >
+      {(style) => (
+        <MenuButton
+          style={{
+            opacity: style.opacity,
+            transform: `translateX(${style.x}px)`,
+          }}
+          onClick={() => click()}
+          className={isMenuOpen ? 'open' : null}
+        >
           <Bar />
           <Bar middle />
           <Bar />
@@ -21,7 +28,6 @@ const MenuBtn = ({ isMenuOpen, click }) => {
       )}
     </Motion>
   );
-
-}
+};
 
 export default MenuBtn;

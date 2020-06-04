@@ -9,21 +9,38 @@ const Filter = ({ filters, handleFilterChange, activeFilters }) => {
   const filtersArr = [];
   for (let filter in filters) {
     filtersArr.push(filters[filter]);
-  };
+  }
 
-  const MapFilters = filtersArr.map((filter, index) => (activeFilters.includes(filter.title)
-    ? <FilterIcon withTitle isActive key={index} icon={filter.icon} title={filter.title} click={handleFilterChange} />
-    : <FilterIcon withTitle key={index} icon={filter.icon} title={filter.title} click={handleFilterChange} />));
+  const MapFilters = filtersArr.map((filter, index) =>
+    activeFilters.includes(filter.title) ? (
+      <FilterIcon
+        withTitle
+        isActive
+        key={index}
+        icon={filter.icon}
+        title={filter.title}
+        click={handleFilterChange}
+      />
+    ) : (
+      <FilterIcon
+        withTitle
+        key={index}
+        icon={filter.icon}
+        title={filter.title}
+        click={handleFilterChange}
+      />
+    )
+  );
 
   return (
     <FilterWrapper>
-      <Text center style={{ marginBottom: '1rem' }}>What kind of <Highlight semibold>projects</Highlight> do you want to see?</Text>
-      <Filters>
-        {MapFilters}
-      </Filters>
+      <Text center style={{ marginBottom: '1rem' }}>
+        What kind of <Highlight semibold>projects</Highlight> do you want to
+        see?
+      </Text>
+      <Filters>{MapFilters}</Filters>
     </FilterWrapper>
   );
-}
-
+};
 
 export default Filter;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  background: ${props => props.theme.background_light.lighten(4)};
-  
+  background: ${(props) => props.theme.background_light.lighten(4)};
+
   display: flex;
   flex-direction: column;
   padding: 2rem 1.5rem 1.5rem;
@@ -22,33 +22,28 @@ export const Form = styled.form`
 export const FormGroup = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: ${p => p.row ? `row` : `column`};
-  ${p => p.center
-    ? `justify-content:center; align-items: center;`
-    : null
-  };
+  flex-direction: ${(p) => (p.row ? `row` : `column`)};
+  ${(p) => (p.center ? `justify-content:center; align-items: center;` : null)};
 
-  ${p => p.center
-    ? `justify-content:flex-start; align-items: center;`
-    : null
-  };
+  ${(p) =>
+    p.center ? `justify-content:flex-start; align-items: center;` : null};
 
   padding: 0.5rem;
 
   border: none;
 
-  input, textarea {
+  input,
+  textarea {
     font-size: 0.875em;
     font-weight: 500;
     line-height: 1.2em;
   }
-
 `;
 
 export const FormInput = styled.input`
   width: 100%;
-  background: ${p => p.theme.background_light.hsl};
-  color: ${p => p.theme.text.hsl};
+  background: ${(p) => p.theme.background_light.hsl};
+  color: ${(p) => p.theme.text.hsl};
   border: none;
   border-radius: 5px;
   padding: 1rem;
@@ -59,12 +54,12 @@ export const FormInput = styled.input`
   transition: border 300ms;
 
   :focus {
-    border-bottom: 3px solid ${p => p.theme.accent.hsl};
+    border-bottom: 3px solid ${(p) => p.theme.accent.hsl};
   }
 `;
 
 export const FormLabel = styled.label`
-  color: ${p => p.theme.text.hsl};
+  color: ${(p) => p.theme.text.hsl};
   text-align: left;
   padding-bottom: 0.5rem;
   font-weight: 600;
@@ -73,12 +68,12 @@ export const FormLabel = styled.label`
 
 export const FormComment = styled.textarea`
   width: 100%;
-  background: ${p => p.theme.background_light.hsl};
-  color: ${p => p.theme.text.hsl};
+  background: ${(p) => p.theme.background_light.hsl};
+  color: ${(p) => p.theme.text.hsl};
   border: none;
   border-radius: 5px;
   outline: none;
-  
+
   font-family: 'Proxima-Soft';
 
   padding: 1rem;
@@ -88,7 +83,7 @@ export const FormReset = styled.button`
   background: none;
   border: none;
   font-weight: 600;
-  color: ${p => p.theme.text.lighten(20)};
+  color: ${(p) => p.theme.text.lighten(20)};
   cursor: pointer;
   margin-left: 1rem;
   padding: 1rem;
@@ -96,7 +91,7 @@ export const FormReset = styled.button`
   font-size: 0.9em;
   position: relative;
 
-  ::after{
+  ::after {
     position: absolute;
     top: 0;
     left: 0;
@@ -112,7 +107,7 @@ export const FormReset = styled.button`
   :hover {
     ::after {
       opacity: 1;
-      border-bottom: 3px solid ${p => p.theme.accent.lighten(20)}
+      border-bottom: 3px solid ${(p) => p.theme.accent.lighten(20)};
     }
   }
 `;
@@ -124,7 +119,7 @@ export const ContactWrapper = styled.div`
   border-radius: 10px;
   margin-bottom: 4rem;
 
-  @media screen and (min-width:768px) {
+  @media screen and (min-width: 768px) {
     box-shadow: 0px 15px 60px hsla(0, 0%, 0%, 0.2);
     flex: 0 2 2;
     flex-direction: row;
@@ -136,7 +131,7 @@ export const ContactWrapper = styled.div`
 
 export const ContactText = styled.div`
   border-radius: 10px 10px 0 0;
-  background: ${p => p.theme.accent.hsl};
+  background: ${(p) => p.theme.accent.hsl};
   padding: 2rem;
   width: 100%;
   display: flex;
@@ -171,17 +166,18 @@ export const ContactText = styled.div`
   p {
     position: relative;
     z-index: 20;
-    
+
     > span {
       display: inline-block;
       position: relative;
       z-index: 25;
-      
+
       &::after {
         content: '';
         display: block;
         position: absolute;
-        background: ${p => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
+        background: ${(p) =>
+          p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
         width: 125%;
         height: 20px;
         border-radius: 25px;
@@ -211,7 +207,7 @@ export const CopyrightWrapper = styled.div`
 
 export const CopyrightText = styled.p`
   padding: 3rem 0rem 1rem;
-  color: ${p => p.theme.text_light.hsl};
+  color: ${(p) => p.theme.text_light.hsl};
   font-size: 1em;
   font-weight: 600;
 
@@ -223,17 +219,18 @@ export const CopyrightText = styled.p`
   }
 
   svg {
-    color: ${p => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
+    color: ${(p) => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
   }
 `;
 
 export const FooterLink = styled.a`
   display: inline-block;
-  color: ${p => p.theme.text_light.hsl};
+  color: ${(p) => p.theme.text_light.hsl};
   padding: 0.25rem;
   padding-bottom: 0;
   text-decoration: none;
-  border-bottom: 2px solid ${p => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
+  border-bottom: 2px solid
+    ${(p) => p.theme.accent.getNewHue(p.theme.accent.hue + 120)};
 
   transition: transform 250ms, color 250ms;
   transform: translateY(0);

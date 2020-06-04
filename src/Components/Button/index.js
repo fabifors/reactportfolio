@@ -9,14 +9,16 @@ import { Link, WithIcon, StyledButton } from './styles';
 const Button = ({ icon, href, text, ...rest }) => {
   return (
     <Link href={href}>
-      {icon
-        ? <WithIcon {...rest}>
-          <FontAwesomeIcon icon={['fas', icon]} />{text}
+      {icon ? (
+        <WithIcon {...rest}>
+          <FontAwesomeIcon icon={['fas', icon]} />
+          {text}
         </WithIcon>
-        : <StyledButton {...rest}>{text}</StyledButton>
-      }
+      ) : (
+        <StyledButton {...rest}>{text}</StyledButton>
+      )}
     </Link>
   );
-}
+};
 
 export default Button;

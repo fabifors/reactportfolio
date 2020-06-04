@@ -26,19 +26,19 @@ const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar-track {
     transition: background 200ms; 
     border-radius: 10px;
-    background: ${p => p.theme.background_light.hsl}; 
+    background: ${(p) => p.theme.background_light.hsl}; 
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
     transition: background 200ms;
-    background: ${p => p.theme.accent.lighten(20)}; 
+    background: ${(p) => p.theme.accent.lighten(20)}; 
     border-radius: 10px;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: ${p => p.theme.accent.lighten(10)}; 
+    background: ${(p) => p.theme.accent.lighten(10)}; 
   }
   
 `;

@@ -8,7 +8,7 @@ export const MenuContainer = styled.div`
   height: 100vh;
   z-index: 99;
   background: #fff;
-  background-color: ${p => p.theme.background.hsl};
+  background-color: ${(p) => p.theme.background.hsl};
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@ export const MenuContainer = styled.div`
 export const Heading = styled.h2`
   margin-top: 1rem;
   font-size: 3em;
-  color: ${p => p.theme.accent.hsl};
+  color: ${(p) => p.theme.accent.hsl};
 `;
 
 export const Nav = styled.nav`
@@ -37,10 +37,10 @@ export const Item = styled.li`
   margin-bottom: 1rem;
   width: 100%;
   border-radius: 5px;
-  background: ${ p => p.theme.background_light.hsl};
+  background: ${(p) => p.theme.background_light.hsl};
   transition: background 300ms, border-radius 300ms;
   &:hover {
-    background: ${ p => p.theme.background_light.darken(3)};
+    background: ${(p) => p.theme.background_light.darken(3)};
   }
 `;
 
@@ -51,8 +51,8 @@ export const Link = styled.a`
   padding-bottom: 1rem;
   text-decoration: none;
   font-size: 1.25em;
-  color: ${p => p.theme.text.hsl};
+  color: ${(p) => p.theme.text.hsl};
   &:hover {
-    color: ${ p => p.theme.accent.hsl};
+    color: ${(p) => p.theme.accent.hsl};
   }
 `;

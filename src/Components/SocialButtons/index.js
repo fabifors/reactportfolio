@@ -12,6 +12,6 @@ const SocialButtons = () => {
       ))}
     </SocialWrapper>
   );
-}
+};
 
 export default SocialButtons;

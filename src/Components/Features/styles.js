@@ -10,9 +10,8 @@ export const Feature = styled.div`
   padding: 4rem 2rem;
   border-radius: 5px;
 
-
   svg {
-    color: ${props => props.theme.accent.hsl};
+    color: ${(props) => props.theme.accent.hsl};
     font-size: 4em;
     margin-left: auto;
     margin-right: auto;
@@ -36,7 +35,6 @@ export const FeatureList = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 1rem;
 
-
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2rem;
@@ -44,16 +42,16 @@ export const FeatureList = styled.div`
 `;
 
 export const FeatureHeading = styled.h3`
-  color: ${props => props.theme.accent.hsl};
+  color: ${(props) => props.theme.accent.hsl};
   align-self: center;
   font-size: 1.25em;
   margin: 0;
 `;
 
 export const FeatureText = styled.p`
-  color: ${props => props.theme.text.hsl};
+  color: ${(props) => props.theme.text.hsl};
   text-align: center;
-  font-size: 1.0em;
+  font-size: 1em;
   margin-top: 1rem;
   margin-bottom: 0;
-  `;
+`;

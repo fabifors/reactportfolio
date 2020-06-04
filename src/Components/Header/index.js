@@ -4,13 +4,18 @@ import Logo from '../Logo/Logo';
 import MenuBtn from '../MenuBtn';
 import { Wrapper } from './styles';
 
-
-
-const Header = ({ handleThemeChange, handleOpenMenu, isMobile, isMenuOpen, navLinks }) => {
-
-  const navigation = !isMobile
-    ? <Navigation links={navLinks} horizontal />
-    : <MenuBtn click={handleOpenMenu} isMenuOpen={isMenuOpen} />;
+const Header = ({
+  handleThemeChange,
+  handleOpenMenu,
+  isMobile,
+  isMenuOpen,
+  navLinks,
+}) => {
+  const navigation = !isMobile ? (
+    <Navigation links={navLinks} horizontal />
+  ) : (
+    <MenuBtn click={handleOpenMenu} isMenuOpen={isMenuOpen} />
+  );
 
   return (
     <Wrapper>
@@ -18,7 +23,6 @@ const Header = ({ handleThemeChange, handleOpenMenu, isMobile, isMenuOpen, navLi
       {navigation}
     </Wrapper>
   );
-}
-
+};
 
 export default React.memo(Header);

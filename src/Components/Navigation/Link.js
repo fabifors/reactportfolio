@@ -7,11 +7,11 @@ const LinkElement = styled.a`
   transition: color 300ms, border 300ms;
   border-bottom: 2px solid;
   border-color: transparent;
-  color: ${p => p.theme.accent.hsl};
+  color: ${(p) => p.theme.accent.hsl};
 
   &:hover {
-    color: ${p => p.theme.accent.lighten(20)};
-    border-bottom: 2px solid ${p => p.theme.accent.lighten(20)};
+    color: ${(p) => p.theme.accent.lighten(20)};
+    border-bottom: 2px solid ${(p) => p.theme.accent.lighten(20)};
   }
 `;
 

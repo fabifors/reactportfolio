@@ -13,19 +13,26 @@ const Navigation = (props) => {
   return (
     <Wrapper>
       <List horizontal={horizontal}>
-        {links.map((link, index) => !link.button
-          ?
-          <ListItem key={index}>
-            <Link href={link.href} text={link.text} />
-          </ListItem>
-          :
-          <ListItem key={index}>
-            <Button nested secondary href={link.href} small text={link.text} />
-          </ListItem>
+        {links.map((link, index) =>
+          !link.button ? (
+            <ListItem key={index}>
+              <Link href={link.href} text={link.text} />
+            </ListItem>
+          ) : (
+            <ListItem key={index}>
+              <Button
+                nested
+                secondary
+                href={link.href}
+                small
+                text={link.text}
+              />
+            </ListItem>
+          )
         )}
       </List>
     </Wrapper>
   );
-}
+};
 
 export default Navigation;

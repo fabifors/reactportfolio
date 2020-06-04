@@ -11,7 +11,7 @@ import { Motion, spring } from 'react-motion';
 // Globally assigned styles
 import GlobalStyles from './Components/Global/Styles';
 
-// Color class 
+// Color class
 import Color from './Functions/Color';
 
 // Components
@@ -38,13 +38,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Spotify button
 import { SpotifyButton } from './Components/Spotify/styles';
 
-library.add(fas, fab)
+library.add(fas, fab);
 
 // API
 const WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?q=stockholm,se&APPID=${key}`;
 
 class App extends PureComponent {
-
   state = {
     isMobile: false,
     theme: {
@@ -53,73 +52,76 @@ class App extends PureComponent {
       text_light: new Color(256, 60, 99, 1),
       boxshadow: new Color(256, 15, 30, 0.25),
       background_light: new Color(256, 15, 95, 1),
-      background: new Color(256, 15, 100, 1)
+      background: new Color(256, 15, 100, 1),
     },
     isMenuOpen: false,
     spotifyIsOpen: false,
     weather: {
-      belowZero: false
-    }
-  }
+      belowZero: false,
+    },
+  };
 
   componentWillMount = () => {
     this.getWeatherInfo();
     window.removeEventListener('resize', this.handleResize);
-  }
+  };
 
   componentDidMount = () => {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
-  }
+  };
 
   getWeatherInfo = () => {
     fetch(WEATHER_API)
       .then((res) => {
         if (res.ok) {
-          return res.json()
+          return res.json();
         } else {
           throw Error(res.status);
         }
       })
       .then((json) => {
-        const { main: { temp }, name } = json;
-        if ((temp - 273.15) < 0) {
+        const {
+          main: { temp },
+          name,
+        } = json;
+        if (temp - 273.15 < 0) {
           this.setState({
             weather: {
               belowZero: true,
-              temp: ((temp - 273.15).toFixed(2)),
-              city: name
-            }
-          })
+              temp: (temp - 273.15).toFixed(2),
+              city: name,
+            },
+          });
         } else {
           this.setState({
             weather: {
               belowZero: false,
-              temp: ((temp - 273.15).toFixed(2)),
-              city: name
-            }
-          })
+              temp: (temp - 273.15).toFixed(2),
+              city: name,
+            },
+          });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   handleOpenMenu = () => {
-    this.setState(prevState => ({
-      isMenuOpen: !prevState.isMenuOpen
-    }))
-  }
+    this.setState((prevState) => ({
+      isMenuOpen: !prevState.isMenuOpen,
+    }));
+  };
 
   handleSnowDemo = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       weather: {
         ...prevState.weather,
-        belowZero: !prevState.weather.belowZero
-      }
-    }))
-  }
+        belowZero: !prevState.weather.belowZero,
+      },
+    }));
+  };
 
   handleThemeChange = (newHue) => {
     const newTheme = { ...this.state.theme };
@@ -128,49 +130,58 @@ class App extends PureComponent {
     }
     console.table(newTheme);
     this.setState({
-      theme: newTheme
-    })
-  }
+      theme: newTheme,
+    });
+  };
 
   handleResize = () => {
     const windowSize = window.innerWidth;
     if (windowSize > 768 && this.state.isMobile) {
       this.setState({
-        isMobile: false
-      })
+        isMobile: false,
+      });
     } else if (windowSize < 768 && !this.state.isMobile) {
       this.setState({
-        isMobile: true
-      })
+        isMobile: true,
+      });
     } else {
       return;
     }
-  }
+  };
 
   handleSpotifyOpen = () => {
-    this.setState(prevState => ({
-      spotifyIsOpen: !prevState.spotifyIsOpen
-    }))
-  }
+    this.setState((prevState) => ({
+      spotifyIsOpen: !prevState.spotifyIsOpen,
+    }));
+  };
 
   render() {
-
-    const { theme, isMenuOpen, isMobile, spotifyIsOpen, weather: { belowZero } } = this.state;
+    const {
+      theme,
+      isMenuOpen,
+      isMobile,
+      spotifyIsOpen,
+      weather: { belowZero },
+    } = this.state;
 
     return (
       <ThemeProvider theme={theme}>
         <Fragment>
           <MakeItSnow click={this.handleSnowDemo} />
-          {belowZero === true ?
-            <SnowStorm snowStick={false} snowColor={theme.background_light.darken(10)} />
-            : null}
+          {belowZero === true ? (
+            <SnowStorm
+              snowStick={false}
+              snowColor={theme.background_light.darken(10)}
+            />
+          ) : null}
           <GlobalStyles />
           <Container style={{ position: 'relative' }}>
-
             <Spotify spotifyIsOpen={spotifyIsOpen} />
             <Motion
               defaultStyle={{ x: 100 }}
-              style={(this.state.isMenuOpen ? { x: spring(0) } : { x: spring(100) })}
+              style={
+                this.state.isMenuOpen ? { x: spring(0) } : { x: spring(100) }
+              }
             >
               {(style) => {
                 return (
@@ -178,10 +189,10 @@ class App extends PureComponent {
                     handleOpenMenu={this.handleOpenMenu}
                     style={{
                       opacity: style.opacity,
-                      transform: `translateX(${style.x}%)`
+                      transform: `translateX(${style.x}%)`,
                     }}
                   />
-                )
+                );
               }}
             </Motion>
             <Header
@@ -189,7 +200,8 @@ class App extends PureComponent {
               isMenuOpen={isMenuOpen}
               isMobile={isMobile}
               handleOpenMenu={this.handleOpenMenu}
-              handleThemeChange={this.handleThemeChange} />
+              handleThemeChange={this.handleThemeChange}
+            />
             <SpotifyButton onClick={() => this.handleSpotifyOpen()}>
               <FontAwesomeIcon icon={['fab', 'spotify']} />
             </SpotifyButton>

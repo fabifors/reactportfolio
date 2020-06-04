@@ -8,14 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const feature = ({ icon, title, content }) => {
   return (
-    <Feature >
-      <FontAwesomeIcon
-        icon={['fas', icon]}
-        className="icon" />
+    <Feature>
+      <FontAwesomeIcon icon={['fas', icon]} className="icon" />
       <FeatureHeading>{title}</FeatureHeading>
       <FeatureText>{content}</FeatureText>
     </Feature>
-  )
+  );
 };
 
 export default feature;

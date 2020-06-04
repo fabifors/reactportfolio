@@ -6,10 +6,6 @@ const Item = styled.li`
   list-style: none;
 `;
 
-const ListItem = ({ children }) => (
-  <Item>
-    {children}
-  </Item>
-);
+const ListItem = ({ children }) => <Item>{children}</Item>;
 
 export default ListItem;

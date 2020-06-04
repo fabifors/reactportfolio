@@ -32,7 +32,7 @@ export const ProjectContainer = styled.li`
   list-style: none;
   
   ::before {
-    content: '${props => props.workedOn}';
+    content: '${(props) => props.workedOn}';
     text-transform: uppercase;
     width: 100%;
     height: 100%;
@@ -79,6 +79,6 @@ export const HiddenLabel = styled.span`
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   border: 0;
 `;

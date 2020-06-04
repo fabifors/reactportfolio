@@ -21,7 +21,7 @@ export const Content = styled.div`
   align-items: center;
 
   h1 {
-    color: ${p => p.theme.accent.hsl};
+    color: ${(p) => p.theme.accent.hsl};
     font-size: 2em;
     font-weight: 600;
     padding-top: 0.5rem;
@@ -38,7 +38,7 @@ export const Content = styled.div`
     font-size: 1.25em;
     line-height: 1.4em;
     font-weight: 600;
-    color: ${p => p.theme.text.hsl};
+    color: ${(p) => p.theme.text.hsl};
     margin-top: 0;
     margin-bottom: 3rem;
 

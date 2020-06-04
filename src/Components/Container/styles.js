@@ -9,9 +9,13 @@ export const Wrapper = styled.div`
   margin-right: auto;
   margin-left: auto;
 
-  ${props => props.background ? `background: ${props.theme.accent.darken(3)};` : null}
+  ${(props) =>
+    props.background ? `background: ${props.theme.accent.darken(3)};` : null}
 
-  ${ p => p.fluid ? null : `@media screen and (min-width: 768px) {
+  ${(p) =>
+    p.fluid
+      ? null
+      : `@media screen and (min-width: 768px) {
       width: 750px;
     }
 
@@ -27,8 +31,8 @@ export const Wrapper = styled.div`
       calc(1400px - ${padding});
     }
     `} 
-  ${p => p.hasNestedContainer ? `padding: 0;` : null};
+  ${(p) => (p.hasNestedContainer ? `padding: 0;` : null)};
 
-  ${p => p.height ? `min-height: ${p.height}` : null}
+  ${(p) => (p.height ? `min-height: ${p.height}` : null)}
 
 `;

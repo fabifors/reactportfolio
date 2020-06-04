@@ -8,8 +8,7 @@ export const Filters = styled.div`
   padding: 1rem 0 3rem;
 `;
 
-export const FilterWrapper = styled.div`
-`;
+export const FilterWrapper = styled.div``;
 
 export const Icon = styled.div`
   position: relative;
@@ -20,20 +19,25 @@ export const Icon = styled.div`
   padding: 0.5rem;
   margin-left: 1rem;
 
-  border: 1px solid ${props => props.theme.accent.hsl};
+  border: 1px solid ${(props) => props.theme.accent.hsl};
   border-radius: 3px;
 
-  background: ${props => props.isActive ? props.theme.accent.hsl : props.theme.text_light.hsl};
-  color: ${props => props.isActive ? props.theme.text_light.hsl : props.theme.accent.hsl};
+  background: ${(props) =>
+    props.isActive ? props.theme.accent.hsl : props.theme.text_light.hsl};
+  color: ${(props) =>
+    props.isActive ? props.theme.text_light.hsl : props.theme.accent.hsl};
 
   transition: color 300ms, background 300ms;
 
   ::after {
-    content: '${props => props.iconTitle}';
-    ${props => props.iconTitle ? 'padding-left: 0.5rem' : null};
+    content: '${(props) => props.iconTitle}';
+    ${(props) => (props.iconTitle ? 'padding-left: 0.5rem' : null)};
   }
 
   &:hover {
-    background: ${props => props.isActive ? props.theme.accent.darken(10) : props.theme.text_light.darken(10)};
+    background: ${(props) =>
+      props.isActive
+        ? props.theme.accent.darken(10)
+        : props.theme.text_light.darken(10)};
   }
 `;
