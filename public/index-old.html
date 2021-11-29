@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Fabian Forsström" />
+
+    <!-- Meta SEO -->
+    <meta
+      name="name"
+      content="Front End Developer | Fabian Forsström - Stockholm"
+    />
+    <meta
+      name="title"
+      content="Front End Developer | Fabian Forsström - Stockholm"
+    />
+    <meta
+      name="description"
+      content="Front-End Developer based in Stockholm. I believe in simple, effective designs with a focus on the user experience and design. Let's Talk!"
+    />
+    <meta
+      name="image"
+      content="https://brorarmand.com/assets/img/brorarmand.png"
+    />
+
+    <!-- Open Graph Meta -->
+    <meta
+      property="og:title"
+      content="Front End Developer | Fabian Forsström - Stockholm"
+    />
+    <meta property="og:url" content="https://brorarmand.com/" />
+    <meta
+      property="og:description"
+      content="Front-End Developer based in Stockholm. I believe in simple, effective designs with a focus on the user experience and design. Let's Talk!"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="sv_se" />
+    <meta property="og:site_name" content="Bror Armand - Front-End Developer" />
+    <meta
+      property="og:image"
+      content="https://brorarmand.com/assets/img/brorarmand.png"
+    />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#242424" />
+    <meta name="msapplication-TileColor" content="#242424" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="https://use.typekit.net/baq5pvv.css" />
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <title>Front End Developer | Fabian Forsström - Stockholm</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.5.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.5.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.5.0/firebase-database-compat.js"></script>
+    <script
+      defer
+      src="/__/firebase/9.5.0/firebase-firestore-compat.js"
+    ></script>
+    <script
+      defer
+      src="/__/firebase/9.5.0/firebase-functions-compat.js"
+    ></script>
+    <script
+      defer
+      src="/__/firebase/9.5.0/firebase-messaging-compat.js"
+    ></script>
+    <script defer src="/__/firebase/9.5.0/firebase-storage-compat.js"></script>
+    <script
+      defer
+      src="/__/firebase/9.5.0/firebase-analytics-compat.js"
+    ></script>
+    <script
+      defer
+      src="/__/firebase/9.5.0/firebase-remote-config-compat.js"
+    ></script>
+    <script
+      defer
+      src="/__/firebase/9.5.0/firebase-performance-compat.js"
+    ></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" style="overflow: hidden;"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth',
+            'database',
+            'firestore',
+            'functions',
+            'messaging',
+            'storage',
+            'analytics',
+            'remoteConfig',
+            'performance'
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(
+            ', '
+          )}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent =
+            'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+    <script>
+      async function onSubmit(token) {
+        await document.getElementById('invisible-recaptcha-form').submit();
+      }
+    </script>
+  </body>
+</html>
