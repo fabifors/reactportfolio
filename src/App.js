@@ -1,8 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
 
-// Api Key OPEN WEATHER MAP
-import { key } from './apikey';
-
 // Libraries
 import { ThemeProvider } from 'styled-components';
 import SnowStorm from 'react-snowstorm';
@@ -41,7 +38,7 @@ import { SpotifyButton } from './Components/Spotify/styles';
 library.add(fas, fab);
 
 // API
-const WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?q=stockholm,se&APPID=${key}`;
+const WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?q=stockholm,se&APPID=${process.env.OPENWEATHER_API_KEY}`;
 
 class App extends PureComponent {
   state = {
