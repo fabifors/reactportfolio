@@ -199,9 +199,9 @@ class App extends PureComponent {
               handleOpenMenu={this.handleOpenMenu}
               handleThemeChange={this.handleThemeChange}
             />
-            <SpotifyButton onClick={() => this.handleSpotifyOpen()}>
+            {/*<SpotifyButton onClick={() => this.handleSpotifyOpen()}>
               <FontAwesomeIcon icon={['fab', 'spotify']} />
-            </SpotifyButton>
+            </SpotifyButton>*/}
           </Container>
           <Hero />
 
