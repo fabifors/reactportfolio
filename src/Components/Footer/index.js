@@ -24,7 +24,7 @@ const Footer = ({ id }) => {
   return (
     <Container id={id} background fluid hasNestedContainer>
       <Container>
-        <Section padding style={{ paddingBottom: '2rem' }}>
+        <Section has-padding style={{ paddingBottom: '2rem' }}>
           <ContactWrapper>
             <ContactText>
               <Heading light>Contact</Heading>
@@ -46,7 +46,7 @@ const Footer = ({ id }) => {
               <SocialButtons />
             </ContactText>
             <Form
-              accept-charset="UTF-8"
+              acceptCharset="UTF-8"
               action="https://usebasin.com/f/d25d2e66f249"
               method="POST"
               id="invisible-recaptcha-form"

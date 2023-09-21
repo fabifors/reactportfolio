@@ -38,53 +38,45 @@ export const levels = [
 
 export const creative = [
   {
-    value: 0.45,
+    value: 0.6,
     label: 'UI Design',
   },
   {
     value: 0.8,
-    label: 'Adobe XD',
-  },
-  {
-    value: 0.25,
-    label: 'Adobe Illustrator',
-  },
-  {
-    value: 0.25,
-    label: 'Adobe Photoshop',
+    label: 'Figma',
   },
 ];
 
 export const building = [
   {
-    value: 0.87,
+    value: 0.9,
     label: 'HTML',
   },
   {
-    value: 0.85,
+    value: 0.9,
     label: 'CSS3',
   },
   {
-    value: 0.6,
-    label: 'JavaScript',
+    value: 0.8,
+    label: 'TypeScript',
   },
   {
-    value: 0.6,
+    value: 0.9,
     label: 'React.js',
   },
 ];
 
 export const uiux = [
   {
-    value: 0.25,
+    value: 0.5,
     label: 'Animations',
   },
   {
-    value: 0.4,
+    value: 0.7,
     label: 'Interactity',
   },
   {
-    value: 0.5,
+    value: 0.8,
     label: 'User experience',
   },
 ];

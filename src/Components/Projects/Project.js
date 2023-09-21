@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // Styled components
 import {
@@ -9,51 +9,40 @@ import {
 } from './styles';
 import FilterIcon from '../Filter/FilterIcon';
 
-export default class Project extends Component {
-  render() {
-    const {
-      name,
-      type,
-      url,
-      title,
-      img,
-      handleFilterChange,
-      activeFilters,
-      ...rest
-    } = this.props;
+const Project = ({
+  name,
+  type,
+  url,
+  title,
+  img,
+  handleFilterChange,
+  activeFilters,
+  ...rest
+}) => {
+  const types = type.map((type, index) => (
+    <FilterIcon
+      isActive={activeFilters.includes(type.title)}
+      click={handleFilterChange}
+      key={index}
+      title={type.title}
+      icon={type.icon}
+    />
+  ));
 
-    const types = type.map((type, index) =>
-      activeFilters.includes(type.title) ? (
-        <FilterIcon
-          isActive
-          click={handleFilterChange}
-          key={index}
-          title={type.title}
-          icon={type.icon}
-        />
-      ) : (
-        <FilterIcon
-          click={handleFilterChange}
-          key={index}
-          title={type.title}
-          icon={type.icon}
-        />
-      )
-    );
+  return (
+    <ProjectContainer workedOn={title} {...rest}>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ display: 'flex' }}
+      >
+        <ProjectImg src={img} alt={name} />
+        <HiddenLabel>{name}</HiddenLabel>
+      </a>
+      <TypesContainer>{types}</TypesContainer>
+    </ProjectContainer>
+  );
+};
 
-    return (
-      <ProjectContainer workedOn={title} {...rest}>
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ display: 'flex' }}
-        >
-          <ProjectImg src={img} alt={name} />
-          <HiddenLabel>{name}</HiddenLabel>
-        </a>
-        <TypesContainer>{types}</TypesContainer>
-      </ProjectContainer>
-    );
-  }
-}
+export default Project;

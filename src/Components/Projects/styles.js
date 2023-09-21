@@ -30,8 +30,8 @@ export const ProjectContainer = styled.li`
   transform: scale(1);
   cursor: pointer;
   list-style: none;
-  
-  ::before {
+
+  &::before {
     content: '${(props) => props.workedOn}';
     text-transform: uppercase;
     width: 100%;
@@ -55,13 +55,13 @@ export const ProjectContainer = styled.li`
   &:hover {
     transform: scale(1.1);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.16);
-    
-    ::before {
+
+    &::before {
       opacity: 1;
       transform: scale(0.97) skewY(0deg);
     }
   }
-  
+
   @media screen and (min-width: 768px) {
     width: 300px;
   }

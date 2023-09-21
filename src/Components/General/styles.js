@@ -35,9 +35,9 @@ export const Background = styled.div`
 
 export const Section = styled.section`
   text-align: ${(p) => (p.align === 'center' ? 'center' : 'left')};
-  ${(p) => (p.fullScreen ? `padding: 4rem 0 5rem; min-height: 100vh;` : null)};
+  ${(p) => (p["full-screen"] ? `padding: 4rem 0 5rem; min-height: 100vh;` : null)};
 
-  ${(p) => (p.padding ? `padding: 4rem 0 5rem;` : null)};
+  ${(p) => (p["has-padding"] ? `padding: 4rem 0 5rem;` : null)};
 `;
 
 export const HeadsUp = styled.div`

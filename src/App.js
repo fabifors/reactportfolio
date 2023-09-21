@@ -1,9 +1,10 @@
-import React, { PureComponent, Fragment } from 'react';
+// use strict;
+import React, { Fragment, useEffect, useState } from 'react';
 
 // Libraries
 import { ThemeProvider } from 'styled-components';
 import SnowStorm from 'react-snowstorm';
-import { Motion, spring } from 'react-motion';
+import { useSpring, animated } from '@react-spring/web';
 
 // Globally assigned styles
 import GlobalStyles from './Components/Global/Styles';
@@ -30,18 +31,14 @@ import { navLinks } from './navLinks';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Spotify button
 import { SpotifyButton } from './Components/Spotify/styles';
 
 library.add(fas, fab);
 
-// API
-const WEATHER_API = `https://api.openweathermap.org/data/2.5/weather?q=stockholm,se&APPID=${process.env.OPENWEATHER_API_KEY}`;
-
-class App extends PureComponent {
-  state = {
+const App = () => {
+  const [state, setState] = useState({
     isMobile: false,
     theme: {
       accent: new Color(256, 45, 50, 1),
@@ -54,168 +51,119 @@ class App extends PureComponent {
     isMenuOpen: false,
     spotifyIsOpen: false,
     weather: {
-      belowZero: false,
+      isBelowZero: false,
     },
+  });
+
+  const handleResize = () => {
+    const windowSize = window.innerWidth;
+    if (windowSize > 768 && state.isMobile) {
+      console.log('desktop');
+      setState((prevState) => ({
+        ...prevState,
+        isMobile: false,
+      }));
+    } else if (windowSize < 768 && !state.isMobile) {
+      console.log('mobile');
+      setState((prevState) => ({
+        ...prevState,
+        isMobile: true,
+      }));
+    }
   };
 
-  componentWillMount = () => {
-    this.getWeatherInfo();
-    window.removeEventListener('resize', this.handleResize);
-  };
+  // Handle resize
+  useEffect(() => {
+    handleResize();
 
-  componentDidMount = () => {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize);
-  };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-  getWeatherInfo = () => {
-    fetch(WEATHER_API)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw Error(res.status);
-        }
-      })
-      .then((json) => {
-        const {
-          main: { temp },
-          name,
-        } = json;
-        if (temp - 273.15 < 0) {
-          this.setState({
-            weather: {
-              belowZero: true,
-              temp: (temp - 273.15).toFixed(2),
-              city: name,
-            },
-          });
-        } else {
-          this.setState({
-            weather: {
-              belowZero: false,
-              temp: (temp - 273.15).toFixed(2),
-              city: name,
-            },
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  handleOpenMenu = () => {
-    this.setState((prevState) => ({
+  const handleOpenMenu = () => {
+    setState((prevState) => ({
+      ...prevState,
       isMenuOpen: !prevState.isMenuOpen,
     }));
   };
 
-  handleSnowDemo = () => {
-    this.setState((prevState) => ({
+  const handleSnowDemo = () => {
+    setState((prevState) => ({
+      ...prevState,
       weather: {
         ...prevState.weather,
-        belowZero: !prevState.weather.belowZero,
+        isBelowZero: !prevState.weather.isBelowZero,
       },
     }));
   };
 
-  handleThemeChange = (newHue) => {
-    const newTheme = { ...this.state.theme };
+  const handleThemeChange = (newHue) => {
+    const newTheme = { ...state.theme };
     for (let color in newTheme) {
       newTheme[color].setNewHue(newHue);
     }
-    console.table(newTheme);
-    this.setState({
+    setState((prevState) => ({
+      ...prevState,
       theme: newTheme,
-    });
-  };
-
-  handleResize = () => {
-    const windowSize = window.innerWidth;
-    if (windowSize > 768 && this.state.isMobile) {
-      this.setState({
-        isMobile: false,
-      });
-    } else if (windowSize < 768 && !this.state.isMobile) {
-      this.setState({
-        isMobile: true,
-      });
-    } else {
-      return;
-    }
-  };
-
-  handleSpotifyOpen = () => {
-    this.setState((prevState) => ({
-      spotifyIsOpen: !prevState.spotifyIsOpen,
     }));
   };
 
-  render() {
-    const {
-      theme,
-      isMenuOpen,
-      isMobile,
-      spotifyIsOpen,
-      weather: { belowZero },
-    } = this.state;
+  // const handleSpotifyOpen = () => {
+  //   setState((prevState) => ({
+  //     spotifyIsOpen: !prevState.spotifyIsOpen,
+  //   }));
+  // };
 
-    return (
-      <ThemeProvider theme={theme}>
-        <Fragment>
-          <MakeItSnow click={this.handleSnowDemo} />
-          {belowZero === true ? (
-            <SnowStorm
-              snowStick={false}
-              snowColor={theme.background_light.darken(10)}
-            />
-          ) : null}
-          <GlobalStyles />
-          <Container style={{ position: 'relative' }}>
-            <Spotify spotifyIsOpen={spotifyIsOpen} />
-            <Motion
-              defaultStyle={{ x: 100 }}
-              style={
-                this.state.isMenuOpen ? { x: spring(0) } : { x: spring(100) }
-              }
-            >
-              {(style) => {
-                return (
-                  <SideMenu
-                    handleOpenMenu={this.handleOpenMenu}
-                    style={{
-                      opacity: style.opacity,
-                      transform: `translateX(${style.x}%)`,
-                    }}
-                  />
-                );
-              }}
-            </Motion>
-            <Header
-              navLinks={navLinks}
-              isMenuOpen={isMenuOpen}
-              isMobile={isMobile}
-              handleOpenMenu={this.handleOpenMenu}
-              handleThemeChange={this.handleThemeChange}
-            />
-            {/*<SpotifyButton onClick={() => this.handleSpotifyOpen()}>
+  const AnimatedSideMenu = animated(SideMenu);
+
+  const animationProps = useSpring({
+    x: state.isMenuOpen ? 0 : 100,
+  });
+
+  return (
+    <ThemeProvider theme={state.theme}>
+      <Fragment>
+        <MakeItSnow click={handleSnowDemo} />
+        {state.isBelowZero === true ? (
+          <SnowStorm
+            snowStick={false}
+            snowColor={state.theme.background_light.darken(10)}
+          />
+        ) : null}
+        <GlobalStyles />
+        <Container style={{ position: 'relative' }}>
+          {/* <Spotify spotifyIsOpen={state.spotifyIsOpen} /> */}
+          <AnimatedSideMenu
+            handleOpenMenu={handleOpenMenu}
+            style={{
+              transform: animationProps.x.to((x) => `translateX(${x}%)`),
+            }}
+          />
+          <Header
+            navLinks={navLinks}
+            isMenuOpen={state.isMenuOpen}
+            isMobile={state.isMobile}
+            handleOpenMenu={handleOpenMenu}
+            handleThemeChange={handleThemeChange}
+          />
+          {/*<SpotifyButton onClick={() => handleSpotifyOpen()}>
               <FontAwesomeIcon icon={['fab', 'spotify']} />
             </SpotifyButton>*/}
-          </Container>
-          <Hero />
+        </Container>
+        <Hero />
 
-          <Features id="about-me" />
+        <Features id="about-me" />
 
-          <Projects id="projects" />
+        <Projects id="projects" />
 
-          <Skills id="skills" />
+        <Skills id="skills" />
 
-          <Footer id="contact" />
-        </Fragment>
-      </ThemeProvider>
-    );
-  }
-}
+        <Footer id="contact" />
+      </Fragment>
+    </ThemeProvider>
+  );
+};
 
 export default App;

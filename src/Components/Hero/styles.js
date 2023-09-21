@@ -2,7 +2,8 @@
 import styled from 'styled-components';
 
 export const Section = styled.section`
-  height: calc(100vh - 100px);
+  height: 70vh;
+  min-height: 500px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -41,8 +42,9 @@ export const Content = styled.div`
     color: ${(p) => p.theme.text.hsl};
     margin-top: 0;
     margin-bottom: 3rem;
-
+    
     @media screen and (min-width: 768px) {
+      width: 80%;
       font-size: 1.25em;
     }
   }

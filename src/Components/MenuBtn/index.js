@@ -1,32 +1,33 @@
 import React from 'react';
 
 // Libraries
-import { Motion, spring } from 'react-motion';
+import { useSpring, animated } from '@react-spring/web';
 
 // Components
-import { Bar, MenuButton } from './styles';
+import { Bar, MenuButton as StyledMenuButton } from './styles';
+
+const AnimatedMenuButton = animated(StyledMenuButton);
 
 const MenuBtn = ({ isMenuOpen, click }) => {
+  const style = useSpring({
+    x: 0,
+    opacity: 1,
+    from: { x: 100, opacity: 0 },
+  });
+
   return (
-    <Motion
-      defaultStyle={{ x: 100, opacity: 0 }}
-      style={{ x: spring(0), opacity: spring(1) }}
+    <AnimatedMenuButton
+      style={{
+        opacity: style.opacity,
+        transform: style.x.to((x) => `translateX(${x}px)`),
+      }}
+      onClick={() => click()}
+      className={isMenuOpen ? 'open' : null}
     >
-      {(style) => (
-        <MenuButton
-          style={{
-            opacity: style.opacity,
-            transform: `translateX(${style.x}px)`,
-          }}
-          onClick={() => click()}
-          className={isMenuOpen ? 'open' : null}
-        >
-          <Bar />
-          <Bar middle />
-          <Bar />
-        </MenuButton>
-      )}
-    </Motion>
+      <Bar />
+      <Bar middle />
+      <Bar />
+    </AnimatedMenuButton>
   );
 };
 

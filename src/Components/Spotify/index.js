@@ -1,113 +1,93 @@
-import React, { Component, Fragment } from 'react';
-import { Motion, spring } from 'react-motion';
+import React, { useState, useEffect } from 'react';
+import { useSpring, animated } from '@react-spring/web';
 
 // Components
 import {
-  SpotifyWrapper,
+  SpotifyWrapper as StyledSpotifyWrapper,
   SpotifySection,
   SpotifyAlbumCover,
   SpotifyText,
   SpotifyLink,
 } from './styles';
 
-class Spotify extends Component {
-  state = {
-    status: false,
-    nowPlaying: {
-      song: {
-        name: '',
-        url: '',
-      },
-      album: {},
-      artists: {},
+const AnimatedSpotifyWrapper = animated(StyledSpotifyWrapper);
+
+const Spotify = ({ spotifyIsOpen }) => {
+  const [status, setStatus] = useState(false);
+  const [nowPlaying, setNowPlaying] = useState({
+    song: {
+      name: '',
+      url: '',
     },
+    album: {},
+    artists: {},
+  });
+
+  const getNowPlaying = () => {
+    fetch('https://brorarmand.herokuapp.com/my-recently-played')
+      .then((res) => res.json())
+      .then((json) => {
+        setStatus(json.success);
+        setNowPlaying(json.nowPlaying);
+      })
+      .catch((err) => console.log(err));
   };
 
-  getNowPlaying() {
-    fetch('https://brorarmand.herokuapp.com/my-recently-played')
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) =>
-        this.setState({
-          status: json.success,
-          nowPlaying: json.nowPlaying,
-        })
-      )
-      .catch((err) => console.log(err));
-    console.log('This run');
-  }
+  useEffect(() => {
+    getNowPlaying();
+    const interval = setInterval(() => getNowPlaying(), 10000);
+    return () => clearInterval(interval);
+  }, []);
 
-  componentDidMount() {
-    this.getNowPlaying();
-    setInterval(() => this.getNowPlaying(), 1000);
-  }
+  const style = useSpring({
+    y: spotifyIsOpen ? 0 : 100,
+    opacity: spotifyIsOpen ? 1 : 0,
+    from: { y: 100, opacity: 0 },
+  });
 
-  render() {
-    const {
-      status,
-      nowPlaying: {
-        song: { name, url },
-        artists,
-        album,
-      },
-    } = this.state;
-    const { spotifyIsOpen } = this.props;
-
-    return (
-      <Fragment>
-        <Motion
-          defaultStyle={{ y: 100, opacity: 0 }}
-          style={
-            spotifyIsOpen
-              ? { y: spring(0), opacity: spring(1) }
-              : { y: spring(100), opacity: spring(0) }
-          }
-        >
-          {(style) => (
-            <SpotifyWrapper
-              style={{
-                opacity: style.opacity,
-                transform: `translateY(${style.y}%)`,
-              }}
-            >
-              {status ? (
-                <>
-                  <SpotifyAlbumCover
-                    alt="Album Cover Art"
-                    src={album.images[2].url}
-                  />
-                  <SpotifySection>
-                    <SpotifySection>
-                      <SpotifyText bold>Song</SpotifyText>
-                      <SpotifyLink href={url} title={name}>
-                        {name}
-                      </SpotifyLink>
-                    </SpotifySection>
-                    <SpotifySection>
-                      <SpotifyText bold>Artists</SpotifyText>
-                      {artists.map((artist, i) => (
-                        <SpotifyLink
-                          href={artist.url}
-                          target="_blank"
-                          rel="noopener nofollow"
-                          key={i}
-                        >
-                          {artist.name}
-                        </SpotifyLink>
-                      ))}
-                    </SpotifySection>
-                  </SpotifySection>
-                </>
-              ) : (
-                <SpotifyText>Not listening to music atm</SpotifyText>
-              )}
-            </SpotifyWrapper>
-          )}
-        </Motion>
-      </Fragment>
-    );
-  }
-}
+  return (
+    <AnimatedSpotifyWrapper
+      style={{
+        opacity: style.opacity,
+        transform: style.y.to((y) => `translateY(${y}%)`),
+      }}
+    >
+      {status ? (
+        <>
+          <SpotifyAlbumCover
+            alt="Album Cover Art"
+            src={nowPlaying.album.images[2].url}
+          />
+          <SpotifySection>
+            <SpotifySection>
+              <SpotifyText bold>Song</SpotifyText>
+              <SpotifyLink
+                href={nowPlaying.song.url}
+                title={nowPlaying.song.name}
+              >
+                {nowPlaying.song.name}
+              </SpotifyLink>
+            </SpotifySection>
+            <SpotifySection>
+              <SpotifyText bold>Artists</SpotifyText>
+              {nowPlaying.artists.map((artist, i) => (
+                <SpotifyLink
+                  href={artist.url}
+                  target="_blank"
+                  rel="noopener nofollow"
+                  key={i}
+                >
+                  {artist.name}
+                </SpotifyLink>
+              ))}
+            </SpotifySection>
+          </SpotifySection>
+        </>
+      ) : (
+        <SpotifyText>Not listening to music atm</SpotifyText>
+      )}
+    </AnimatedSpotifyWrapper>
+  );
+};
 
 export default Spotify;
