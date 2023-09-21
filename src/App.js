@@ -1,5 +1,5 @@
 // use strict;
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 
 // Libraries
 import { ThemeProvider } from 'styled-components';
@@ -68,7 +68,7 @@ const App = () => {
         isMobile: true,
       }));
     }
-  }, []);
+  }, [state.isMobile]);
 
   // Handle resize
   useEffect(() => {
