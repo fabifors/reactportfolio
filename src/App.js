@@ -55,22 +55,20 @@ const App = () => {
     },
   });
 
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     const windowSize = window.innerWidth;
     if (windowSize > 768 && state.isMobile) {
-      console.log('desktop');
       setState((prevState) => ({
         ...prevState,
         isMobile: false,
       }));
     } else if (windowSize < 768 && !state.isMobile) {
-      console.log('mobile');
       setState((prevState) => ({
         ...prevState,
         isMobile: true,
       }));
     }
-  };
+  }, []);
 
   // Handle resize
   useEffect(() => {
