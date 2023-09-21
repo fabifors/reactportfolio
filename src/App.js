@@ -15,7 +15,6 @@ import Color from './Functions/Color';
 // Components
 import Container from './Components/Container';
 import Header from './Components/Header';
-import Spotify from './Components/Spotify';
 import Hero from './Components/Hero';
 import Features from './Components/Features';
 import Projects from './Components/Projects';
@@ -32,8 +31,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
-// Spotify button
-import { SpotifyButton } from './Components/Spotify/styles';
+// Spotify stuff
+// import Spotify from './Components/Spotify';
+// import { SpotifyButton } from './Components/Spotify/styles';
 
 library.add(fas, fab);
 
@@ -80,7 +80,7 @@ const App = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [handleResize]);
 
   const handleOpenMenu = () => {
     setState((prevState) => ({
