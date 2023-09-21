@@ -4,7 +4,7 @@ const Data = [
     title: 'Web Design',
     content:
       'I create simple yet beautiful designs to make the web a little less cluttered one page at the time. In the end I want to be able to create even better designs with custom illustrations.',
-    icon: 'pencil-paintbrush',
+    icon: 'paintbrush',
     alt: 'Webdesign',
   },
 

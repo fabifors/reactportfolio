@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 class Projects extends PureComponent {
   icons = {
     code: { title: 'Code', icon: 'laptop-code' },
-    design: { title: 'Design', icon: 'pencil-paintbrush' },
+    design: { title: 'Design', icon: 'paintbrush' },
     school: { title: 'School Project', icon: 'graduation-cap' },
   };
 
