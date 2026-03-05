@@ -1,7 +1,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -59,15 +58,13 @@ export default function Projects() {
             <Card key={title} className="flex flex-col">
               <CardHeader>
                 <CardTitle>{title}</CardTitle>
-                <CardDescription>
-                  <div className="flex flex-wrap gap-1.5 mt-2">
-                    {tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardDescription>
+                <div className="flex flex-wrap gap-1.5 mt-2">
+                  {tags.map((tag) => (
+                    <Badge key={tag} variant="outline" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
               </CardHeader>
               <CardContent className="flex-1">
                 <p className="text-muted-foreground text-sm">{description}</p>
