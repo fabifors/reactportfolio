@@ -22,10 +22,8 @@ export default function AboutPage() {
       <Header />
 
       {/* Page hero */}
-      <section className="relative overflow-hidden py-20 md:py-28 border-b border-border/40">
-        <div className="absolute inset-0 bg-dot-grid" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/70 to-background" />
-        <div className="relative container mx-auto px-6 max-w-3xl">
+      <section className="py-20 md:py-28 border-b border-border/40">
+        <div className="container mx-auto px-6 max-w-3xl">
           <p className="terminal-prefix text-xs tracking-widest mb-4">
             &gt; background &amp; philosophy
           </p>

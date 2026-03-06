@@ -8,11 +8,6 @@ export type NavItem = {
   href: string;
 };
 
-export type BioData = {
-  intro: string;
-  detail: string;
-};
-
 export type StorySection = {
   label: string;
   title: string;
@@ -44,12 +39,14 @@ export type WorkHighlight = {
   employer: string;
   period: string;
   role: string;
+  team: string;
   impact: string[];
   tags: string[];
 };
 
 export type LegacyProject = {
   title: string;
+  description: string;
   url?: string;
 };
 
@@ -85,39 +82,30 @@ export const heroData = {
   eyebrow: "> lead engineer / full-stack",
   headline: "Building things\nthat last.",
   subheadline:
-    "I spent a decade in sales before finding my way into software — and that background shaped how I think about the work. I care about the people using it, the business depending on it, and the engineers maintaining it. At Svea Solar I've spent five years building the platform behind our marketing and content, and the last year leading the team that keeps it moving.",
+    "I spent a decade in sales before finding my way into software — and that background shapes how I think about the work. I care about the people using it, the business depending on it, and the engineers maintaining it.",
   primaryCta: { label: "See the work", href: "#work" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
 };
 
-// ─── Bio ──────────────────────────────────────────────────────────────────────
-
-export const bioData: BioData = {
-  intro:
-    "I came up through ten years in telecom sales before teaching myself to code and eventually going through KYH's frontend programme. That path gave me something I'm grateful for every day: a genuine curiosity about the people on the other side of the screen and the business problems underneath the interface.",
-  detail:
-    "I still get excited about both the technical solution and the experience it creates. Outside of work I shoot photography and think a lot about visual communication — which probably explains why I care as much about the interface as the infrastructure behind it.",
-};
-
 // ─── Philosophy ───────────────────────────────────────────────────────────────
 
-// Short versions for the homepage — one or two sentences each.
+// Short versions for the homepage — two sentences each.
 // Full versions live in aboutPageData.deepPhilosophy below.
 export const philosophyCards: PhilosophyCard[] = [
   {
     icon: "Terminal",
     title: "Get the foundations right",
-    body: "Good architecture is quiet. I invest the time upfront so the team can move fast without constantly fighting fires.",
+    body: "Good architecture is quiet. I invest the time upfront so the team can move fast without constantly fighting fires — because the cost of a bad foundation grows every sprint.",
   },
   {
     icon: "Layers",
     title: "Code you can trust",
-    body: "Components built in isolation. Cypress and Jest as standard. The confidence to refactor without fear.",
+    body: "Components built in isolation. Cypress and Jest as standard. The confidence to refactor without fear is what separates a codebase that scales from one you're afraid to touch.",
   },
   {
     icon: "Users",
     title: "Raise the ceiling",
-    body: "The most valuable thing I can do as a lead is help everyone around me think a little bigger.",
+    body: "The most valuable thing I can do as a lead is help everyone around me think a little bigger. Good systems come from teams that own their decisions, not just execute them.",
   },
 ];
 
@@ -166,12 +154,13 @@ export const skillDomains: SkillDomain[] = [
     ],
   },
   {
-    domain: "Agentic Engineering",
+    domain: "Tooling",
     items: [
-      "Claude Code",
-      "AI-assisted development",
-      "Prompt engineering",
-      "Automated code workflows",
+      "Git",
+      "Figma",
+      "Firebase",
+      "Agile / Scrum",
+      "Exploring: Claude Code & agentic workflows",
     ],
   },
 ];
@@ -184,12 +173,13 @@ export const workHighlights: WorkHighlight[] = [
     employer: "Svea Solar",
     period: "2020 – present",
     role: "Frontend Engineer (2020–2024) → Lead Engineer (2024–now)",
+    team: "2–5 engineers",
     impact: [
       "Joined the sites team as a frontend engineer and spent four years building and maintaining the marketing and content infrastructure for a national solar brand.",
-      "Architected the headless CMS platform that powers content creation across the organisation — editors publish autonomously without needing a developer in the loop.",
-      "Built the lead capture tools and proprietary API connecting our frontend to Salesforce CRM, routing qualified leads at scale across the Swedish market.",
-      "Developed the analytics and value-based bidding infrastructure that connects ad spend to persona-qualified leads in Google Ads, closing the loop between marketing and revenue.",
-      "Since 2024, leading a team of 2–5 engineers across the full stack — TypeScript on the frontend, Python (Wagtail) on the backend — with a strong focus on testing, component quality, and sustainable architecture.",
+      "Architected the headless CMS platform that powers content creation across the full organisation — the entire editorial team publishes autonomously without needing a developer in the loop.",
+      "Built the lead capture tools and proprietary API connecting the frontend to Salesforce CRM, routing qualified leads across the Swedish market at scale.",
+      "Developed the analytics and value-based bidding infrastructure that connects ad spend to persona-qualified pipeline in Google Ads, closing the loop between marketing investment and revenue.",
+      "Since 2024, leading the engineering team across the full stack — TypeScript on the frontend, Python (Wagtail) on the backend — with a strong focus on testing, component quality, and sustainable architecture.",
     ],
     tags: [
       "Next.js",
@@ -206,10 +196,24 @@ export const workHighlights: WorkHighlight[] = [
 ];
 
 export const legacyProjects: LegacyProject[] = [
-  { title: "Hitta Webbhotellet", url: "https://hittawebbhotellet.se" },
-  { title: "Hittasmslån", url: "https://hittasmslan.se" },
-  { title: "Refine-It" },
-  { title: "Quire" },
+  {
+    title: "Hitta Webbhotellet",
+    description: "web hosting comparison, design & UX",
+    url: "https://hittawebbhotellet.se",
+  },
+  {
+    title: "Hittasmslån",
+    description: "loan comparison, design & UX",
+    url: "https://hittasmslan.se",
+  },
+  {
+    title: "Refine-It",
+    description: "internal tool, React",
+  },
+  {
+    title: "Quire",
+    description: "school project, end-to-end design",
+  },
 ];
 
 // ─── About Page ───────────────────────────────────────────────────────────────

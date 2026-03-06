@@ -32,12 +32,12 @@ export default function Contact() {
             &gt; contact
           </p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Get in touch
+            Say hello
           </h2>
-          <p className="text-muted-foreground text-lg">
-            I&apos;m not actively looking for a new role, but I&apos;m always
-            open to interesting conversations — about systems architecture,
-            agentic development, or the future of marketing tech.
+          <p className="text-[15px] text-muted-foreground leading-relaxed">
+            I&apos;m heads-down building at Svea Solar, but I&apos;m always
+            interested in conversations about systems architecture, content
+            platforms, or where AI tooling is taking software development.
           </p>
         </div>
 
@@ -53,7 +53,7 @@ export default function Contact() {
               <p className="text-lg font-semibold text-foreground">
                 Message received.
               </p>
-              <p className="text-muted-foreground mt-2 text-sm">
+              <p className="text-[15px] text-muted-foreground mt-2">
                 I&apos;ll get back to you as soon as I can.
               </p>
               <Button
@@ -97,7 +97,7 @@ export default function Contact() {
                 </Label>
                 <Textarea
                   id="message"
-                  placeholder="What&apos;s on your mind?"
+                  placeholder="What's on your mind?"
                   rows={5}
                   required
                   minLength={25}
