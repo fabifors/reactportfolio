@@ -37,10 +37,20 @@
 
   html {
     scroll-behavior: smooth;
+    /* Prevent iOS Safari from scaling the page on form focus */
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-size: 16px;
+  }
+
+  /* Prevent iOS zoom on input focus — requires font-size >= 16px */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
   }
 }
 
@@ -53,10 +63,10 @@
   .bg-dot-grid {
     background-image: radial-gradient(
       circle,
-      hsl(170 70% 55% / 0.12) 1px,
-      transparent 1px
+      hsl(170 70% 55% / 0.22) 1.5px,
+      transparent 1.5px
     );
-    background-size: 28px 28px;
+    background-size: 24px 24px;
   }
 
   /* Gradient text utility */

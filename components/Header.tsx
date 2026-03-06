@@ -28,15 +28,23 @@ export default function Header() {
                 key={item.label}
                 asChild
                 size="sm"
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 text-[15px]"
               >
                 <a href={item.href}>{item.label}</a>
               </Button>
+            ) : item.href.startsWith("/") ? (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-[15px] font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                {item.label}
+              </Link>
             ) : (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                className="text-[15px] font-medium text-muted-foreground transition-colors hover:text-primary"
               >
                 {item.label}
               </a>
@@ -57,16 +65,27 @@ export default function Header() {
       {/* Mobile nav */}
       {mobileOpen && (
         <div className="md:hidden border-t border-border/50 px-6 py-5 flex flex-col gap-4 bg-background/95 backdrop-blur-md">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-              onClick={() => setMobileOpen(false)}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) =>
+            item.href.startsWith("/") ? (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-[15px] font-medium text-muted-foreground hover:text-primary transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-[15px] font-medium text-muted-foreground hover:text-primary transition-colors"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </a>
+            )
+          )}
         </div>
       )}
     </header>

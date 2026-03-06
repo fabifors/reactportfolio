@@ -70,7 +70,7 @@ export default function Projects() {
             {work.impact.map((point, i) => (
               <li
                 key={i}
-                className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed"
+                className="flex items-start gap-3 text-[15px] text-muted-foreground leading-relaxed"
               >
                 <span className="text-primary mt-0.5 leading-none flex-shrink-0 font-mono">
                   {String(i + 1).padStart(2, "0")}

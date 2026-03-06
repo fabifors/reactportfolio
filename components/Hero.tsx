@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden min-h-[90vh] flex items-center">
       {/* Dot-grid background */}
-      <div className="absolute inset-0 bg-dot-grid opacity-60" />
+      <div className="absolute inset-0 bg-dot-grid" />
 
       {/* Radial gradient fade from center */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/60 to-background" />

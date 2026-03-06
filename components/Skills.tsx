@@ -30,7 +30,7 @@ function DomainCard({
       </p>
       <ul className="space-y-1.5">
         {items.map((item) => (
-          <li key={item} className="text-sm text-muted-foreground flex items-start gap-2">
+          <li key={item} className="text-[15px] text-muted-foreground flex items-start gap-2">
             <span className="text-primary/50 mt-0.5 leading-none select-none">—</span>
             {item}
           </li>

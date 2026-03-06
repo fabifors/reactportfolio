@@ -13,6 +13,21 @@ export type BioData = {
   detail: string;
 };
 
+export type StorySection = {
+  label: string;
+  title: string;
+  body: string;
+};
+
+export type AboutPageData = {
+  story: StorySection[];
+  deepPhilosophy: PhilosophyCard[];
+  leadSection: {
+    title: string;
+    body: string;
+  };
+};
+
 export type PhilosophyCard = {
   icon: string;
   title: string;
@@ -58,7 +73,7 @@ export const siteConfig = {
 // ─── Navigation ──────────────────────────────────────────────────────────────
 
 export const navItems: NavItem[] = [
-  { label: "Philosophy", href: "#philosophy" },
+  { label: "About", href: "/about" },
   { label: "Expertise", href: "#expertise" },
   { label: "Work", href: "#work" },
   { label: "Contact", href: "#contact" },
@@ -86,21 +101,23 @@ export const bioData: BioData = {
 
 // ─── Philosophy ───────────────────────────────────────────────────────────────
 
+// Short versions for the homepage — one or two sentences each.
+// Full versions live in aboutPageData.deepPhilosophy below.
 export const philosophyCards: PhilosophyCard[] = [
   {
     icon: "Terminal",
     title: "Get the foundations right",
-    body: "I've learned the hard way that skipping the architecture conversation costs you more than it saves. Good foundations are quiet — they let the team move fast without constantly fighting fires. I'd rather spend an afternoon getting the content model right than a week untangling the fallout.",
+    body: "Good architecture is quiet. I invest the time upfront so the team can move fast without constantly fighting fires.",
   },
   {
     icon: "Layers",
-    title: "Code you can actually trust",
-    body: "I build components in isolation — pieces that know their own shape but not where they'll end up. Paired with Cypress and Jest, that gives you a system you can refactor without second-guessing everything. Tests aren't a tax on development; they're what give you the confidence to keep moving.",
+    title: "Code you can trust",
+    body: "Components built in isolation. Cypress and Jest as standard. The confidence to refactor without fear.",
   },
   {
     icon: "Users",
     title: "Raise the ceiling",
-    body: "The most valuable thing I can do as a lead isn't write the best code on the team — it's help the people around me think a little bigger. I share context generously, ask more questions than I give answers, and try to make sure my teammates genuinely own their work.",
+    body: "The most valuable thing I can do as a lead is help everyone around me think a little bigger.",
   },
 ];
 
@@ -194,6 +211,49 @@ export const legacyProjects: LegacyProject[] = [
   { title: "Refine-It" },
   { title: "Quire" },
 ];
+
+// ─── About Page ───────────────────────────────────────────────────────────────
+
+export const aboutPageData: AboutPageData = {
+  story: [
+    {
+      label: "before the code",
+      title: "Ten years in sales",
+      body: "I spent a decade in telecom retail — selling phones, broadband plans, and home electronics to everyday people. Customer-facing, service-minded, technically curious. I was always the one explaining what the products actually did under the hood. That job gave me something I still draw on: an instinct for what makes something genuinely useful to the person on the other end of it, and a comfort with talking to non-technical people about technical things.",
+    },
+    {
+      label: "finding the craft",
+      title: "KYH frontend programme, 2018",
+      body: "I enrolled in KYH's frontend development programme in 2018. It was project-based from day one — no dry theory, straight into building things with teams. We learned agile the way you actually learn it: by doing standups, missing deadlines, retrospecting, and doing better. I came out with a solid React and JavaScript foundation, a habit of iterating quickly, and a real respect for the discipline of writing maintainable code. In parallel I was taking on small commissions — sites for friends, local businesses, the occasional redesign — enough to know this was where I wanted to go.",
+    },
+    {
+      label: "svea solar, 2020 – now",
+      title: "From frontend engineer to lead",
+      body: "I joined Svea Solar's sites team in 2020 and spent four years going from building pages to owning the platform they ran on. The headless CMS, the lead capture system, the Salesforce API integration, the analytics layer — I built all of these incrementally, taking on ownership as the system and my understanding of the business grew. In 2024 I moved into the lead engineer role. Now I run a team of 2–5 developers across the full stack — TypeScript on the frontend, Python (Wagtail) on the backend. That shift from individual contributor to lead has been the most interesting challenge of my career so far.",
+    },
+  ],
+  deepPhilosophy: [
+    {
+      icon: "Terminal",
+      title: "Get the foundations right",
+      body: "Features are temporary. The content model, the data contracts, the CI pipeline — those live forever. Every time I've rushed past an architecture decision I've paid for it later, and every time I've slowed down and thought it through I've been grateful. I'm not precious about it — I can move fast when the situation calls for it — but I've developed a strong instinct for when to pause and get the structure right first. A morning spent on the right abstraction is worth weeks of untangling a bad one.",
+    },
+    {
+      icon: "Layers",
+      title: "Code you can actually trust",
+      body: "I build components in isolation — pieces that know their own shape and API without caring where they end up in the application. That forces genuine reusability rather than coupling to the page they started on. Paired with a Cypress suite for critical user paths and Jest for logic-heavy pieces, you get a system you can refactor without second-guessing everything. Tests aren't a tax on development. They're what give you permission to keep moving confidently as the codebase grows.",
+    },
+    {
+      icon: "Users",
+      title: "Raise the ceiling",
+      body: "When I moved into the lead role I realised quickly that my output as an individual engineer was no longer the most important variable. What matters more is whether the people I work with are growing, whether they understand the system well enough to make good decisions without me, and whether they feel real ownership over their work. I try to be generous with context, curious about how people think rather than prescriptive about solutions, and honest when I don't know something. The goal is a team that makes good calls when I'm not in the room.",
+    },
+  ],
+  leadSection: {
+    title: "How I think about learning",
+    body: "I came from sales, not computer science. That means I've always had to be deliberate about building depth — reading source code, experimenting, taking on things that are slightly beyond what I know. I'm drawn to architecture more than any specific technology: how systems are shaped, how data flows, how you draw boundaries that make the whole thing maintainable over years. I'm also genuinely excited about where agentic coding tools are taking the craft — not as a shortcut, but as a new kind of leverage that rewards people who think clearly about structure.",
+  },
+};
 
 // ─── Social Links ─────────────────────────────────────────────────────────────
 
