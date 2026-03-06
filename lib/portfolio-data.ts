@@ -71,9 +71,9 @@ export const siteConfig = {
 
 export const navItems: NavItem[] = [
   { label: "About", href: "/about" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Work", href: "#work" },
-  { label: "Contact", href: "#contact" },
+  { label: "Expertise", href: "/#expertise" },
+  { label: "Work", href: "/#work" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
