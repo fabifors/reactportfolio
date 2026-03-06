@@ -1,14 +1,14 @@
 "use client";
 
-import { Terminal, GitBranch, Cpu } from "lucide-react";
-import { philosophyCards } from "@/lib/portfolio-data";
+import { Terminal, Layers, Users } from "lucide-react";
+import { philosophyCards, bioData } from "@/lib/portfolio-data";
 import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
 
 const iconMap = {
   Terminal,
-  GitBranch,
-  Cpu,
+  Layers,
+  Users,
 } as const;
 
 type IconName = keyof typeof iconMap;
@@ -48,15 +48,17 @@ function PhilosophyCard({
 }
 
 export default function About() {
-  const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.15 });
+  const [bioRef, bioInView] = useInView<HTMLDivElement>({ threshold: 0.15 });
 
   return (
     <section id="philosophy" className="py-20 md:py-28 bg-muted/30">
       <div className="container mx-auto px-6">
+        {/* Section heading */}
         <div
           ref={headingRef}
           className={cn(
-            "mb-14 transition-all duration-500",
+            "mb-10 transition-all duration-500",
             headingInView ? "animate-fade-up opacity-100" : "opacity-0"
           )}
         >
@@ -66,12 +68,25 @@ export default function About() {
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             How I think about engineering
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl">
-            Six years of ownership sharpens your priorities. These are the
-            principles that guide every decision I make.
+        </div>
+
+        {/* Bio intro — two short paragraphs about the person */}
+        <div
+          ref={bioRef}
+          className={cn(
+            "mb-14 max-w-3xl transition-all duration-500",
+            bioInView ? "animate-fade-up opacity-100" : "opacity-0"
+          )}
+        >
+          <p className="text-muted-foreground text-base leading-relaxed mb-4">
+            {bioData.intro}
+          </p>
+          <p className="text-muted-foreground text-base leading-relaxed">
+            {bioData.detail}
           </p>
         </div>
 
+        {/* Philosophy cards */}
         <div className="grid gap-5 md:grid-cols-3">
           {philosophyCards.map((card, i) => (
             <PhilosophyCard

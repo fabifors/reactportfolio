@@ -8,6 +8,11 @@ export type NavItem = {
   href: string;
 };
 
+export type BioData = {
+  intro: string;
+  detail: string;
+};
+
 export type PhilosophyCard = {
   icon: string;
   title: string;
@@ -43,9 +48,9 @@ export type SocialLink = {
 
 export const siteConfig = {
   name: "Fabian Forsström",
-  title: "Tech Lead · Full-Stack Engineer",
+  title: "Lead Engineer · Full-Stack",
   description:
-    "Tech Lead and full-stack engineer with a frontend focus. Six years building content platforms, lead pipelines, and analytics infrastructure at Svea Solar.",
+    "Lead engineer and full-stack developer with a frontend focus. Five years building content platforms, lead pipelines, and analytics infrastructure at Svea Solar — now leading the team behind it.",
   github: "https://github.com/fabifors/",
   linkedin: "https://linkedin.com/in/fabian-forsström-22958159/",
 };
@@ -62,12 +67,21 @@ export const navItems: NavItem[] = [
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
 export const heroData = {
-  eyebrow: "> tech lead / full-stack engineer",
-  headline: "Building systems\nthat scale with intent.",
+  eyebrow: "> lead engineer / full-stack",
+  headline: "Building things\nthat last.",
   subheadline:
-    "Six years taking a marketing website from static HTML to a full content platform — headless CMS architecture, lead capture pipelines, Salesforce API integrations, and analytics that close the loop between ad spend and revenue. Now leaning hard into AI-augmented engineering.",
+    "I spent a decade in sales before finding my way into software — and that background shaped how I think about the work. I care about the people using it, the business depending on it, and the engineers maintaining it. At Svea Solar I've spent five years building the platform behind our marketing and content, and the last year leading the team that keeps it moving.",
   primaryCta: { label: "See the work", href: "#work" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
+};
+
+// ─── Bio ──────────────────────────────────────────────────────────────────────
+
+export const bioData: BioData = {
+  intro:
+    "I came up through ten years in telecom sales before teaching myself to code and eventually going through KYH's frontend programme. That path gave me something I'm grateful for every day: a genuine curiosity about the people on the other side of the screen and the business problems underneath the interface.",
+  detail:
+    "I still get excited about both the technical solution and the experience it creates. Outside of work I shoot photography and think a lot about visual communication — which probably explains why I care as much about the interface as the infrastructure behind it.",
 };
 
 // ─── Philosophy ───────────────────────────────────────────────────────────────
@@ -75,18 +89,18 @@ export const heroData = {
 export const philosophyCards: PhilosophyCard[] = [
   {
     icon: "Terminal",
-    title: "Systems before features",
-    body: "Features are temporary. The content model, the data contracts, the CI pipeline — those live forever. I spend the time upfront to get the architecture right so iteration is fast and regressions are rare.",
+    title: "Get the foundations right",
+    body: "I've learned the hard way that skipping the architecture conversation costs you more than it saves. Good foundations are quiet — they let the team move fast without constantly fighting fires. I'd rather spend an afternoon getting the content model right than a week untangling the fallout.",
   },
   {
-    icon: "GitBranch",
-    title: "Frontend as infrastructure",
-    body: "A marketing site is not just HTML. It is a lead generation engine, a performance budget, a CMS contract, and a tracking layer. I treat it with the same discipline as a backend service.",
+    icon: "Layers",
+    title: "Code you can actually trust",
+    body: "I build components in isolation — pieces that know their own shape but not where they'll end up. Paired with Cypress and Jest, that gives you a system you can refactor without second-guessing everything. Tests aren't a tax on development; they're what give you the confidence to keep moving.",
   },
   {
-    icon: "Cpu",
-    title: "Augmented, not replaced",
-    body: "I use agentic coding tools to compress cycle time — not to avoid thinking. The leverage is real, but it requires stronger architecture instincts, not weaker ones.",
+    icon: "Users",
+    title: "Raise the ceiling",
+    body: "The most valuable thing I can do as a lead isn't write the best code on the team — it's help the people around me think a little bigger. I share context generously, ask more questions than I give answers, and try to make sure my teammates genuinely own their work.",
   },
 ];
 
@@ -98,11 +112,20 @@ export const skillDomains: SkillDomain[] = [
     items: ["TypeScript", "React", "Next.js", "Tailwind CSS", "HTML5 / CSS3"],
   },
   {
+    domain: "Testing",
+    items: [
+      "Cypress (E2E)",
+      "Jest (unit / integration)",
+      "Component-driven development",
+      "Test-driven refactoring",
+    ],
+  },
+  {
     domain: "Platform & CMS",
     items: [
       "Headless CMS architecture",
+      "Wagtail (Python)",
       "Payload CMS",
-      "Wagtail",
       "REST APIs",
       "Static site generation",
     ],
@@ -112,7 +135,7 @@ export const skillDomains: SkillDomain[] = [
     items: [
       "Salesforce API",
       "Custom lead capture pipelines",
-      "Form optimization",
+      "Form optimisation",
       "CRM integration",
     ],
   },
@@ -124,10 +147,6 @@ export const skillDomains: SkillDomain[] = [
       "Persona mapping",
       "Data layer architecture",
     ],
-  },
-  {
-    domain: "Tooling",
-    items: ["Git", "Figma", "Firebase", "Agile / Scrum", "VS Code"],
   },
   {
     domain: "Agentic Engineering",
@@ -144,23 +163,26 @@ export const skillDomains: SkillDomain[] = [
 
 export const workHighlights: WorkHighlight[] = [
   {
-    title: "Full content and marketing platform",
+    title: "Content and marketing platform",
     employer: "Svea Solar",
-    period: "2019 – present",
-    role: "Frontend Engineer → Tech Lead",
+    period: "2020 – present",
+    role: "Frontend Engineer (2020–2024) → Lead Engineer (2024–now)",
     impact: [
-      "Architected and own the headless CMS powering all content creation for a national solar brand, enabling editors to publish autonomously without developer involvement.",
-      "Built and maintain the statically-generated Next.js marketing website responsible for lead generation at scale across the Swedish market.",
-      "Engineered custom lead capture tools and a proprietary API bridging the frontend to Salesforce CRM, routing thousands of qualified leads per month.",
-      "Developed value-based bidding analytics infrastructure connecting ad spend to persona-qualified leads in Google Ads, directly improving marketing ROI.",
-      "Grew from individual contributor frontend engineer to Tech Lead over six years, now owning the technical direction of the full content and acquisition stack.",
+      "Joined the sites team as a frontend engineer and spent four years building and maintaining the marketing and content infrastructure for a national solar brand.",
+      "Architected the headless CMS platform that powers content creation across the organisation — editors publish autonomously without needing a developer in the loop.",
+      "Built the lead capture tools and proprietary API connecting our frontend to Salesforce CRM, routing qualified leads at scale across the Swedish market.",
+      "Developed the analytics and value-based bidding infrastructure that connects ad spend to persona-qualified leads in Google Ads, closing the loop between marketing and revenue.",
+      "Since 2024, leading a team of 2–5 engineers across the full stack — TypeScript on the frontend, Python (Wagtail) on the backend — with a strong focus on testing, component quality, and sustainable architecture.",
     ],
     tags: [
       "Next.js",
+      "TypeScript",
+      "Wagtail",
       "Headless CMS",
       "Salesforce API",
-      "TypeScript",
-      "Analytics",
+      "Cypress",
+      "Jest",
+      "Google Ads",
       "Tech Lead",
     ],
   },
