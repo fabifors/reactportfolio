@@ -4,14 +4,16 @@ import { skillDomains } from "@/lib/portfolio-data";
 import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
 
-function DomainCard({
+function DomainRow({
   domain,
   items,
   delay,
+  isLast,
 }: {
   domain: string;
   items: string[];
   delay: number;
+  isLast: boolean;
 }) {
   const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1 });
 
@@ -19,23 +21,28 @@ function DomainCard({
     <div
       ref={ref}
       className={cn(
-        "card-accent rounded-lg bg-surface border border-border/60 p-5 transition-all duration-500",
+        "grid grid-cols-1 md:grid-cols-[160px_1fr] gap-2 md:gap-10 py-4 transition-all duration-500",
+        !isLast && "border-b border-border/30",
         inView ? "animate-fade-up opacity-100" : "opacity-0"
       )}
       style={{ animationDelay: `${delay}ms` }}
     >
-      <p className="text-xs font-mono text-primary mb-3 tracking-wider">
-        <span className="opacity-60 mr-1">&gt;</span>
+      {/* Domain label */}
+      <span className="font-mono text-xs text-primary/60 uppercase tracking-wider self-start md:pt-[3px]">
         {domain}
-      </p>
-      <ul className="space-y-1.5">
-        {items.map((item) => (
-          <li key={item} className="text-[15px] text-muted-foreground flex items-start gap-2">
-            <span className="text-primary/50 mt-0.5 leading-none select-none">—</span>
+      </span>
+
+      {/* Items — inline with dots */}
+      <p className="text-[15px] text-muted-foreground leading-relaxed">
+        {items.map((item, i) => (
+          <span key={item}>
             {item}
-          </li>
+            {i < items.length - 1 && (
+              <span className="mx-2 text-border select-none">·</span>
+            )}
+          </span>
         ))}
-      </ul>
+      </p>
     </div>
   );
 }
@@ -44,12 +51,12 @@ export default function Skills() {
   const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
 
   return (
-    <section id="expertise" className="py-20 md:py-28">
-      <div className="container mx-auto px-6">
+    <section id="expertise" className="py-20 md:py-28 bg-muted/30">
+      <div className="container mx-auto px-6 max-w-4xl">
         <div
           ref={headingRef}
           className={cn(
-            "mb-14 transition-all duration-500",
+            "mb-10 transition-all duration-500",
             headingInView ? "animate-fade-up opacity-100" : "opacity-0"
           )}
         >
@@ -59,18 +66,20 @@ export default function Skills() {
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             What I work with
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl">
+          <p className="text-[15px] text-muted-foreground max-w-2xl">
             The domains I own — chosen because they produce results, not because
             they look good on a slide.
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div>
           {skillDomains.map((domain, i) => (
-            <DomainCard
+            <DomainRow
               key={domain.domain}
-              {...domain}
-              delay={i * 80}
+              domain={domain.domain}
+              items={domain.items}
+              delay={i * 60}
+              isLast={i === skillDomains.length - 1}
             />
           ))}
         </div>
