@@ -34,13 +34,17 @@ export type SkillDomain = {
   items: string[];
 };
 
+export type WorkPhase = {
+  period: string;
+  role: string;
+  impact: string[];
+};
+
 export type WorkHighlight = {
   title: string;
   employer: string;
-  period: string;
-  role: string;
   team: string;
-  impact: string[];
+  phases: WorkPhase[];
   tags: string[];
 };
 
@@ -169,17 +173,29 @@ export const skillDomains: SkillDomain[] = [
 
 export const workHighlights: WorkHighlight[] = [
   {
-    title: "Content and marketing platform",
+    title: "Svea Solar",
     employer: "Svea Solar",
-    period: "2020 – present",
-    role: "Frontend Engineer (2020–2024) → Lead Engineer (2024–now)",
     team: "2–5 engineers",
-    impact: [
-      "Joined the sites team as a frontend engineer and spent four years building and maintaining the marketing and content infrastructure for a national solar brand.",
-      "Architected the headless CMS platform that powers content creation across the full organisation — the entire editorial team publishes autonomously without needing a developer in the loop.",
-      "Built the lead capture tools and proprietary API connecting the frontend to Salesforce CRM, routing qualified leads across the Swedish market at scale.",
-      "Developed the analytics and value-based bidding infrastructure that connects ad spend to persona-qualified pipeline in Google Ads, closing the loop between marketing investment and revenue.",
-      "Since 2024, leading the engineering team across the full stack — TypeScript on the frontend, Python (Wagtail) on the backend — with a strong focus on testing, component quality, and sustainable architecture.",
+    phases: [
+      {
+        period: "2024 – present",
+        role: "Lead Engineer",
+        impact: [
+          "Moved from individual contributor to leading the engineering team across the full stack — TypeScript on the frontend, Python (Wagtail) on the backend.",
+          "Introduced Cypress and Jest as standards across the codebase, shifting the team toward component-driven development and test-driven refactoring.",
+          "Focused on sustainable architecture: clear ownership boundaries, good documentation, and a team that makes sound decisions independently.",
+        ],
+      },
+      {
+        period: "2020 – 2024",
+        role: "Frontend Engineer",
+        impact: [
+          "Built and maintained the marketing and content infrastructure for a national solar brand over four years.",
+          "Architected the headless CMS platform that powers the editorial team — they publish autonomously without needing a developer in the loop.",
+          "Built the lead capture tools and proprietary API connecting the frontend to Salesforce CRM, routing qualified leads across the Swedish market at scale.",
+          "Developed the analytics and value-based bidding infrastructure that connects ad spend to persona-qualified pipeline in Google Ads.",
+        ],
+      },
     ],
     tags: [
       "Next.js",
