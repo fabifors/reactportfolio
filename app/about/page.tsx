@@ -71,29 +71,28 @@ export default function AboutPage() {
       </section>
 
       {/* Closing */}
-      <section className="py-20 md:py-24">
+      <section className="py-20 md:py-28">
         <div className="container mx-auto px-6 max-w-3xl">
-          <p className="terminal-prefix text-xs tracking-widest mb-4">&gt; always learning</p>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
             {leadSection.title}
           </h2>
-          <p className="text-[15px] text-muted-foreground leading-relaxed max-w-2xl">
+          <p className="text-[15px] text-muted-foreground leading-relaxed max-w-xl">
             {leadSection.body}
           </p>
 
-          <div className="mt-12 flex flex-wrap gap-6">
+          <div className="mt-10 flex flex-wrap gap-6 items-center">
             <Link
-              href="/#work"
-              className="inline-flex items-center gap-2 text-[15px] font-medium text-primary hover:text-primary/80 transition-colors"
+              href="/#contact"
+              className="inline-flex items-center gap-2 text-[15px] font-semibold text-primary hover:text-primary/80 transition-colors"
             >
-              See the work
+              Let&apos;s talk
               <span aria-hidden>→</span>
             </Link>
             <Link
-              href="/#contact"
-              className="inline-flex items-center gap-2 text-[15px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+              href="/#work"
+              className="inline-flex items-center gap-2 text-[15px] text-muted-foreground hover:text-foreground transition-colors"
             >
-              Get in touch
+              See the work
             </Link>
           </div>
         </div>

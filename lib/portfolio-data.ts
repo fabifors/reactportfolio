@@ -270,8 +270,8 @@ export const aboutPageData: AboutPageData = {
     },
   ],
   leadSection: {
-    title: "How I think about learning",
-    body: "I came from sales, not computer science. That means I've always had to be deliberate about building depth — reading source code, experimenting, taking on things that are slightly beyond what I know. I'm drawn to architecture more than any specific technology: how systems are shaped, how data flows, how you draw boundaries that make the whole thing maintainable over years. I'm also genuinely excited about where agentic coding tools are taking the craft — not as a shortcut, but as a new kind of leverage that rewards people who think clearly about structure.",
+    title: "Not done yet.",
+    body: "I came from sales, spent years as an engineer, and recently stepped into a lead role. Each shift was a deliberate bet on what I wanted to be good at. I'm drawn to hard problems that sit at the edge of what I know — the kind where the answer isn't obvious and the architecture has to be thought through carefully. If you're building something interesting and want someone who thinks about both the code and the people building it — let's talk.",
   },
 };
 
