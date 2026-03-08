@@ -1,31 +1,35 @@
 "use client";
 
+import { motion } from "motion/react";
 import { skillDomains } from "@/lib/portfolio-data";
-import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
+
+const headingVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+};
 
 function DomainRow({
   domain,
   items,
-  delay,
   isLast,
 }: {
   domain: string;
   items: string[];
-  delay: number;
   isLast: boolean;
 }) {
-  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1 });
-
   return (
-    <div
-      ref={ref}
+    <motion.div
+      variants={itemVariants}
       className={cn(
-        "grid grid-cols-1 md:grid-cols-[160px_1fr] gap-2 md:gap-10 py-4 transition-all duration-500",
-        !isLast && "border-b border-border/30",
-        inView ? "animate-fade-up opacity-100" : "opacity-0"
+        "grid grid-cols-1 md:grid-cols-[160px_1fr] gap-2 md:gap-10 py-4",
+        !isLast && "border-b border-border/30"
       )}
-      style={{ animationDelay: `${delay}ms` }}
     >
       {/* Domain label */}
       <span className="font-mono text-xs text-primary/60 uppercase tracking-wider self-start md:pt-[3px]">
@@ -43,22 +47,20 @@ function DomainRow({
           </span>
         ))}
       </p>
-    </div>
+    </motion.div>
   );
 }
 
 export default function Skills() {
-  const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
-
   return (
     <section id="expertise" className="py-20 md:py-28 bg-muted/30">
       <div className="container mx-auto px-6 max-w-4xl">
-        <div
-          ref={headingRef}
-          className={cn(
-            "mb-10 transition-all duration-500",
-            headingInView ? "animate-fade-up opacity-100" : "opacity-0"
-          )}
+        <motion.div
+          className="mb-10"
+          variants={headingVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
           <p className="terminal-prefix text-xs tracking-widest mb-3">
             &gt; expertise
@@ -70,19 +72,23 @@ export default function Skills() {
             The domains I own — chosen because they produce results, not because
             they look good on a slide.
           </p>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ staggerChildren: 0.06 }}
+        >
           {skillDomains.map((domain, i) => (
             <DomainRow
               key={domain.domain}
               domain={domain.domain}
               items={domain.items}
-              delay={i * 60}
               isLast={i === skillDomains.length - 1}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

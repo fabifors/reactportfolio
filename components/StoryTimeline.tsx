@@ -1,22 +1,24 @@
 "use client";
 
-import { useInView } from "@/hooks/use-in-view";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { type StorySection } from "@/lib/portfolio-data";
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 function StoryNode({
   section,
-  index,
   isLast,
 }: {
   section: StorySection;
   index: number;
   isLast: boolean;
 }) {
-  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1 });
-
   return (
-    <div ref={ref} className="relative grid grid-cols-[1.5rem_1fr] md:grid-cols-[2.5rem_1fr] gap-5 md:gap-10">
+    <div className="relative grid grid-cols-[1.5rem_1fr] md:grid-cols-[2.5rem_1fr] gap-5 md:gap-10">
       {/* Spine */}
       <div className="flex flex-col items-center">
         <div
@@ -33,27 +35,28 @@ function StoryNode({
       </div>
 
       {/* Content */}
-      <div
-        className={cn(
-          "pb-14 transition-all duration-600",
-          isLast && "pb-0",
-          inView ? "animate-fade-up opacity-100" : "opacity-0"
-        )}
-        style={{ transitionDelay: `${index * 100}ms` }}
+      <motion.div
+        variants={itemVariants}
+        className={cn("pb-14", isLast && "pb-0")}
       >
         <p className="font-mono text-xs text-primary/60 tracking-wider mb-2 uppercase">
           {section.label}
         </p>
         <h2 className="text-xl font-semibold text-foreground mb-3">{section.title}</h2>
         <p className="text-[15px] text-muted-foreground leading-relaxed">{section.body}</p>
-      </div>
+      </motion.div>
     </div>
   );
 }
 
 export default function StoryTimeline({ sections }: { sections: StorySection[] }) {
   return (
-    <div>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ staggerChildren: 0.1 }}
+    >
       {sections.map((section, i) => (
         <StoryNode
           key={section.label}
@@ -62,6 +65,6 @@ export default function StoryTimeline({ sections }: { sections: StorySection[] }
           isLast={i === sections.length - 1}
         />
       ))}
-    </div>
+    </motion.div>
   );
 }
