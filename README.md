@@ -1,41 +1,36 @@
-# Welcome to my Portfolio repo
-Hi, Fabian here. This is my first project in react. As an assignment in school I will build a react app that represent my passed and future work. The app will consist of a single page to start and maybe gets more pages added on later if I so choose. 
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-The goal of this project is to develop base understanding of react and it's methods for rendering component based applications to the web.
+## Getting Started
 
-## Component Tree
-{Input component tree here}
+First, run the development server:
 
-## Key points
-This site will display my current level of skills from 0-100 in my own scale using my own library to render a react skillbar component. I will also include some information about me, how I write code and short descriptions of why I do it. I will also include a portfolio section where I list my work so far. 
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Libraries used
-I will use all of the below stated libraries to style and animate components or to simply enchance the development experience. 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### `Styled Components` 
-https://www.styled-components.com/
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-Library used to style components. This really is the future!
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Learn More
 
-## Available Scripts
+To learn more about Next.js, take a look at the following resources:
 
-Of course all the avaliable scripts from create-react-app are avaliable here aswell. I have shortend this version to only include `npm i` and `npm start` since these are the only script you really need to use to test the application. The intent of this project is only to develop my skills and has no need for collaborations. 
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
->Thanks for downloading and taking an interest in my personal development into the world of the web.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-First of all run:
+## Deploy on Vercel
 
-### `npm i`
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
