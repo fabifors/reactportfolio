@@ -1,6 +1,3 @@
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "./firebase";
-
 export type ContactSubmission = {
   name: string;
   email: string;
@@ -8,8 +5,13 @@ export type ContactSubmission = {
 };
 
 export async function submitContact(data: ContactSubmission): Promise<void> {
-  await addDoc(collection(db, "contacts"), {
-    ...data,
-    createdAt: serverTimestamp(),
+  const res = await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
   });
+
+  if (!res.ok) {
+    throw new Error("Failed to send message");
+  }
 }
