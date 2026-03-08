@@ -121,7 +121,7 @@ export default function Projects() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.05 }}
-            transition={{ staggerChildren: 0.25, delayChildren: 0.15 }}
+            transition={{ staggerChildren: 0.075, delayChildren: 0.15 }}
           >
             {work.phases.map((phase, i) => (
               <TimelinePhase
