@@ -136,7 +136,7 @@
     left: -120px;
     width: 720px;
     height: 620px;
-    background: radial-gradient(circle at 50% 50%, hsl(170 70% 55% / 0.30) 0%, transparent 70%);
+    background: radial-gradient(circle at 50% 50%, hsl(170 70% 55% / 0.60) 0%, transparent 70%);
     filter: blur(72px);
     animation: orb-float-1 38s ease-in-out infinite;
   }
@@ -146,7 +146,7 @@
     right: -120px;
     width: 640px;
     height: 560px;
-    background: radial-gradient(circle at 50% 50%, hsl(195 85% 60% / 0.22) 0%, transparent 70%);
+    background: radial-gradient(circle at 50% 50%, hsl(195 85% 60% / 0.48) 0%, transparent 70%);
     filter: blur(72px);
     animation: orb-float-2 29s ease-in-out infinite;
   }
@@ -156,7 +156,7 @@
     left: 32%;
     width: 520px;
     height: 420px;
-    background: radial-gradient(circle at 50% 50%, hsl(250 60% 60% / 0.14) 0%, transparent 70%);
+    background: radial-gradient(circle at 50% 50%, hsl(250 60% 60% / 0.32) 0%, transparent 70%);
     filter: blur(80px);
     animation: orb-float-3 46s ease-in-out infinite;
   }
