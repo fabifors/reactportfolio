@@ -3,7 +3,7 @@
 export default function AmbientBackground() {
   return (
     <div
-      className="fixed inset-0 -z-10 pointer-events-none overflow-hidden"
+      className="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-background"
       aria-hidden="true"
     >
       {/* Gradient orbs */}
