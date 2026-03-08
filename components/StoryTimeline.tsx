@@ -21,14 +21,14 @@ function StoryNode({
       <div className="flex flex-col items-center">
         <div
           className={cn(
-            "relative z-10 h-2.5 w-2.5 rounded-full border-2 flex-shrink-0 mt-[6px] transition-all duration-700",
+            "relative z-10 h-2.5 w-2.5 rounded-full border-2 shrink-0 mt-[6px] transition-all duration-700",
             isLast
               ? "border-primary bg-primary shadow-[0_0_10px_3px_hsl(var(--primary)/0.4)]"
               : "border-border/70 bg-background"
           )}
         />
         {!isLast && (
-          <div className="flex-1 w-px bg-gradient-to-b from-border/50 to-border/10 mt-2" />
+          <div className="flex-1 w-px bg-linear-to-b from-border/50 to-border/10 mt-2" />
         )}
       </div>
 

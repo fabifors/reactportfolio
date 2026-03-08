@@ -10,10 +10,10 @@ export default function Hero() {
       <div className="absolute inset-0 bg-dot-grid" />
 
       {/* Radial gradient fade from center */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/60 to-background" />
+      <div className="absolute inset-0 bg-linear-to-b from-background/0 via-background/60 to-background" />
 
       {/* Horizontal gradient vignette */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/0 to-background" />
+      <div className="absolute inset-0 bg-linear-to-r from-background via-background/0 to-background" />
 
       <div className="relative container mx-auto px-6 py-24 md:py-36 flex flex-col items-start gap-8 max-w-4xl">
         {/* Eyebrow / terminal prompt */}
