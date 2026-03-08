@@ -1,86 +1,178 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
+"use client";
 
-const projects = [
-  {
-    title: "Hitta Webbhotellet",
-    description:
-      "A web hosting comparison platform designed to help Swedish users find the right hosting plan. Focused on clean information hierarchy and trustworthy visual design.",
-    tags: ["Design", "UI/UX"],
-    url: "https://hittawebbhotellet.se",
-  },
-  {
-    title: "Refine-It",
-    description:
-      "A design and development project combining thoughtful UX patterns with a solid React implementation. Built to refine the experience of a core user workflow.",
-    tags: ["Design", "React", "Code"],
-    url: null,
-  },
-  {
-    title: "Hittasmslån",
-    description:
-      "SMS loan comparison site designed for clarity and speed. Prioritized legibility and conversion-focused layout to help users make informed financial decisions.",
-    tags: ["Design", "UI/UX"],
-    url: "https://hittasmslån.se",
-  },
-  {
-    title: "Quire",
-    description:
-      "A school project that brought together design, frontend development, and UX research. Demonstrates end-to-end thinking from concept to coded prototype.",
-    tags: ["Design", "React", "Code", "School Project"],
-    url: null,
-  },
-];
+import { Badge } from "@/components/ui/badge";
+import { workHighlights, legacyProjects, WorkPhase } from "@/lib/portfolio-data";
+import { useInView } from "@/hooks/use-in-view";
+import { cn } from "@/lib/utils";
+import { ExternalLink, Users } from "lucide-react";
+
+function TimelinePhase({
+  phase,
+  index,
+  isLast,
+}: {
+  phase: WorkPhase;
+  index: number;
+  isLast: boolean;
+}) {
+  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1 });
+
+  return (
+    <div ref={ref} className="relative grid grid-cols-[1.5rem_1fr] md:grid-cols-[2.5rem_1fr] gap-4 md:gap-8">
+      {/* Timeline spine */}
+      <div className="flex flex-col items-center">
+        {/* Node dot */}
+        <div
+          className={cn(
+            "relative z-10 h-3 w-3 rounded-full border-2 flex-shrink-0 mt-1 transition-all duration-500",
+            index === 0
+              ? "border-primary bg-primary shadow-[0_0_8px_2px_hsl(var(--primary)/0.35)]"
+              : "border-border/60 bg-background"
+          )}
+        />
+        {/* Connecting line down */}
+        {!isLast && (
+          <div className="flex-1 w-px bg-gradient-to-b from-border/60 to-border/20 mt-2" />
+        )}
+      </div>
+
+      {/* Content */}
+      <div
+        className={cn(
+          "pb-10 transition-all duration-500",
+          isLast && "pb-0",
+          inView ? "animate-fade-up opacity-100" : "opacity-0"
+        )}
+        style={{ transitionDelay: `${index * 80}ms` }}
+      >
+        {/* Phase header */}
+        <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 mb-4">
+          <span className="font-mono text-xs text-primary/70 tracking-wider">{phase.period}</span>
+          <span className="hidden sm:block text-border/40 text-xs">·</span>
+          <h3 className="text-lg font-semibold text-foreground">{phase.role}</h3>
+        </div>
+
+        {/* Impact list */}
+        <ul className="space-y-3">
+          {phase.impact.map((point, i) => (
+            <li
+              key={i}
+              className="flex items-start gap-3 text-[15px] text-muted-foreground leading-relaxed"
+            >
+              <span className="text-border/50 mt-[6px] leading-none flex-shrink-0 select-none">—</span>
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
 
 export default function Projects() {
+  const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const [metaRef, metaInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const [legacyRef, legacyInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+
+  const work = workHighlights[0];
+
   return (
-    <section id="projects" className="bg-muted/40 py-20 md:py-28">
+    <section id="work" className="py-20 md:py-28 bg-muted/30">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
+        {/* Section heading */}
+        <div
+          ref={headingRef}
+          className={cn(
+            "mb-14 transition-all duration-500",
+            headingInView ? "animate-fade-up opacity-100" : "opacity-0"
+          )}
+        >
+          <p className="terminal-prefix text-xs tracking-widest mb-3">&gt; work</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Selected Work
+            Where I&apos;ve built things
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A handful of projects I&apos;m proud of. More in the works — including some personal React apps I&apos;m genuinely excited about.
+          <p className="text-[15px] text-muted-foreground max-w-2xl">
+            Six years of continuous ownership at one company. That breadth and depth is the work.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {projects.map(({ title, description, tags, url }) => (
-            <Card key={title} className="flex flex-col">
-              <CardHeader>
-                <CardTitle>{title}</CardTitle>
-                <div className="flex flex-wrap gap-1.5 mt-2">
-                  {tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </CardHeader>
-              <CardContent className="flex-1">
-                <p className="text-muted-foreground text-sm">{description}</p>
-              </CardContent>
-              {url && (
-                <CardFooter>
-                  <Button variant="ghost" size="sm" asChild>
-                    <a href={url} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-1.5" />
-                      View project
-                    </a>
-                  </Button>
-                </CardFooter>
-              )}
-            </Card>
-          ))}
+        {/* Card */}
+        <div className="rounded-xl bg-surface border border-border/60 p-8 md:p-10">
+          {/* Card meta: employer + team */}
+          <div
+            ref={metaRef}
+            className={cn(
+              "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-10 pb-8 border-b border-border/40 transition-all duration-500",
+              metaInView ? "animate-fade-up opacity-100" : "opacity-0"
+            )}
+          >
+            <div>
+              <p className="font-mono text-xs text-primary/60 tracking-wider mb-1">employer</p>
+              <p className="text-xl font-bold text-foreground">{work.employer}</p>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground/70 sm:text-right">
+              <Users className="h-3.5 w-3.5 flex-shrink-0" />
+              <span>Team: {work.team}</span>
+            </div>
+          </div>
+
+          {/* Timeline */}
+          <div>
+            {work.phases.map((phase, i) => (
+              <TimelinePhase
+                key={phase.period}
+                phase={phase}
+                index={i}
+                isLast={i === work.phases.length - 1}
+              />
+            ))}
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 pt-8 border-t border-border/40 mt-2">
+            {work.tags.map((tag) => (
+              <Badge
+                key={tag}
+                variant="outline"
+                className="text-xs border-border/60 text-muted-foreground font-mono"
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        </div>
+
+        {/* Earlier work footnote */}
+        <div
+          ref={legacyRef}
+          className={cn(
+            "mt-12 transition-all duration-500",
+            legacyInView ? "animate-fade-in opacity-100" : "opacity-0"
+          )}
+        >
+          <p className="text-xs font-mono text-muted-foreground/60 mb-3 tracking-wider">
+            earlier work
+          </p>
+          <div className="flex flex-col gap-1.5">
+            {legacyProjects.map(({ title, description, url }) => (
+              <div key={title} className="flex items-baseline gap-2">
+                {url ? (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted-foreground/60 hover:text-muted-foreground transition-colors inline-flex items-center gap-1 flex-shrink-0"
+                  >
+                    {title}
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                ) : (
+                  <span className="text-sm text-muted-foreground/60 flex-shrink-0">{title}</span>
+                )}
+                <span className="text-xs text-muted-foreground/35">— {description}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

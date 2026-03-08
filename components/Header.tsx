@@ -1,49 +1,87 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { navItems, siteConfig } from "@/lib/portfolio-data";
 
-const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-];
+// On the homepage, resolve "/#expertise" → "#expertise" so the browser
+// smooth-scrolls in-page rather than doing a full navigation cycle.
+// From any other page the full absolute path is used as-is.
+function useResolvedHref(href: string) {
+  const pathname = usePathname();
+  if (href.startsWith("/#") && pathname === "/") {
+    return href.slice(1); // "#expertise"
+  }
+  return href;
+}
+
+function NavLink({
+  label,
+  href,
+  onClick,
+  className,
+}: {
+  label: string;
+  href: string;
+  onClick?: () => void;
+  className: string;
+}) {
+  const resolved = useResolvedHref(href);
+  const isContact = href === "/#contact";
+
+  if (isContact) {
+    return (
+      <Button
+        asChild
+        size="sm"
+        className="bg-primary text-primary-foreground hover:bg-primary/90 text-[15px]"
+      >
+        <Link href={resolved} onClick={onClick}>
+          {label}
+        </Link>
+      </Button>
+    );
+  }
+
+  return (
+    <Link href={resolved} onClick={onClick} className={className}>
+      {label}
+    </Link>
+  );
+}
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between mx-auto px-6">
-        <Link href="/" className="font-semibold text-lg tracking-tight">
-          Fabian Forsström
+        <Link
+          href="/"
+          className="font-mono text-sm font-semibold tracking-tight text-foreground hover:text-primary transition-colors"
+        >
+          <span className="terminal-prefix mr-1">~/</span>
+          {siteConfig.name}
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
-          {navItems.map((item) =>
-            item.href === "#contact" ? (
-              <Button key={item.label} asChild size="sm">
-                <a href={item.href}>{item.label}</a>
-              </Button>
-            ) : (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {item.label}
-              </a>
-            )
-          )}
+          {navItems.map((item) => (
+            <NavLink
+              key={item.label}
+              label={item.label}
+              href={item.href}
+              className="text-[15px] font-medium text-muted-foreground transition-colors hover:text-primary"
+            />
+          ))}
         </nav>
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden"
+          className="md:hidden text-muted-foreground hover:text-foreground transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -53,16 +91,15 @@ export default function Header() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="md:hidden border-t px-6 py-4 flex flex-col gap-3 bg-background">
+        <div className="md:hidden border-t border-border/50 px-6 py-5 flex flex-col gap-4 bg-background/95 backdrop-blur-md">
           {navItems.map((item) => (
-            <a
+            <NavLink
               key={item.label}
+              label={item.label}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground"
               onClick={() => setMobileOpen(false)}
-            >
-              {item.label}
-            </a>
+              className="text-[15px] font-medium text-muted-foreground hover:text-primary transition-colors"
+            />
           ))}
         </div>
       )}

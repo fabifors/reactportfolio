@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { siteConfig } from "@/lib/portfolio-data";
 
 export const metadata: Metadata = {
-  title: "Fabian Forsström — Front-End Engineer",
-  description:
-    "Front-End Engineer specializing in React, TypeScript, and delightful user interfaces.",
+  title: `${siteConfig.name} — Tech Lead · Full-Stack Engineer`,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="dark scroll-smooth">
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

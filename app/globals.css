@@ -4,48 +4,29 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
+    /* Dark terminal palette — default (no light mode) */
+    --background:    220 20% 7%;
+    --surface:       220 18% 11%;
+    --foreground:    210 20% 92%;
+    --card:          220 18% 11%;
+    --card-foreground: 210 20% 92%;
+    --popover:       220 18% 11%;
+    --popover-foreground: 210 20% 92%;
+    --primary:       170 70% 55%;
+    --primary-foreground: 220 20% 7%;
+    --secondary:     220 15% 18%;
+    --secondary-foreground: 210 20% 75%;
+    --muted:         220 15% 14%;
+    --muted-foreground: 215 12% 70%;
+    --accent:        220 15% 18%;
+    --accent-foreground: 210 20% 92%;
+    --accent-blue:   195 85% 60%;
+    --destructive:   0 62.8% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border:        220 15% 18%;
+    --input:         220 15% 16%;
+    --ring:          170 70% 45%;
+    --radius:        0.5rem;
   }
 }
 
@@ -53,8 +34,23 @@
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+    /* Prevent iOS Safari from scaling the page on form focus */
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-size: 16px;
+  }
+
+  /* Prevent iOS zoom on input focus — requires font-size >= 16px */
+  input,
+  textarea,
+  select {
+    font-size: 16px;
   }
 }
 
@@ -62,4 +58,56 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Hero dot-grid background */
+  .bg-dot-grid {
+    background-image: radial-gradient(
+      circle,
+      hsl(170 70% 55% / 0.22) 1.5px,
+      transparent 1.5px
+    );
+    background-size: 24px 24px;
+  }
+
+  /* Gradient text utility */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(170 70% 55%) 0%,
+      hsl(195 85% 60%) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Terminal eyebrow prefix glow */
+  .terminal-prefix {
+    color: hsl(170 70% 55%);
+    font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Monaco,
+      Consolas, monospace;
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+  }
+
+  /* Card left-border accent */
+  .card-accent {
+    border-left: 2px solid hsl(170 70% 55% / 0.6);
+  }
+
+  /* Blinking cursor */
+  .cursor-blink::after {
+    content: "|";
+    color: hsl(170 70% 55%);
+    animation: cursor-blink 1.1s step-end infinite;
+    margin-left: 2px;
+  }
+
+  /* Staggered fade-up delays for grid children */
+  .stagger-1 { animation-delay: 0ms; }
+  .stagger-2 { animation-delay: 80ms; }
+  .stagger-3 { animation-delay: 160ms; }
+  .stagger-4 { animation-delay: 240ms; }
+  .stagger-5 { animation-delay: 320ms; }
+  .stagger-6 { animation-delay: 400ms; }
 }
