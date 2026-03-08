@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { workHighlights, legacyProjects, WorkPhase } from "@/lib/portfolio-data";
 import { cn } from "@/lib/utils";
 import { ExternalLink, Users } from "lucide-react";
+import CornerBrackets from "@/components/CornerBrackets";
 
 const ease = [0.25, 0, 0, 1] as const;
 
@@ -26,15 +27,31 @@ function TimelinePhase({
     <div className="relative grid grid-cols-[1.5rem_1fr] md:grid-cols-[2.5rem_1fr] gap-4 md:gap-8">
       {/* Timeline spine */}
       <div className="flex flex-col items-center">
-        {/* Node dot */}
-        <div
-          className={cn(
-            "relative z-10 h-3 w-3 rounded-full border-2 flex-shrink-0 mt-1 transition-all duration-500",
-            index === 0
-              ? "border-primary bg-primary shadow-[0_0_8px_2px_hsl(var(--primary)/0.35)]"
-              : "border-border/60 bg-background"
+        {/* Node dot + pulsing rings for current position */}
+        <div className="relative flex-shrink-0 mt-1">
+          {index === 0 && (
+            <>
+              <motion.div
+                className="absolute inset-[-2px] rounded-full border border-primary/50"
+                animate={{ scale: [1, 4], opacity: [0.55, 0] }}
+                transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 0.8 }}
+              />
+              <motion.div
+                className="absolute inset-[-2px] rounded-full border border-primary/30"
+                animate={{ scale: [1, 4], opacity: [0.35, 0] }}
+                transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 0.8, delay: 1.1 }}
+              />
+            </>
           )}
-        />
+          <div
+            className={cn(
+              "h-3 w-3 rounded-full border-2 transition-all duration-500",
+              index === 0
+                ? "border-primary bg-primary shadow-[0_0_8px_2px_hsl(var(--primary)/0.35)]"
+                : "border-border/60 bg-background"
+            )}
+          />
+        </div>
         {/* Connecting line down */}
         {!isLast && (
           <div className="flex-1 w-px bg-gradient-to-b from-border/60 to-border/20 mt-2" />
@@ -97,7 +114,8 @@ export default function Projects() {
         </motion.div>
 
         {/* Card */}
-        <div className="rounded-xl bg-surface border border-border/60 p-8 md:p-10">
+        <div className="relative rounded-xl bg-surface border border-border/60 p-8 md:p-10">
+          <CornerBrackets delay={0.1} />
           {/* Card meta: employer + team */}
           <motion.div
             className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-10 pb-8 border-b border-border/40"
