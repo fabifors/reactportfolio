@@ -24,7 +24,7 @@ function TimelinePhase({
         {/* Node dot */}
         <div
           className={cn(
-            "relative z-10 h-3 w-3 rounded-full border-2 flex-shrink-0 mt-1 transition-all duration-500",
+            "relative z-10 h-3 w-3 rounded-full border-2 shrink-0 mt-1 transition-all duration-500",
             index === 0
               ? "border-primary bg-primary shadow-[0_0_8px_2px_hsl(var(--primary)/0.35)]"
               : "border-border/60 bg-background"
@@ -32,7 +32,7 @@ function TimelinePhase({
         />
         {/* Connecting line down */}
         {!isLast && (
-          <div className="flex-1 w-px bg-gradient-to-b from-border/60 to-border/20 mt-2" />
+          <div className="flex-1 w-px bg-linear-to-b from-border/60 to-border/20 mt-2" />
         )}
       </div>
 
@@ -59,7 +59,7 @@ function TimelinePhase({
               key={i}
               className="flex items-start gap-3 text-[15px] text-muted-foreground leading-relaxed"
             >
-              <span className="text-border/50 mt-[6px] leading-none flex-shrink-0 select-none">—</span>
+              <span className="text-border/50 mt-[6px] leading-none shrink-0 select-none">—</span>
               {point}
             </li>
           ))}
@@ -111,7 +111,7 @@ export default function Projects() {
               <p className="text-xl font-bold text-foreground">{work.employer}</p>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground/70 sm:text-right">
-              <Users className="h-3.5 w-3.5 flex-shrink-0" />
+              <Users className="h-3.5 w-3.5 shrink-0" />
               <span>Team: {work.team}</span>
             </div>
           </div>
@@ -161,13 +161,13 @@ export default function Projects() {
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground/60 hover:text-muted-foreground transition-colors inline-flex items-center gap-1 flex-shrink-0"
+                    className="text-sm text-muted-foreground/60 hover:text-muted-foreground transition-colors inline-flex items-center gap-1 shrink-0"
                   >
                     {title}
                     <ExternalLink className="h-3 w-3" />
                   </a>
                 ) : (
-                  <span className="text-sm text-muted-foreground/60 flex-shrink-0">{title}</span>
+                  <span className="text-sm text-muted-foreground/60 shrink-0">{title}</span>
                 )}
                 <span className="text-xs text-muted-foreground/35">— {description}</span>
               </div>
