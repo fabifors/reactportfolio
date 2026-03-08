@@ -78,7 +78,7 @@ export default function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.05 }}
-          transition={{ staggerChildren: 0.25, delayChildren: 0.35 }}
+          transition={{ staggerChildren: 0.25, delayChildren: 0.2 }}
         >
           {skillDomains.map((domain, i) => (
             <DomainRow

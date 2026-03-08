@@ -55,7 +55,7 @@ export default function StoryTimeline({ sections }: { sections: StorySection[] }
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.05 }}
-      transition={{ staggerChildren: 0.25, delayChildren: 0.35 }}
+      transition={{ staggerChildren: 0.25, delayChildren: 0.2 }}
     >
       {sections.map((section, i) => (
         <StoryNode
