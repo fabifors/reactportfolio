@@ -6,7 +6,7 @@ import { type StorySection } from "@/lib/portfolio-data";
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.25, ease: "easeOut" } },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.25, ease: [0.25, 0, 0, 1] } },
 };
 
 function StoryNode({
