@@ -12,7 +12,7 @@ const headingVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.25 } },
 };
 
 function PhilosophyItem({
@@ -84,7 +84,7 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.05 }}
-          transition={{ staggerChildren: 0.12 }}
+          transition={{ staggerChildren: 0.08, delayChildren: 0.1 }}
         >
           {philosophyCards.map((card, i) => (
             <PhilosophyItem

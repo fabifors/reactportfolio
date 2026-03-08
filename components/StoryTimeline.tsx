@@ -6,7 +6,7 @@ import { type StorySection } from "@/lib/portfolio-data";
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.25 } },
 };
 
 function StoryNode({
@@ -55,7 +55,7 @@ export default function StoryTimeline({ sections }: { sections: StorySection[] }
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.05 }}
-      transition={{ staggerChildren: 0.1 }}
+      transition={{ staggerChildren: 0.08, delayChildren: 0.1 }}
     >
       {sections.map((section, i) => (
         <StoryNode

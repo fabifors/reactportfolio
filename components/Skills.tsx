@@ -11,7 +11,7 @@ const headingVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.45 } },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.25 } },
 };
 
 function DomainRow({
@@ -78,7 +78,7 @@ export default function Skills() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.05 }}
-          transition={{ staggerChildren: 0.06 }}
+          transition={{ staggerChildren: 0.05, delayChildren: 0.1 }}
         >
           {skillDomains.map((domain, i) => (
             <DomainRow
