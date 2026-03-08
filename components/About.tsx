@@ -84,7 +84,7 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.05 }}
-          transition={{ staggerChildren: 0.08, delayChildren: 0.35 }}
+          transition={{ staggerChildren: 0.25, delayChildren: 0.35 }}
         >
           {philosophyCards.map((card, i) => (
             <PhilosophyItem
