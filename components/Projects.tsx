@@ -6,14 +6,11 @@ import { workHighlights, legacyProjects, WorkPhase } from "@/lib/portfolio-data"
 import { cn } from "@/lib/utils";
 import { ExternalLink, Users } from "lucide-react";
 
+const ease = [0.25, 0, 0, 1] as const;
+
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.25, ease: [0.25, 0, 0, 1] as const } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
 };
 
 function TimelinePhase({
@@ -46,7 +43,10 @@ function TimelinePhase({
 
       {/* Content */}
       <motion.div
-        variants={itemVariants}
+        initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.55, delay: Math.min(index * 0.07, 0.21), ease }}
         className={cn("pb-10", isLast && "pb-0")}
       >
         {/* Phase header */}
@@ -116,13 +116,8 @@ export default function Projects() {
             </div>
           </motion.div>
 
-          {/* Timeline — staggered list */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ staggerChildren: 0.075, delayChildren: 0.15 }}
-          >
+          {/* Timeline */}
+          <div>
             {work.phases.map((phase, i) => (
               <TimelinePhase
                 key={phase.period}
@@ -131,7 +126,7 @@ export default function Projects() {
                 isLast={i === work.phases.length - 1}
               />
             ))}
-          </motion.div>
+          </div>
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 pt-8 border-t border-border/40 mt-2">

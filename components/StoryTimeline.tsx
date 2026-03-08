@@ -4,13 +4,11 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { type StorySection } from "@/lib/portfolio-data";
 
-const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.25, ease: [0.25, 0, 0, 1] as const } },
-};
+const ease = [0.25, 0, 0, 1] as const;
 
 function StoryNode({
   section,
+  index,
   isLast,
 }: {
   section: StorySection;
@@ -36,7 +34,10 @@ function StoryNode({
 
       {/* Content */}
       <motion.div
-        variants={itemVariants}
+        initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.55, delay: Math.min(index * 0.07, 0.21), ease }}
         className={cn("pb-14", isLast && "pb-0")}
       >
         <p className="font-mono text-xs text-primary/60 tracking-wider mb-2 uppercase">
@@ -51,12 +52,7 @@ function StoryNode({
 
 export default function StoryTimeline({ sections }: { sections: StorySection[] }) {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.05 }}
-      transition={{ staggerChildren: 0.075, delayChildren: 0.15 }}
-    >
+    <div>
       {sections.map((section, i) => (
         <StoryNode
           key={section.label}
@@ -65,6 +61,6 @@ export default function StoryTimeline({ sections }: { sections: StorySection[] }
           isLast={i === sections.length - 1}
         />
       ))}
-    </motion.div>
+    </div>
   );
 }
