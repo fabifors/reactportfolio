@@ -1,18 +1,11 @@
 "use client";
 
-import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { workHighlights, legacyProjects, WorkPhase } from "@/lib/portfolio-data";
+import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
 import { ExternalLink, Users } from "lucide-react";
 import CornerBrackets from "@/components/CornerBrackets";
-
-const ease = [0.25, 0, 0, 1] as const;
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
-};
 
 function TimelinePhase({
   phase,
@@ -23,21 +16,20 @@ function TimelinePhase({
   index: number;
   isLast: boolean;
 }) {
+  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1 });
+
   return (
-    <div className="relative grid grid-cols-[1.5rem_1fr] md:grid-cols-[2.5rem_1fr] gap-4 md:gap-8">
+    <div ref={ref} className="relative grid grid-cols-[1.5rem_1fr] md:grid-cols-[2.5rem_1fr] gap-4 md:gap-8">
       {/* Timeline spine */}
       <div className="flex flex-col items-center">
         {/* Node dot */}
-        <div
-          className={cn(
-            "relative z-10 h-3 w-3 rounded-full border-2 shrink-0 mt-1 transition-all duration-500",
-            index === 0
-              ? "border-primary bg-primary shadow-[0_0_8px_2px_hsl(var(--primary)/0.35)]"
-              : "border-border/60 bg-background"
+        <div className="relative flex-shrink-0 mt-1">
+          {index === 0 && (
+            <span className="absolute inset-[-2px] rounded-full border border-primary/50 animate-ping" />
           )}
           <div
             className={cn(
-              "h-3 w-3 rounded-full border-2 transition-all duration-500",
+              "relative z-10 h-3 w-3 rounded-full border-2 transition-all duration-500",
               index === 0
                 ? "border-primary bg-primary shadow-[0_0_8px_2px_hsl(var(--primary)/0.35)]"
                 : "border-border/60 bg-background"
@@ -51,12 +43,13 @@ function TimelinePhase({
       </div>
 
       {/* Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.55, delay: Math.min(index * 0.07, 0.21), ease }}
-        className={cn("pb-10", isLast && "pb-0")}
+      <div
+        className={cn(
+          "pb-10 transition-all duration-500",
+          isLast && "pb-0",
+          inView ? "animate-fade-up opacity-100" : "opacity-0"
+        )}
+        style={{ transitionDelay: `${Math.min(index * 70, 210)}ms` }}
       >
         {/* Phase header */}
         <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4 mb-4">
@@ -76,24 +69,28 @@ function TimelinePhase({
             </li>
           ))}
         </ul>
-      </motion.div>
+      </div>
     </div>
   );
 }
 
 export default function Projects() {
+  const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const [metaRef, metaInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const [legacyRef, legacyInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+
   const work = workHighlights[0];
 
   return (
     <section id="work" className="py-20 md:py-28">
       <div className="container mx-auto px-6">
         {/* Section heading */}
-        <motion.div
-          className="mb-14"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+        <div
+          ref={headingRef}
+          className={cn(
+            "mb-14 transition-all duration-500",
+            headingInView ? "animate-fade-up opacity-100" : "opacity-0"
+          )}
         >
           <p className="terminal-prefix text-xs tracking-widest mb-3">&gt; work</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
@@ -102,18 +99,18 @@ export default function Projects() {
           <p className="text-[15px] text-muted-foreground max-w-2xl">
             Six years of continuous ownership at one company. That breadth and depth is the work.
           </p>
-        </motion.div>
+        </div>
 
         {/* Card */}
         <div className="relative rounded-xl bg-surface/60 backdrop-blur-sm border border-border/60 p-8 md:p-10">
           <CornerBrackets delay={0.1} />
           {/* Card meta: employer + team */}
-          <motion.div
-            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-10 pb-8 border-b border-border/40"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+          <div
+            ref={metaRef}
+            className={cn(
+              "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-10 pb-8 border-b border-border/40 transition-all duration-500",
+              metaInView ? "animate-fade-up opacity-100" : "opacity-0"
+            )}
           >
             <div>
               <p className="font-mono text-xs text-primary/60 tracking-wider mb-1">employer</p>
@@ -123,7 +120,7 @@ export default function Projects() {
               <Users className="h-3.5 w-3.5 shrink-0" />
               <span>Team: {work.team}</span>
             </div>
-          </motion.div>
+          </div>
 
           {/* Timeline */}
           <div>
@@ -152,12 +149,12 @@ export default function Projects() {
         </div>
 
         {/* Earlier work footnote */}
-        <motion.div
-          className="mt-12"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+        <div
+          ref={legacyRef}
+          className={cn(
+            "mt-12 transition-all duration-500",
+            legacyInView ? "animate-fade-up opacity-100" : "opacity-0"
+          )}
         >
           <p className="text-xs font-mono text-muted-foreground/60 mb-3 tracking-wider">
             earlier work
@@ -182,7 +179,7 @@ export default function Projects() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
