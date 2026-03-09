@@ -1,3 +1,4 @@
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { heroData } from "@/lib/portfolio-data";
 
@@ -42,7 +43,7 @@ export default function Hero() {
         <div className="flex flex-wrap gap-4 animate-fade-up opacity-0 stagger-4">
           <Button
             size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold btn-primary-glow"
             asChild
           >
             <a href={primaryCta.href}>{primaryCta.label}</a>
@@ -68,6 +69,15 @@ export default function Hero() {
           ))}
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <a
+        href="#philosophy"
+        aria-label="Scroll down"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground/40 hover:text-primary/60 transition-colors animate-fade-in opacity-0 stagger-6"
+      >
+        <ChevronDown className="h-5 w-5 animate-bounce" />
+      </a>
     </section>
   );
 }

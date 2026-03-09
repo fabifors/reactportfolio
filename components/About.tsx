@@ -22,14 +22,14 @@ function PhilosophyItem({
     <div
       ref={ref}
       className={cn(
-        "grid grid-cols-[2.5rem_1fr] md:grid-cols-[5rem_1fr] gap-5 md:gap-10 py-8 transition-all duration-500",
+        "group grid grid-cols-[2.5rem_1fr] md:grid-cols-[5rem_1fr] gap-5 md:gap-10 py-8 transition-all duration-500 rounded-lg -mx-4 px-4 hover:bg-surface/40",
         !isLast && "border-b border-border/40",
         inView ? "animate-fade-up opacity-100" : "opacity-0"
       )}
       style={{ transitionDelay: `${Math.min((index - 1) * 70, 210)}ms` }}
     >
       {/* Number */}
-      <span className="font-mono text-2xl md:text-3xl font-bold text-primary/30 leading-none pt-1 select-none tabular-nums">
+      <span className="font-mono text-2xl md:text-3xl font-bold text-primary/30 group-hover:text-primary/50 leading-none pt-1 select-none tabular-nums transition-colors duration-300">
         {String(index).padStart(2, "0")}
       </span>
 
