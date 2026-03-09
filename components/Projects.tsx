@@ -93,7 +93,7 @@ export default function Projects() {
   const work = workHighlights[0];
 
   return (
-    <section id="work" className="py-20 md:py-28 bg-muted/30">
+    <section id="work" className="py-20 md:py-28">
       <div className="container mx-auto px-6">
         {/* Section heading */}
         <motion.div
@@ -113,7 +113,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Card */}
-        <div className="relative rounded-xl bg-surface border border-border/60 p-8 md:p-10">
+        <div className="relative rounded-xl bg-surface/60 backdrop-blur-sm border border-border/60 p-8 md:p-10">
           <CornerBrackets delay={0.1} />
           {/* Card meta: employer + team */}
           <motion.div

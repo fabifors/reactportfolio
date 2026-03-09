@@ -55,7 +55,7 @@ function DomainRow({
 
 export default function Skills() {
   return (
-    <section id="expertise" className="py-20 md:py-28 bg-muted/30">
+    <section id="expertise" className="py-20 md:py-28">
       <div className="container mx-auto px-6 max-w-4xl">
         <motion.div
           className="mb-10"
