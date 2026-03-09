@@ -55,6 +55,41 @@
   }
 }
 
+/* ── Orb float keyframes ─────────────────────────────────────────────────── */
+@keyframes orb-float-1 {
+  0%   { transform: translate(0px,    0px); }
+  20%  { transform: translate(180px,  130px); }
+  45%  { transform: translate(-140px, 210px); }
+  70%  { transform: translate(200px, -110px); }
+  100% { transform: translate(0px,    0px); }
+}
+@keyframes orb-float-2 {
+  0%   { transform: translate(0px,    0px); }
+  25%  { transform: translate(-200px, 100px); }
+  50%  { transform: translate(-100px, 220px); }
+  75%  { transform: translate(-160px, -80px); }
+  100% { transform: translate(0px,    0px); }
+}
+@keyframes orb-float-3 {
+  0%   { transform: translate(0px,    0px); }
+  30%  { transform: translate(160px, -120px); }
+  60%  { transform: translate(-120px, -200px); }
+  80%  { transform: translate(80px,   100px); }
+  100% { transform: translate(0px,    0px); }
+}
+@keyframes orb-float-4 {
+  0%   { transform: translate(0px,    0px); }
+  33%  { transform: translate(-180px, -140px); }
+  66%  { transform: translate(140px, -180px); }
+  100% { transform: translate(0px,    0px); }
+}
+@keyframes orb-float-5 {
+  0%   { transform: translate(0px,    0px); }
+  25%  { transform: translate(-100px, -160px); }
+  55%  { transform: translate(160px,  -100px); }
+  80%  { transform: translate(-60px,  -220px); }
+  100% { transform: translate(0px,    0px); }
+}
 
 @layer utilities {
   .text-balance {

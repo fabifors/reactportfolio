@@ -4,59 +4,44 @@ import { motion, useScroll, useTransform } from "motion/react";
 
 const ORBS = [
   {
-    // Top-left — teal primary
-    pos: { top: "-15vh", left: "-10vw" },
-    size: "clamp(280px, 55vw, 700px)",
-    color: "hsl(170 70% 55% / 0.55)",
-    duration: 14,
-    x: ["0%", "18%", "-12%", "8%", "0%"],
-    y: ["0%", "22%", "10%", "-8%", "0%"],
-    parallaxY: 14,          // vh offset over full scroll
-    mobileOnly: false,
+    pos:      { top: "-15vh", left: "-10vw" },
+    size:     "clamp(300px, 55vw, 720px)",
+    color:    "hsl(170 70% 55% / 0.55)",
+    animation: "orb-float-1 15s ease-in-out infinite",
+    parallaxY: 12,
+    desktopOnly: false,
   },
   {
-    // Top-right — cyan
-    pos: { top: "5vh", right: "-12vw" },
-    size: "clamp(240px, 45vw, 600px)",
-    color: "hsl(195 85% 60% / 0.45)",
-    duration: 18,
-    x: ["0%", "-20%", "-8%", "-15%", "0%"],
-    y: ["0%", "15%", "35%", "8%", "0%"],
-    parallaxY: 22,
-    mobileOnly: false,
+    pos:      { top: "5vh", right: "-12vw" },
+    size:     "clamp(260px, 45vw, 620px)",
+    color:    "hsl(195 85% 60% / 0.45)",
+    animation: "orb-float-2 19s ease-in-out infinite",
+    parallaxY: 20,
+    desktopOnly: false,
   },
   {
-    // Bottom-left — teal secondary
-    pos: { bottom: "-10vh", left: "-8vw" },
-    size: "clamp(220px, 50vw, 640px)",
-    color: "hsl(170 65% 50% / 0.40)",
-    duration: 16,
-    x: ["0%", "22%", "10%", "-10%", "0%"],
-    y: ["0%", "-20%", "-35%", "-12%", "0%"],
+    pos:      { bottom: "-10vh", left: "-8vw" },
+    size:     "clamp(240px, 50vw, 660px)",
+    color:    "hsl(170 65% 50% / 0.40)",
+    animation: "orb-float-3 17s ease-in-out infinite",
+    parallaxY: -16,
+    desktopOnly: false,
+  },
+  {
+    pos:      { top: "35vh", left: "25vw" },
+    size:     "clamp(220px, 40vw, 540px)",
+    color:    "hsl(250 60% 62% / 0.28)",
+    animation: "orb-float-4 23s ease-in-out infinite",
+    parallaxY: 6,
+    desktopOnly: true,
+  },
+  {
+    pos:      { bottom: "-15vh", right: "-10vw" },
+    size:     "clamp(220px, 48vw, 640px)",
+    color:    "hsl(210 75% 58% / 0.32)",
+    animation: "orb-float-5 21s ease-in-out infinite",
     parallaxY: -18,
-    mobileOnly: false,
-  },
-  {
-    // Center — purple (desktop only)
-    pos: { top: "38vh", left: "28vw" },
-    size: "clamp(200px, 40vw, 520px)",
-    color: "hsl(250 60% 62% / 0.28)",
-    duration: 22,
-    x: ["0%", "14%", "-18%", "6%", "0%"],
-    y: ["0%", "-18%", "12%", "20%", "0%"],
-    parallaxY: 8,
-    mobileOnly: true,       // hide on mobile
-  },
-  {
-    // Bottom-right — blue (desktop only)
-    pos: { bottom: "-15vh", right: "-10vw" },
-    size: "clamp(200px, 48vw, 620px)",
-    color: "hsl(210 75% 58% / 0.32)",
-    duration: 20,
-    x: ["0%", "-16%", "-28%", "-8%", "0%"],
-    y: ["0%", "-25%", "-10%", "-18%", "0%"],
-    parallaxY: -20,
-    mobileOnly: true,
+    desktopOnly: true,
   },
 ] as const;
 
@@ -67,8 +52,9 @@ function Orb({
   orb: (typeof ORBS)[number];
   scrollY: ReturnType<typeof useScroll>["scrollY"];
 }) {
-  // Parallax lives on the outer wrapper — float animation on the inner blob.
-  // Keeping them on separate elements avoids the MotionValue vs keyframe conflict.
+  // Framer Motion only drives the slow scroll parallax on the wrapper.
+  // The actual float animation is a plain CSS @keyframes on the inner div,
+  // which is guaranteed to run regardless of hydration / JS timing.
   const yParallax = useTransform(
     scrollY,
     [0, 3000],
@@ -77,7 +63,7 @@ function Orb({
 
   return (
     <motion.div
-      className={orb.mobileOnly ? "hidden md:block" : undefined}
+      className={orb.desktopOnly ? "hidden md:block" : undefined}
       style={{
         position: "absolute",
         ...orb.pos,
@@ -86,21 +72,15 @@ function Orb({
         y: yParallax,
       }}
     >
-      <motion.div
+      <div
         style={{
           width: "100%",
           height: "100%",
           borderRadius: "50%",
           background: `radial-gradient(circle at 50% 50%, ${orb.color} 0%, transparent 70%)`,
           filter: "blur(60px)",
+          animation: orb.animation,
           willChange: "transform",
-        }}
-        animate={{ x: orb.x as unknown as string[], y: orb.y as unknown as string[] }}
-        transition={{
-          duration: orb.duration,
-          repeat: Infinity,
-          ease: "easeInOut",
-          times: [0, 0.25, 0.5, 0.75, 1],
         }}
       />
     </motion.div>
