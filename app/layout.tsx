@@ -6,6 +6,7 @@ import AmbientBackground from "@/components/AmbientBackground";
 export const metadata: Metadata = {
   title: `${siteConfig.name} — Tech Lead · Full-Stack Engineer`,
   description: siteConfig.description,
+  themeColor: "#0e1115",
 };
 
 export default function RootLayout({
