@@ -19,20 +19,12 @@ function StoryNode({
     <div className="relative grid grid-cols-[1.5rem_1fr] md:grid-cols-[2.5rem_1fr] gap-5 md:gap-10">
       {/* Spine */}
       <div className="flex flex-col items-center">
-        <div className="relative flex-shrink-0 mt-[6px]">
-          {isLast && (
-            <>
-              <motion.div
-                className="absolute inset-[-2px] rounded-full border border-primary/50"
-                animate={{ scale: [1, 4], opacity: [0.55, 0] }}
-                transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 0.9 }}
-              />
-              <motion.div
-                className="absolute inset-[-2px] rounded-full border border-primary/30"
-                animate={{ scale: [1, 4], opacity: [0.35, 0] }}
-                transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 0.9, delay: 1.2 }}
-              />
-            </>
+        <div
+          className={cn(
+            "relative z-10 h-2.5 w-2.5 rounded-full border-2 shrink-0 mt-[6px] transition-all duration-700",
+            isLast
+              ? "border-primary bg-primary shadow-[0_0_10px_3px_hsl(var(--primary)/0.4)]"
+              : "border-border/70 bg-background"
           )}
           <div
             className={cn(
@@ -44,7 +36,7 @@ function StoryNode({
           />
         </div>
         {!isLast && (
-          <div className="flex-1 w-px bg-gradient-to-b from-border/50 to-border/10 mt-2" />
+          <div className="flex-1 w-px bg-linear-to-b from-border/50 to-border/10 mt-2" />
         )}
       </div>
 
