@@ -35,5 +35,5 @@ export function useInView<T extends Element>(
     return () => observer.disconnect();
   }, [threshold, rootMargin, once]);
 
-  return [ref, inView];
+  return [ref as React.RefObject<T>, inView];
 }
