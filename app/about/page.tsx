@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StoryTimeline from "@/components/StoryTimeline";
@@ -19,8 +20,13 @@ export default function AboutPage() {
       <Header />
 
       {/* Page hero */}
-      <section className="py-20 md:py-28 border-b border-border/40">
-        <div className="container mx-auto px-6 max-w-3xl">
+      <section className="relative py-20 md:py-28 border-b border-border/40 overflow-hidden">
+        {/* Dot-grid background (matches homepage hero) */}
+        <div className="absolute inset-0 bg-dot-grid" />
+        <div className="absolute inset-0 bg-linear-to-b from-background/0 via-background/60 to-background" />
+        <div className="absolute inset-0 bg-linear-to-r from-background via-background/0 to-background" />
+
+        <div className="relative container mx-auto px-6 max-w-3xl">
           <p className="terminal-prefix text-xs tracking-widest mb-4">&gt; story</p>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
             The story so far.
@@ -83,10 +89,10 @@ export default function AboutPage() {
           <div className="mt-10 flex flex-wrap gap-6 items-center">
             <Link
               href="/#contact"
-              className="inline-flex items-center gap-2 text-[15px] font-semibold text-primary hover:text-primary/80 transition-colors"
+              className="inline-flex items-center gap-2 text-[15px] font-semibold text-primary hover:text-primary/80 transition-colors group/cta"
             >
               Let&apos;s talk
-              <span aria-hidden>→</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover/cta:translate-x-0.5" aria-hidden />
             </Link>
             <Link
               href="/#work"

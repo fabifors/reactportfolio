@@ -156,26 +156,26 @@ export default function Projects() {
             legacyInView ? "animate-fade-up opacity-100" : "opacity-0"
           )}
         >
-          <p className="text-xs font-mono text-muted-foreground/60 mb-3 tracking-wider">
+          <p className="text-xs font-mono text-muted-foreground/60 mb-4 tracking-wider uppercase">
             earlier work
           </p>
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
             {legacyProjects.map(({ title, description, url }) => (
-              <div key={title} className="flex items-baseline gap-2">
+              <div key={title} className="flex items-baseline gap-3 group/legacy">
                 {url ? (
                   <a
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground/60 hover:text-muted-foreground transition-colors inline-flex items-center gap-1 shrink-0"
+                    className="text-sm text-muted-foreground/70 hover:text-primary transition-colors inline-flex items-center gap-1 shrink-0"
                   >
                     {title}
-                    <ExternalLink className="h-3 w-3" />
+                    <ExternalLink className="h-3 w-3 opacity-0 group-hover/legacy:opacity-100 transition-opacity" />
                   </a>
                 ) : (
-                  <span className="text-sm text-muted-foreground/60 shrink-0">{title}</span>
+                  <span className="text-sm text-muted-foreground/70 shrink-0">{title}</span>
                 )}
-                <span className="text-xs text-muted-foreground/35">— {description}</span>
+                <span className="text-xs text-muted-foreground/50">— {description}</span>
               </div>
             ))}
           </div>

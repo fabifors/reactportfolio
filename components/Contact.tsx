@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CheckCircle, SendHorizonal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -62,14 +63,15 @@ export default function Contact() {
           )}
         >
           {status === "success" ? (
-            <div className="text-center py-8">
-              <p className="text-lg font-semibold text-foreground">Message received.</p>
-              <p className="text-[15px] text-muted-foreground mt-2">
+            <div className="text-center py-8 flex flex-col items-center gap-3">
+              <CheckCircle className="h-10 w-10 text-primary/70" />
+              <p className="text-lg font-semibold text-foreground mt-1">Message received.</p>
+              <p className="text-[15px] text-muted-foreground">
                 I&apos;ll get back to you as soon as I can.
               </p>
               <Button
                 variant="outline"
-                className="mt-6 border-border/60 text-muted-foreground hover:text-foreground"
+                className="mt-3 border-border/60 text-muted-foreground hover:text-foreground"
                 onClick={() => setStatus("idle")}
               >
                 Send another message
@@ -135,7 +137,12 @@ export default function Contact() {
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold disabled:opacity-60"
                 size="lg"
               >
-                {status === "loading" ? "Sending…" : "Send message"}
+                {status === "loading" ? "Sending…" : (
+                  <span className="inline-flex items-center gap-2">
+                    Send message
+                    <SendHorizonal className="h-4 w-4" />
+                  </span>
+                )}
               </Button>
             </form>
           )}
