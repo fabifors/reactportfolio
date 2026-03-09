@@ -55,25 +55,6 @@
   }
 }
 
-/* ── Orb keyframes — must live outside @layer so Tailwind doesn't strip them ── */
-@keyframes orb-float-1 {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  30%       { transform: translate(60px, 80px) scale(1.05); }
-  65%       { transform: translate(-35px, 120px) scale(0.96); }
-}
-
-@keyframes orb-float-2 {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  35%       { transform: translate(-90px, -65px) scale(1.07); }
-  70%       { transform: translate(45px, -105px) scale(0.94); }
-}
-
-@keyframes orb-float-3 {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  25%       { transform: translate(100px, -55px) scale(1.04); }
-  55%       { transform: translate(-65px, 80px) scale(0.97); }
-  80%       { transform: translate(50px, 40px) scale(1.02); }
-}
 
 @layer utilities {
   .text-balance {
@@ -124,44 +105,7 @@
     margin-left: 2px;
   }
 
-  /* ── Ambient background orbs ───────────────────────────────────── */
-  .orb {
-    position: absolute;
-    border-radius: 50%;
-    will-change: transform;
-  }
-
-  .orb-1 {
-    top: -220px;
-    left: -120px;
-    width: 720px;
-    height: 620px;
-    background: radial-gradient(circle at 50% 50%, hsl(170 70% 55% / 0.60) 0%, transparent 70%);
-    filter: blur(72px);
-    animation: orb-float-1 38s ease-in-out infinite;
-  }
-
-  .orb-2 {
-    bottom: -160px;
-    right: -120px;
-    width: 640px;
-    height: 560px;
-    background: radial-gradient(circle at 50% 50%, hsl(195 85% 60% / 0.48) 0%, transparent 70%);
-    filter: blur(72px);
-    animation: orb-float-2 29s ease-in-out infinite;
-  }
-
-  .orb-3 {
-    top: 38%;
-    left: 32%;
-    width: 520px;
-    height: 420px;
-    background: radial-gradient(circle at 50% 50%, hsl(250 60% 60% / 0.32) 0%, transparent 70%);
-    filter: blur(80px);
-    animation: orb-float-3 46s ease-in-out infinite;
-  }
-
-  /* Staggered fade-up delays for grid children */
+/* Staggered fade-up delays for grid children */
   .stagger-1 { animation-delay: 0ms; }
   .stagger-2 { animation-delay: 80ms; }
   .stagger-3 { animation-delay: 160ms; }
