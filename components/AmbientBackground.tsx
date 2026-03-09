@@ -55,8 +55,8 @@ export default function AmbientBackground() {
     }
 
     function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      width = canvas!.width = window.innerWidth;
+      height = canvas!.height = window.innerHeight;
     }
 
     function draw() {
