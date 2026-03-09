@@ -110,11 +110,7 @@ export default function Header() {
         }`}
       >
         {/* Drawer header */}
-        <div className="flex items-center justify-between px-6 h-16 border-b border-border/50 shrink-0">
-          <span className="font-mono text-sm font-semibold text-foreground">
-            <span className="terminal-prefix mr-1">~/</span>
-            {siteConfig.name}
-          </span>
+        <div className="flex items-center justify-end px-6 h-16 border-b border-border/50 shrink-0">
           <button
             className="text-muted-foreground hover:text-foreground transition-colors"
             onClick={() => setMobileOpen(false)}
