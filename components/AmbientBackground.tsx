@@ -2,136 +2,129 @@
 
 import { useEffect, useRef } from "react";
 
-const ORBS = [
-  {
-    pos:         { top: "-15vh", left: "-10vw" },
-    size:        "clamp(300px, 55vw, 720px)",
-    color:       "hsl(170 70% 55% / 0.55)",
-    duration:    15000,
-    x:           [0, 180, -140,  200,    0],
-    y:           [0, 130,  210, -110,    0],
-    parallaxY:   12,
-    desktopOnly: false,
-  },
-  {
-    pos:         { top: "5vh", right: "-12vw" },
-    size:        "clamp(260px, 45vw, 620px)",
-    color:       "hsl(195 85% 60% / 0.45)",
-    duration:    19000,
-    x:           [0, -200, -100, -160,   0],
-    y:           [0,  100,  220,  -80,   0],
-    parallaxY:   20,
-    desktopOnly: false,
-  },
-  {
-    pos:         { bottom: "-10vh", left: "-8vw" },
-    size:        "clamp(240px, 50vw, 660px)",
-    color:       "hsl(170 65% 50% / 0.40)",
-    duration:    17000,
-    x:           [0,  160, -120,  80,    0],
-    y:           [0, -120, -200, 100,    0],
-    parallaxY:   -16,
-    desktopOnly: false,
-  },
-  {
-    pos:         { top: "35vh", left: "25vw" },
-    size:        "clamp(220px, 40vw, 540px)",
-    color:       "hsl(250 60% 62% / 0.28)",
-    duration:    23000,
-    x:           [0, -180,  140,   0],
-    y:           [0, -140, -180,   0],
-    parallaxY:   6,
-    desktopOnly: true,
-  },
-  {
-    pos:         { bottom: "-15vh", right: "-10vw" },
-    size:        "clamp(220px, 48vw, 640px)",
-    color:       "hsl(210 75% 58% / 0.32)",
-    duration:    21000,
-    x:           [0, -100,  160,  -60,   0],
-    y:           [0, -160, -100, -220,   0],
-    parallaxY:   -18,
-    desktopOnly: true,
-  },
-] as const;
+// Primary cyan and accent-blue from the theme
+const PRIMARY_H = 170;
+const PRIMARY_S = 70;
+const PRIMARY_L = 55;
+const ACCENT_H = 195;
 
-function Orb({ orb }: { orb: (typeof ORBS)[number] }) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const blobRef = useRef<HTMLDivElement>(null);
-
-  // Float animation via native Web Animations API
-  useEffect(() => {
-    const el = blobRef.current;
-    if (!el) return;
-
-    const keyframes = orb.x.map((x, i) => ({
-      transform: `translate(${x}px, ${orb.y[i]}px)`,
-    }));
-
-    const anim = el.animate(keyframes, {
-      duration: orb.duration,
-      iterations: Infinity,
-      easing: "ease-in-out",
-    });
-
-    return () => anim.cancel();
-  // orb is from a constant array — stable reference
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Parallax via scroll listener
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight || 1;
-      const progress = scrollY / Math.max(maxScroll, 3000);
-      const translateY = progress * orb.parallaxY * window.innerHeight / 100;
-      wrapper.style.transform = `translateY(${translateY}px)`;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <div
-      ref={wrapperRef}
-      className={orb.desktopOnly ? "hidden md:block" : undefined}
-      style={{
-        position: "absolute",
-        ...orb.pos,
-        width:  orb.size,
-        height: orb.size,
-      }}
-    >
-      <div
-        ref={blobRef}
-        style={{
-          width:        "100%",
-          height:       "100%",
-          borderRadius: "50%",
-          background:   `radial-gradient(circle at 50% 50%, ${orb.color} 0%, transparent 70%)`,
-          filter:       "blur(60px)",
-          willChange:   "transform",
-        }}
-      />
-    </div>
-  );
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  r: number;
+  opacity: number;
+  accent: boolean;
 }
 
 export default function AmbientBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animId: number;
+    let width = 0;
+    let height = 0;
+    const isMobile = () => window.innerWidth < 768;
+    const CONNECT_DIST = 130;
+
+    let particles: Particle[] = [];
+
+    function buildParticles() {
+      const count = isMobile() ? 45 : 90;
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 0.06 + Math.random() * 0.14;
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          r: 0.8 + Math.random() * 1.2,
+          opacity: 0.25 + Math.random() * 0.45,
+          // ~20% of particles use the accent-blue hue
+          accent: Math.random() < 0.2,
+        });
+      }
+    }
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Move particles — wrap at edges
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = width;
+        else if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        else if (p.y > height) p.y = 0;
+      }
+
+      // Connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            const alpha = (1 - dist / CONNECT_DIST) * 0.12;
+            const h = particles[i].accent ? ACCENT_H : PRIMARY_H;
+            ctx.strokeStyle = `hsl(${h} ${PRIMARY_S}% ${PRIMARY_L}% / ${alpha})`;
+            ctx.lineWidth = 0.7;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Dots
+      for (const p of particles) {
+        const h = p.accent ? ACCENT_H : PRIMARY_H;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${h} ${PRIMARY_S}% ${PRIMARY_L}% / ${p.opacity})`;
+        ctx.fill();
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    resize();
+    buildParticles();
+    draw();
+
+    const handleResize = () => {
+      resize();
+      buildParticles();
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div
       className="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-background"
       aria-hidden="true"
     >
-      {ORBS.map((orb, i) => (
-        <Orb key={i} orb={orb} />
-      ))}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       {/* Film grain */}
       <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
