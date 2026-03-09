@@ -5,6 +5,7 @@ import { workHighlights, legacyProjects, WorkPhase } from "@/lib/portfolio-data"
 import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
 import { ExternalLink, Users } from "lucide-react";
+import CornerBrackets from "@/components/CornerBrackets";
 
 function TimelinePhase({
   phase,
@@ -22,14 +23,19 @@ function TimelinePhase({
       {/* Timeline spine */}
       <div className="flex flex-col items-center">
         {/* Node dot */}
-        <div
-          className={cn(
-            "relative z-10 h-3 w-3 rounded-full border-2 shrink-0 mt-1 transition-all duration-500",
-            index === 0
-              ? "border-primary bg-primary shadow-[0_0_8px_2px_hsl(var(--primary)/0.35)]"
-              : "border-border/60 bg-background"
+        <div className="relative flex-shrink-0 mt-1">
+          {index === 0 && (
+            <span className="absolute inset-[-2px] rounded-full border border-primary/50 animate-ping" />
           )}
-        />
+          <div
+            className={cn(
+              "relative z-10 h-3 w-3 rounded-full border-2 transition-all duration-500",
+              index === 0
+                ? "border-primary bg-primary shadow-[0_0_8px_2px_hsl(var(--primary)/0.35)]"
+                : "border-border/60 bg-background"
+            )}
+          />
+        </div>
         {/* Connecting line down */}
         {!isLast && (
           <div className="flex-1 w-px bg-linear-to-b from-border/60 to-border/20 mt-2" />
@@ -43,13 +49,12 @@ function TimelinePhase({
           isLast && "pb-0",
           inView ? "animate-fade-up opacity-100" : "opacity-0"
         )}
-        style={{ transitionDelay: `${index * 80}ms` }}
+        style={{ transitionDelay: `${Math.min(index * 70, 210)}ms` }}
       >
         {/* Phase header */}
-        <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 mb-4">
-          <span className="font-mono text-xs text-primary/70 tracking-wider">{phase.period}</span>
-          <span className="hidden sm:block text-border/40 text-xs">·</span>
-          <h3 className="text-lg font-semibold text-foreground">{phase.role}</h3>
+        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4 mb-4">
+          <span className="font-mono text-xs text-primary/70 tracking-wider flex-shrink-0 sm:order-2">{phase.period}</span>
+          <h3 className="text-lg font-semibold text-foreground sm:order-1">{phase.role}</h3>
         </div>
 
         {/* Impact list */}
@@ -77,7 +82,7 @@ export default function Projects() {
   const work = workHighlights[0];
 
   return (
-    <section id="work" className="py-20 md:py-28 bg-muted/30">
+    <section id="work" className="py-20 md:py-28">
       <div className="container mx-auto px-6">
         {/* Section heading */}
         <div
@@ -97,7 +102,8 @@ export default function Projects() {
         </div>
 
         {/* Card */}
-        <div className="rounded-xl bg-surface border border-border/60 p-8 md:p-10">
+        <div className="relative rounded-xl bg-surface/60 backdrop-blur-sm border border-border/60 p-8 md:p-10">
+          <CornerBrackets delay={0.1} />
           {/* Card meta: employer + team */}
           <div
             ref={metaRef}
@@ -147,7 +153,7 @@ export default function Projects() {
           ref={legacyRef}
           className={cn(
             "mt-12 transition-all duration-500",
-            legacyInView ? "animate-fade-in opacity-100" : "opacity-0"
+            legacyInView ? "animate-fade-up opacity-100" : "opacity-0"
           )}
         >
           <p className="text-xs font-mono text-muted-foreground/60 mb-3 tracking-wider">

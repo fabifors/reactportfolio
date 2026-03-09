@@ -234,7 +234,8 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply text-foreground antialiased;
+    background: transparent;
     font-size: 16px;
   }
 

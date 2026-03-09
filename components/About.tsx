@@ -9,16 +9,14 @@ function PhilosophyItem({
   index,
   title,
   body,
-  delay,
   isLast,
 }: {
   index: number;
   title: string;
   body: string;
-  delay: number;
   isLast: boolean;
 }) {
-  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1 });
+  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.25 });
 
   return (
     <div
@@ -28,7 +26,7 @@ function PhilosophyItem({
         !isLast && "border-b border-border/40",
         inView ? "animate-fade-up opacity-100" : "opacity-0"
       )}
-      style={{ animationDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${Math.min((index - 1) * 70, 210)}ms` }}
     >
       {/* Number */}
       <span className="font-mono text-2xl md:text-3xl font-bold text-primary/30 leading-none pt-1 select-none tabular-nums">
@@ -85,7 +83,6 @@ export default function About() {
               index={i + 1}
               title={card.title}
               body={card.body}
-              delay={i * 120}
               isLast={i === philosophyCards.length - 1}
             />
           ))}

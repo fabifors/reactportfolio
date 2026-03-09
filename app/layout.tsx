@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { siteConfig } from "@/lib/portfolio-data";
+import AmbientBackground from "@/components/AmbientBackground";
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} — Tech Lead · Full-Stack Engineer`,
@@ -14,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark scroll-smooth">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <AmbientBackground />
+        {children}
+      </body>
     </html>
   );
 }

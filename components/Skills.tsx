@@ -7,15 +7,15 @@ import { cn } from "@/lib/utils";
 function DomainRow({
   domain,
   items,
-  delay,
   isLast,
+  index,
 }: {
   domain: string;
   items: string[];
-  delay: number;
   isLast: boolean;
+  index: number;
 }) {
-  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.1 });
+  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.3 });
 
   return (
     <div
@@ -25,7 +25,7 @@ function DomainRow({
         !isLast && "border-b border-border/30",
         inView ? "animate-fade-up opacity-100" : "opacity-0"
       )}
-      style={{ animationDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${Math.min(index * 70, 210)}ms` }}
     >
       {/* Domain label */}
       <span className="font-mono text-xs text-primary/60 uppercase tracking-wider self-start md:pt-[3px]">
@@ -51,7 +51,7 @@ export default function Skills() {
   const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
 
   return (
-    <section id="expertise" className="py-20 md:py-28 bg-muted/30">
+    <section id="expertise" className="py-20 md:py-28">
       <div className="container mx-auto px-6 max-w-4xl">
         <div
           ref={headingRef}
@@ -78,8 +78,8 @@ export default function Skills() {
               key={domain.domain}
               domain={domain.domain}
               items={domain.items}
-              delay={i * 60}
               isLast={i === skillDomains.length - 1}
+              index={i}
             />
           ))}
         </div>
