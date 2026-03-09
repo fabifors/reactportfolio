@@ -11,10 +11,10 @@ export default function AmbientBackground() {
     >
       {/* Top-left teal bloom */}
       <div className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-[hsl(170_70%_55%)] opacity-[0.045] blur-[120px]" />
-      {/* Bottom-right purple bloom */}
-      <div className="absolute -bottom-40 -right-20 w-[560px] h-[560px] rounded-full bg-[hsl(250_60%_60%)] opacity-[0.04] blur-[130px]" />
+      {/* Top-right purple bloom — kept in the upper half so it never bleeds into cards */}
+      <div className="absolute -top-20 -right-20 w-[480px] h-[480px] rounded-full bg-[hsl(250_60%_60%)] opacity-[0.035] blur-[130px]" />
       {/* Center cyan accent — very faint */}
-      <div className="absolute top-[40%] left-[35%] w-[400px] h-[400px] rounded-full bg-[hsl(195_85%_60%)] opacity-[0.025] blur-[100px]" />
+      <div className="absolute top-[30%] left-[40%] w-[360px] h-[360px] rounded-full bg-[hsl(195_85%_60%)] opacity-[0.022] blur-[110px]" />
 
       {/* Film grain */}
       <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
