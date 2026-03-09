@@ -57,7 +57,7 @@ export default function Contact() {
         <div
           ref={formRef}
           className={cn(
-            "rounded-xl bg-surface/60 backdrop-blur-sm border border-border/60 p-8 transition-all duration-500",
+            "rounded-xl glass-card p-8 transition-all duration-500",
             formInView ? "animate-fade-up opacity-100" : "opacity-0"
           )}
         >

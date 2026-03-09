@@ -57,7 +57,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full glass-card rounded-none border-x-0 border-t-0">
       <div className="container flex h-16 items-center justify-between mx-auto px-6">
         <Link
           href="/"

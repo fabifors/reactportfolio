@@ -113,7 +113,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Card */}
-        <div className="relative rounded-xl bg-surface/60 backdrop-blur-sm border border-border/60 p-8 md:p-10">
+        <div className="relative rounded-xl glass-card glass-card-hover p-8 md:p-10">
           <CornerBrackets delay={0.1} />
           {/* Card meta: employer + team */}
           <motion.div
