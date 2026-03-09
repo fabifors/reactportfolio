@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, SendHorizonal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -137,7 +137,12 @@ export default function Contact() {
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold disabled:opacity-60"
                 size="lg"
               >
-                {status === "loading" ? "Sending…" : "Send message"}
+                {status === "loading" ? "Sending…" : (
+                  <span className="inline-flex items-center gap-2">
+                    Send message
+                    <SendHorizonal className="h-4 w-4" />
+                  </span>
+                )}
               </Button>
             </form>
           )}
