@@ -1,16 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
 import { philosophyCards } from "@/lib/portfolio-data";
+import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
-
-const ease = [0.25, 0, 0, 1] as const;
-
-const headingVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
-};
 
 function PhilosophyItem({
   index,
@@ -23,16 +16,17 @@ function PhilosophyItem({
   body: string;
   isLast: boolean;
 }) {
+  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.25 });
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.55, delay: Math.min((index - 1) * 0.07, 0.21), ease }}
+    <div
+      ref={ref}
       className={cn(
-        "grid grid-cols-[2.5rem_1fr] md:grid-cols-[5rem_1fr] gap-5 md:gap-10 py-8",
-        !isLast && "border-b border-border/40"
+        "grid grid-cols-[2.5rem_1fr] md:grid-cols-[5rem_1fr] gap-5 md:gap-10 py-8 transition-all duration-500",
+        !isLast && "border-b border-border/40",
+        inView ? "animate-fade-up opacity-100" : "opacity-0"
       )}
+      style={{ transitionDelay: `${Math.min((index - 1) * 70, 210)}ms` }}
     >
       {/* Number */}
       <span className="font-mono text-2xl md:text-3xl font-bold text-primary/30 leading-none pt-1 select-none tabular-nums">
@@ -48,20 +42,22 @@ function PhilosophyItem({
           {body}
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 export default function About() {
+  const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.15 });
+
   return (
     <section id="philosophy" className="py-20 md:py-28">
       <div className="container mx-auto px-6 max-w-4xl">
-        <motion.div
-          className="mb-4 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
-          variants={headingVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+        <div
+          ref={headingRef}
+          className={cn(
+            "mb-4 flex flex-col md:flex-row md:items-end md:justify-between gap-4 transition-all duration-500",
+            headingInView ? "animate-fade-up opacity-100" : "opacity-0"
+          )}
         >
           <div>
             <p className="terminal-prefix text-xs tracking-widest mb-3">
@@ -78,7 +74,7 @@ export default function About() {
             Background &amp; full story
             <span aria-hidden>→</span>
           </Link>
-        </motion.div>
+        </div>
 
         <div>
           {philosophyCards.map((card, i) => (
