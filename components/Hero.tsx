@@ -1,11 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { heroData } from "@/lib/portfolio-data";
+import HeroParticles from "@/components/HeroParticles";
 
 export default function Hero() {
   const { eyebrow, headline, subheadline, primaryCta, secondaryCta } = heroData;
 
   return (
     <section className="relative overflow-hidden min-h-[90vh] flex items-center">
+      {/* Particle network — hero only */}
+      <HeroParticles />
+
       {/* Dot-grid background */}
       <div className="absolute inset-0 bg-dot-grid" />
 
