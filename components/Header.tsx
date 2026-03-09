@@ -125,8 +125,8 @@ export default function Header() {
         </div>
 
         {/* Nav links */}
-        <nav className="flex flex-col gap-1 px-4 py-6">
-          {navItems.map((item) => (
+        <nav className="flex flex-col gap-1 px-4 py-6 flex-1">
+          {navItems.filter((item) => item.href !== "/#contact").map((item) => (
             <NavLink
               key={item.label}
               label={item.label}
@@ -136,6 +136,16 @@ export default function Header() {
             />
           ))}
         </nav>
+
+        {/* CTA pinned to bottom */}
+        <div className="px-4 py-6 border-t border-border/50 shrink-0">
+          <NavLink
+            label="Contact"
+            href="/#contact"
+            onClick={() => setMobileOpen(false)}
+            className=""
+          />
+        </div>
       </div>
     </>
   );
