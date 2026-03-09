@@ -67,9 +67,9 @@ function TimelinePhase({
         className={cn("pb-10", isLast && "pb-0")}
       >
         {/* Phase header */}
-        <div className="flex items-baseline justify-between gap-4 mb-4">
-          <h3 className="text-lg font-semibold text-foreground">{phase.role}</h3>
-          <span className="font-mono text-xs text-primary/70 tracking-wider flex-shrink-0">{phase.period}</span>
+        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4 mb-4">
+          <span className="font-mono text-xs text-primary/70 tracking-wider flex-shrink-0 sm:order-2">{phase.period}</span>
+          <h3 className="text-lg font-semibold text-foreground sm:order-1">{phase.role}</h3>
         </div>
 
         {/* Impact list */}
