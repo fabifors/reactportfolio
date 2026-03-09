@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { skillDomains } from "@/lib/portfolio-data";
 import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
@@ -21,7 +22,7 @@ function DomainRow({
     <div
       ref={ref}
       className={cn(
-        "grid grid-cols-1 md:grid-cols-[160px_1fr] gap-2 md:gap-10 py-4 transition-all duration-500",
+        "grid grid-cols-1 md:grid-cols-[160px_1fr] gap-3 md:gap-10 py-5 transition-all duration-500",
         !isLast && "border-b border-border/30",
         inView ? "animate-fade-up opacity-100" : "opacity-0"
       )}
@@ -32,17 +33,18 @@ function DomainRow({
         {domain}
       </span>
 
-      {/* Items — inline with dots */}
-      <p className="text-[15px] text-muted-foreground leading-relaxed">
-        {items.map((item, i) => (
-          <span key={item}>
+      {/* Items — badges */}
+      <div className="flex flex-wrap gap-2">
+        {items.map((item) => (
+          <Badge
+            key={item}
+            variant="outline"
+            className="text-xs border-border/50 text-muted-foreground font-mono hover:border-primary/40 hover:text-foreground transition-colors"
+          >
             {item}
-            {i < items.length - 1 && (
-              <span className="mx-2 text-border select-none">·</span>
-            )}
-          </span>
+          </Badge>
         ))}
-      </p>
+      </div>
     </div>
   );
 }
