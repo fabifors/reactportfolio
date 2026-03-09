@@ -1,15 +1,8 @@
 "use client";
 
-import { motion } from "motion/react";
 import { skillDomains } from "@/lib/portfolio-data";
+import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
-
-const ease = [0.25, 0, 0, 1] as const;
-
-const headingVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
-};
 
 function DomainRow({
   domain,
@@ -22,16 +15,17 @@ function DomainRow({
   isLast: boolean;
   index: number;
 }) {
+  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.3 });
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.55, delay: Math.min(index * 0.07, 0.21), ease }}
+    <div
+      ref={ref}
       className={cn(
-        "grid grid-cols-1 md:grid-cols-[160px_1fr] gap-2 md:gap-10 py-4",
-        !isLast && "border-b border-border/30"
+        "grid grid-cols-1 md:grid-cols-[160px_1fr] gap-2 md:gap-10 py-4 transition-all duration-500",
+        !isLast && "border-b border-border/30",
+        inView ? "animate-fade-up opacity-100" : "opacity-0"
       )}
+      style={{ transitionDelay: `${Math.min(index * 70, 210)}ms` }}
     >
       {/* Domain label */}
       <span className="font-mono text-xs text-primary/60 uppercase tracking-wider self-start md:pt-[3px]">
@@ -49,20 +43,22 @@ function DomainRow({
           </span>
         ))}
       </p>
-    </motion.div>
+    </div>
   );
 }
 
 export default function Skills() {
+  const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+
   return (
     <section id="expertise" className="py-20 md:py-28">
       <div className="container mx-auto px-6 max-w-4xl">
-        <motion.div
-          className="mb-10"
-          variants={headingVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+        <div
+          ref={headingRef}
+          className={cn(
+            "mb-10 transition-all duration-500",
+            headingInView ? "animate-fade-up opacity-100" : "opacity-0"
+          )}
         >
           <p className="terminal-prefix text-xs tracking-widest mb-3">
             &gt; expertise
@@ -74,7 +70,7 @@ export default function Skills() {
             The domains I own — chosen because they produce results, not because
             they look good on a slide.
           </p>
-        </motion.div>
+        </div>
 
         <div>
           {skillDomains.map((domain, i) => (
