@@ -2,7 +2,7 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  if (!process.env.RESEND_API_KEY || !process.env.CONTACT_EMAIL) {
+  if (!process.env.RESEND_API_KEY || !process.env.CONTACT_EMAIL || !process.env.EMAIL_FROM) {
     return NextResponse.json(
       { error: "Email service is not configured" },
       { status: 503 }
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
   try {
     const { error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
+      from: process.env.EMAIL_FROM,
       to: process.env.CONTACT_EMAIL,
       replyTo: email,
       subject: `New message from ${name}`,
