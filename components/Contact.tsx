@@ -38,7 +38,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 md:py-28">
-      <div className="container mx-auto px-6 max-w-2xl">
+      <div className="container mx-auto px-6 max-w-4xl">
         <div
           ref={headingRef}
           className={cn(
