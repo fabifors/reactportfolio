@@ -83,7 +83,7 @@ export default function Projects() {
 
   return (
     <section id="work" className="py-20 md:py-28">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 max-w-4xl">
         {/* Section heading */}
         <div
           ref={headingRef}

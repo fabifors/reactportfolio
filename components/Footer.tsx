@@ -8,7 +8,7 @@ type IconName = keyof typeof iconMap;
 export default function Footer() {
   return (
     <footer className="border-t border-border/50">
-      <div className="container mx-auto px-6 py-10 flex flex-col items-center gap-6">
+      <div className="container mx-auto px-6 py-10 flex flex-col items-center gap-6 max-w-4xl">
         <div className="flex gap-5">
           {socialLinks.map(({ label, href, icon }) => {
             const Icon = iconMap[icon as IconName];
