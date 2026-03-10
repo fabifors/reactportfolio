@@ -14,7 +14,9 @@ type Status = "idle" | "loading" | "success" | "error";
 
 export default function Contact() {
   const [status, setStatus] = useState<Status>("idle");
-  const [headingRef, headingInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const [headingRef, headingInView] = useInView<HTMLDivElement>({
+    threshold: 0.2,
+  });
   const [formRef, formInView] = useInView<HTMLDivElement>({ threshold: 0.1 });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,8 +26,12 @@ export default function Contact() {
     const form = e.currentTarget;
     const data = {
       name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
-      email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
+      email: (
+        form.elements.namedItem("email") as HTMLInputElement
+      ).value.trim(),
+      message: (
+        form.elements.namedItem("message") as HTMLTextAreaElement
+      ).value.trim(),
     };
 
     try {
@@ -43,15 +49,19 @@ export default function Contact() {
           ref={headingRef}
           className={cn(
             "mb-12 transition-all duration-500",
-            headingInView ? "animate-fade-up opacity-100" : "opacity-0"
+            headingInView ? "animate-fade-up opacity-100" : "opacity-0",
           )}
         >
-          <p className="terminal-prefix text-xs tracking-widest mb-3">&gt; contact</p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Say hello</h2>
+          <p className="terminal-prefix text-xs tracking-widest mb-3">
+            &gt; contact
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Say hello
+          </h2>
           <p className="text-[15px] text-muted-foreground leading-relaxed">
-            I&apos;m heads-down building at Svea Solar, but I&apos;m always interested in
-            conversations about systems architecture, content platforms, or where AI tooling is
-            taking software development.
+            I&apos;m heads-down building at Svea Solar, but I&apos;m always
+            interested in conversations about systems architecture, content
+            platforms, or where AI tooling is taking software development.
           </p>
         </div>
 
@@ -59,13 +69,15 @@ export default function Contact() {
           ref={formRef}
           className={cn(
             "rounded-xl bg-surface/60 backdrop-blur-sm border border-border/60 p-8 transition-all duration-500",
-            formInView ? "animate-fade-up opacity-100" : "opacity-0"
+            formInView ? "animate-fade-up opacity-100" : "opacity-0",
           )}
         >
           {status === "success" ? (
             <div className="text-center py-8 flex flex-col items-center gap-3">
               <CheckCircle className="h-10 w-10 text-primary/70" />
-              <p className="text-lg font-semibold text-foreground mt-1">Message received.</p>
+              <p className="text-lg font-semibold text-foreground mt-1">
+                Message received.
+              </p>
               <p className="text-[15px] text-muted-foreground">
                 I&apos;ll get back to you as soon as I can.
               </p>
@@ -81,7 +93,10 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm text-muted-foreground">
+                  <Label
+                    htmlFor="name"
+                    className="text-sm text-muted-foreground"
+                  >
                     Name
                   </Label>
                   <Input
@@ -94,7 +109,10 @@ export default function Contact() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm text-muted-foreground">
+                  <Label
+                    htmlFor="email"
+                    className="text-sm text-muted-foreground"
+                  >
                     Email
                   </Label>
                   <Input
@@ -109,7 +127,10 @@ export default function Contact() {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="message" className="text-sm text-muted-foreground">
+                <Label
+                  htmlFor="message"
+                  className="text-sm text-muted-foreground"
+                >
                   Message
                 </Label>
                 <Textarea
@@ -134,10 +155,12 @@ export default function Contact() {
               <Button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold disabled:opacity-60"
+                className="cursor-pointer w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-semibold disabled:opacity-60"
                 size="lg"
               >
-                {status === "loading" ? "Sending…" : (
+                {status === "loading" ? (
+                  "Sending…"
+                ) : (
                   <span className="inline-flex items-center gap-2">
                     Send message
                     <SendHorizonal className="h-4 w-4" />
