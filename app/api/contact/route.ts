@@ -1,7 +1,26 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
+const rateLimit = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX = 3; // max requests per window
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = rateLimit.get(ip)?.filter((t) => now - t < RATE_LIMIT_WINDOW) ?? [];
+  rateLimit.set(ip, timestamps);
+
+  if (timestamps.length >= RATE_LIMIT_MAX) return true;
+  timestamps.push(now);
+  return false;
+}
+
 export async function POST(request: Request) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   if (!process.env.RESEND_API_KEY || !process.env.CONTACT_EMAIL || !process.env.EMAIL_FROM) {
     return NextResponse.json(
       { error: "Email service is not configured" },
